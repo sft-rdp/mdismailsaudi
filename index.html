@@ -1,46 +1,86 @@
 <!DOCTYPE html>
+
 <html>
 <head>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Portfoolio App</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Work Count!</title>
 </head>
-<body>
-  <h1>Portfoolio App!</h1>
-  <!--Todo App-->
-  <h2>Todo App, Login Page Desagn, input validation, tr & td create.</h2>
-  <a target="_blank" href="todoApp/index.html">Todo App Click Here</a>
-  <!--Bank App-->
-  <h2>Bank App</h2>
-  <a target="_blank" href="bankApp/index.html">Bank App Click Here</a>
-  <!--mess Count-->
-  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>></></>  <h2>Mess Count</h2>
-  <a target="_blank" href="messCount/index.html">messCount App Click Here</a>
-
-    N2NE98MTE5F
-    02391311
-    
-    9:40
-    
-    
-    1212610375
-    
-    
-    কিসতি 30000
-    আববা 2000
-    আমমা 3000
-    সফিক কাকা 5000
-    ডাকতার 50000
-    ছমাইয়ার 
-    
-    
-    
-    
-  0হসহn<<n̈nElCome them nowHave not availableThe development<
+<body style='background-image: url("img/bodyBac.jpg");'>
+  <h1 style="text-align: center; color: green;">Md Ismail <span ondblclick="myIn()">S</span>audi<span id="in"></span></h1>
   
+  <!--Admin-->
+  <div class="row">
+  <div class="col">
+    <h2 style="text-align: center; color:white; ">Admin</h2>
+  </div>
+  <div class="col">
+   <img style="border-radius: 3%;"src="img/admin.jpg" >
+  </div>
+</div>
   
+  <!--Arif-->
+  <div class="row">
+  <div class="col">
+    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/17MheRWWqM4nvP3vDFJvH0RkPcpL09-sjhCu1UD1pZHI/edit?usp=drivesdk">মোহাম্মদ আরিফ মিয়া হিসাব</a></h2>
+  </div>
+  <div class="col">
+    <center><a href="https://docs.google.com/document/d/17MheRWWqM4nvP3vDFJvH0RkPcpL09-sjhCu1UD1pZHI/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/arif.jpg" ></a></center>
+  </div>
+</div>
   
-  <script src="script.js"></script>
+  <!--সপন-->
+  <div class="row">
+  <div class="col">
+    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1M2ZgWxT9AUdqBwq7Cban7sJH0XswUcKos71RocNTuwI/edit?usp=drivesdk">মোহাম্মদ সপন মিয়া হিসাব</a></h2>
+  </div>
+  <div class="col">
+   <center><a href="https://docs.google.com/document/d/1M2ZgWxT9AUdqBwq7Cban7sJH0XswUcKos71RocNTuwI/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/sapon.jpg" ></a></center>
+  </div>
+</div>
+  
+  <!--রহমতুললা-->
+  <div class="row">
+  <div class="col">
+    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1AzOA8eHB7POj4pR2RWPtfTiVcpaW8LZ-Q7Hm_Ze5qbY/edit?usp=drivesdk">মোহাম্মদ রহমতুল্লাহ মিয়া হিসাব</a> </h2>
+  </div>
+  <div class="col">
+   <center><a href="https://docs.google.com/document/d/1AzOA8eHB7POj4pR2RWPtfTiVcpaW8LZ-Q7Hm_Ze5qbY/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/rahmatollah.jpg" ></a></center>
+  </div>
+</div>
+  
+  <!--মজিবর-->
+  <div class="row">
+  <div class="col">
+    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk">মোহাম্মদ মজিবর মিয়া হিসাব</a></h2>
+  </div>
+  <div class="col">
+   <center><a href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/mojibor.jpg" ></a></center>
+  </div>
+</div>
+  
+   <!--footer-->
+  <div class="row">
+  <div class="col">
+    <h2 style="text-align: center; color:whitw; background: black; padding:10px;">Powerd by Md Ismail</h2>
+  </div>
+</div>
+  
+ <script>
+  function myIn() {
+  var inF;
+  if (confirm("Press a button For In or Dont See!")) {
+    inF = "<a style='text-decoration:none; color: green; ' href='https://docs.google.com/document/d/16yveFiuXvz-TrSSqeBIcfoz2R9Wz2aWCQ9Qb2BM9Uhs/edit?usp=drivesdk'><span>.</span></a>";
+  } else {
+    inF = "You Dont See In!";
+  }
+  document.getElementById("in").innerHTML = inF;
+}
+  
+</script>
 </body>
 </html>
-93+20+43+61
