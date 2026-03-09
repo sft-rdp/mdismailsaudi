@@ -6,12 +6,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
   <style>
   #p{
     color: white;
   }
+  
+  table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: black;
+}
+.rateBorder{
+  border-style: solid;
+  border-color: green;
+  border-width: 3px;
+  width: 450px;
+  margin-top: 30px;
+  margin-bottom:30px;
+}
+.workImg{
+  width: 70px;
+}
   </style>
   <title>Work Count!</title>
 </head>
@@ -68,13 +95,87 @@
   </div>
 </div>
   
-  <u></u>
+  <div class="rateBorder"></div>
   <!--work rate-->
-  <div class="row">
+  <div style="margin:0 auto; margin-left: 35px;" class="row">
   <div class="col">
-    <p id="p">1. HITER = 2333 SAR</p>
-    <p id="p">2. FREG CONTRO-LER = 2000 SAR</p>
-    <p id="p">3. REF BUTTON = 1500 SAR</p>
+    <table>
+  <tr>
+    <th>Item</th>
+    <th>Img</th>
+    <th>Name</th>
+    <th>Rate</th>
+    <th>Corency</th>
+  </tr>
+  <tr>
+   <td>1</td>
+   <td><img class="workImg" src="img/work/blackSwich.jpg"></td>
+    <td>Black Swich</td>
+    <td>900</td>
+    <td>SAR</td>
+  </tr>
+  <tr>
+   <td>2</td>
+   <td><img class="workImg" src="img/work/autoSwich.jpg"></td>
+    <td>Auto Swich</td>
+    <td>1300</td>
+    <td>SAR</td>
+  </tr>
+  <td>3</td>
+   <td><img class="workImg" src="img/work/redButton.jpg"></td>
+    <td>Red Button</td>
+    <td>1500</td>
+    <td>SAR</td>
+  </tr>
+  <td>4</td>
+   <td><img class="workImg" src="img/work/fregControl.jpg"></td>
+    <td>Freg Controler</td>
+    <td>1500</td>
+    <td>SAR</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><img class="workImg" src="img/work/acControl.jpg"></td>
+    <td>Ac Controler</td>
+    <td>2000</td>
+    <td>SAR</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>6</td>
+    <td><img class="workImg" src="img/work/hitter.jpg"></td>
+    <td>Hitter</td>
+    <td>2333</td>
+    <td>SAR</td>
+  </tr>
+   <td>7</td>
+   <td><img class="workImg" src="img/work/cleanCopper6.jpg"></td>
+    <td>Clean Copper 6</td>
+    <td>6000</td>
+    <td>SAR</td>
+  </tr>
+  <tr>
+   <td>8</td>
+   <td><img class="workImg" src="img/work/cleanBrass.jpg"></td>
+    <td>Clean Brass 7</td>
+    <td>7000</td>
+    <td>SAR</td>
+  </tr>
+  <tr>
+   <td>9</td>
+   <td><img class="workImg" src="img/work/mlcc.jpg"></td>
+    <td>ML</td>
+    <td>1,50000</td>
+    <td>SAR</td>
+  </tr>
+  <tr>
+   <td>10</td>
+   <td><img class="workImg" src="img/work/goldPin.jpg"></td>
+    <td>GP</td>
+    <td>1,50000</td>
+    <td>SAR</td>
+  </tr>
+</table>
   </div>
 </div>
   
@@ -98,5 +199,8 @@
 }
   
 </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
 </body>
 </html>
