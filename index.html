@@ -77,10 +77,11 @@ tr:nth-child(even) {
   <!--রহমতুললা-->
   <div class="row">
   <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1AzOA8eHB7POj4pR2RWPtfTiVcpaW8LZ-Q7Hm_Ze5qbY/edit?usp=drivesdk">মোহাম্মদ রহমতুল্লাহ মিয়া হিসাব</a> </h2>
+    <h2 style="text-align: center; color:white; "><a id="forRahmatollahKey">মোহাম্মদ রহমতুল্লাহ মিয়া হিসাব</a> </h2>
+    <center><a id="rahmatollahSelaryLink" style="display: none; padding:10px; color:black; font-size: 20px; background: green; border-radius:10px; border: none; width:250px" href="https://docs.google.com/document/d/1AzOA8eHB7POj4pR2RWPtfTiVcpaW8LZ-Q7Hm_Ze5qbY/edit?usp=drivesdk">আপনার হিসাব দেখুন।</a></center>
   </div>
   <div class="col">
-   <center><a href="https://docs.google.com/document/d/1AzOA8eHB7POj4pR2RWPtfTiVcpaW8LZ-Q7Hm_Ze5qbY/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/rahmatollah.jpg" ></a></center>
+   <center><a href="#"><img id="" style="width:100px; border-radius: 50%;" src="img/rahmatollah.jpg"></a></center>
   </div>
 </div>
   
@@ -194,6 +195,7 @@ tr:nth-child(even) {
 </div>
   
  <script>
+// for information
   function myIn() {
   var inF;
   if (confirm("Press a button For In or Dont See!")) {
@@ -204,6 +206,20 @@ tr:nth-child(even) {
   document.getElementById("in").innerHTML = inF;
 }
   
+// for Rahmatollah user key
+document.getElementById("forRahmatollahKey").addEventListener("click", function() {
+ let userKey = prompt("মোহাম্মদ রহমাতুল্লাহ সাহেব, আপনার পিন নাম্বার দিন।");
+  if(userKey == 9988){
+     if(confirm("আপনার হিসাব দেখতে চাইলে ওকে চাপুন।")){
+      document.getElementById("rahmatollahSelaryLink").style.display = "block";
+    }else{
+      alert("Thanks For Visit!");
+    }
+  }else{
+    alert("মোহাম্মদ রহমাতুল্লাহ সাহেব আপনার পিন নাম্বার ভুল!");
+  }
+});
+
 </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
