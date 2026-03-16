@@ -88,7 +88,8 @@ tr:nth-child(even) {
   <!--মজিবর-->
   <div class="row">
   <div class="col">
-    <h2 style="text-align: center; color:white; "><a id="forMaziborKey" href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk">মোহাম্মদ মজিবর মিয়া হিসাব</a></h2>
+     <h2 style="text-align: center; color:white; "><a id="forMoziborKey">মোহাম্মদ মজিবর মিয়া হিসাব</a> </h2>
+   <center><a id="moziborSelaryLink" style="display: none; padding:10px; color:black; font-size: 20px; background: green; border-radius:10px; border: none; width:250px" href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk">আপনার হিসাব দেখুন।</a></center>
   </div>
   <div class="col">
    <center><a href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/mojibor.jpg" ></a></center>
@@ -222,11 +223,11 @@ document.getElementById("forRahmatollahKey").addEventListener("click", function(
 
 
 // for mazobor user key
-document.getElementById("forMaziborKey").addEventListener("click", function() {
+document.getElementById("forMoziborKey").addEventListener("click", function() {
  let userKey = prompt("মোহাম্মদ মজিবর সাহেব, আপনার পিন নাম্বার দিন।");
   if(userKey == 7755){
      if(confirm("আপনার হিসাব দেখতে চাইলে ওকে চাপুন।")){
-      document.getElementById("maziborSelaryLink").style.display = "block";
+      document.getElementById("moziborSelaryLink").style.display = "block";
     }else{
       alert("Thanks For Visit!");
     }
