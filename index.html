@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
   <style>
   #p{
     color: white;
@@ -44,6 +43,7 @@ tr:nth-child(even) {
 <body style='background-image: url("img/bodyBac.jpg");'>
   <h1 style="text-align: center; color: green;">Md Ismail <span ondblclick="myIn()">S</span>audi<span id="in"></span></h1>
   
+  945+326+384=1655
   <!--Admin-->
   <div class="row">
   <div class="col">
@@ -88,7 +88,7 @@ tr:nth-child(even) {
   <!--মজিবর-->
   <div class="row">
   <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk">মোহাম্মদ মজিবর মিয়া হিসাব</a></h2>
+    <h2 style="text-align: center; color:white; "><a id="forMaziborKey" href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk">মোহাম্মদ মজিবর মিয়া হিসাব</a></h2>
   </div>
   <div class="col">
    <center><a href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/mojibor.jpg" ></a></center>
@@ -130,7 +130,7 @@ tr:nth-child(even) {
   <td>4</td>
    <td><img class="workImg" src="img/work/fregControl.jpg"></td>
     <td>Freg Controler</td>
-    <td>1500</td>
+    <td>1100</td>
     <td>SAR</td>
   </tr>
   <tr>
@@ -217,6 +217,21 @@ document.getElementById("forRahmatollahKey").addEventListener("click", function(
     }
   }else{
     alert("মোহাম্মদ রহমাতুল্লাহ সাহেব আপনার পিন নাম্বার ভুল!");
+  }
+});
+
+
+// for mazobor user key
+document.getElementById("forMaziborKey").addEventListener("click", function() {
+ let userKey = prompt("মোহাম্মদ মজিবর সাহেব, আপনার পিন নাম্বার দিন।");
+  if(userKey == 7755){
+     if(confirm("আপনার হিসাব দেখতে চাইলে ওকে চাপুন।")){
+      document.getElementById("maziborSelaryLink").style.display = "block";
+    }else{
+      alert("Thanks For Visit!");
+    }
+  }else{
+    alert("মোহাম্মদ মজিবর সাহেব আপনার পিন নাম্বার ভুল!");
   }
 });
 
