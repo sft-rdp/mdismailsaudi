@@ -19,7 +19,6 @@
     body { background-color: var(--bg); padding: 12px; color: #333; }
     .container { max-width: 680px; margin: 0 auto; padding-bottom: 20px; }
     
-    /* Global Profile Header Style */
     .profile-header {
       display: flex;
       flex-direction: column;
@@ -148,7 +147,7 @@
       margin-bottom: 12px;
     }
     .card:last-child { margin-bottom: 0; }
-    .card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 1.5px solid #eee; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+    .card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 1.5px solid #eee; padding-bottom: 4px; }
     
     .input-group { margin-bottom: 10px; display: flex; flex-direction: column; gap: 4px; text-align: left; }
     label { font-size: 0.85rem; font-weight: 600; }
@@ -169,8 +168,20 @@
     .btn:active { opacity: 0.9; }
     .btn-logout { background: #7f8c8d; width: auto; padding: 6px 15px; float: right; }
     .btn-back { background: #546e7a; margin-bottom: 15px; display: inline-block; text-align: center; }
-    .btn-edit-sm { background: #8e44ad; color: white; padding: 4px 10px; font-size: 0.75rem; border-radius: 4px; border: none; cursor: pointer; }
     
+    .btn-adjust {
+      background: #8e44ad;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
     .role-badge {
       display: inline-block;
       padding: 5px 12px;
@@ -220,7 +231,7 @@
       margin-bottom: 8px;
     }
     .worker-item-card h4 { font-size: 0.95rem; color: #333; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
-    .worker-stats { display: flex; justify-content: space-between; font-size: 0.85rem; color: #555; }
+    .worker-stats { display: flex; justify-content: space-between; font-size: 0.85rem; color: #555; flex-wrap: wrap; gap: 4px; }
 
     .monthly-alert-box {
       background-color: #fce4ec;
@@ -303,25 +314,6 @@
       border-radius: 6px;
       margin-bottom: 6px;
     }
-
-    /* Modal for Edit Summary Override */
-    .edit-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .edit-modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
   </style>
 </head>
 <body>
@@ -331,7 +323,6 @@
   <!-- ১. হোম স্ক্রিন -->
   <div id="loginScreen">
     
-    <!-- প্রোফাইল হেডার -->
     <div class="profile-header">
       <img src="admin.jpg" alt="এডমিন প্রোফাইল" class="profile-avatar">
       <span class="profile-name">এমডি ইসমাইল (অ্যাডমিন)</span>
@@ -368,7 +359,6 @@
       <p id="errorMsg" class="error-msg">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
     </div>
 
-    <!-- হোম পেজে প্রকাশিত কর্মীদের পাবলিক হিসাব -->
     <div class="section-block section-worker" style="max-width: 680px;">
       <h2 class="section-title">👥 কর্মীদের মোট পাওনা ও প্রাপ্তির হিসাব (পাবলিক ভিউ)</h2>
       
@@ -425,7 +415,6 @@
 
   <!-- ২. আলাদা ক্যালকুলেটর পেজ -->
   <div id="calcPage" style="display: none;">
-    <!-- প্রোফাইল হেডার -->
     <div class="profile-header">
       <img src="admin.jpg" alt="এডমিন প্রোফাইল" class="profile-avatar">
       <span class="profile-name">এমডি ইসমাইল (অ্যাডমিন)</span>
@@ -523,7 +512,6 @@
 
   <!-- ৩. এডমিন ও এডিটর ড্যাশবোর্ড -->
   <div id="mainDashboard" style="display: none;">
-    <!-- প্রোফাইল হেডার -->
     <div class="profile-header">
       <img src="admin.jpg" alt="এডমিন প্রোফাইল" class="profile-avatar">
       <span class="profile-name">এমডি ইসমাইল (অ্যাডমিন)</span>
@@ -539,7 +527,6 @@
       🧮 দৈনিক কাজের রেট ক্যালকুলেটর ওপেন করুন
     </button>
 
-    <!-- কর্মী অ্যাড ও রিমুভ করার সেকশন (শুধু এডমিন দেখতে পাবেন) -->
     <div id="adminWorkerManagementSection" class="section-block" style="background-color: #e8f8f5; border: 2px solid #2ecc71; display: none;">
       <h2 class="section-title" style="color: #27ae60;">➕ কর্মী যুক্ত ও ব্যবস্থাপনা সেকশন (শুধু এডমিন)</h2>
       <div class="card">
@@ -723,9 +710,7 @@
       </div>
 
       <div class="card">
-        <h3>
-          <span>💰 কর্মীদের মোট হিসাব সারসংক্ষেপ</span>
-        </h3>
+        <h3>💰 কর্মীদের মোট হিসাব সারসংক্ষেপ</h3>
         <div id="dashboardWorkerSummary"></div>
       </div>
 
@@ -773,28 +758,6 @@
     </div>
 
     <button id="resetAllBtn" class="btn" style="background: var(--danger); display: none; margin-bottom: 20px;" onclick="resetAllData()">সব ডাটা রিসেট করুন</button>
-  </div>
-
-  <!-- এডমিনের সরাসরি ওভাররাইড/এডিট পপআপ মডাল -->
-  <div id="overrideSummaryModal" class="edit-modal">
-    <div class="edit-modal-content">
-      <h3 style="margin-bottom: 15px; color: #8e44ad;" id="overrideModalWorkerTitle">কর্মীর সারসংক্ষেপ এডিট</h3>
-      
-      <div class="input-group">
-        <label for="overrideWorkAmount">মোট কাজ (৳):</label>
-        <input type="number" id="overrideWorkAmount" placeholder="০.০০">
-      </div>
-      
-      <div class="input-group">
-        <label for="overridePayAmount">মোট প্রাপ্তি/পেমেন্ট (৳):</label>
-        <input type="number" id="overridePayAmount" placeholder="০.০০">
-      </div>
-
-      <div style="display: flex; gap: 10px; margin-top: 15px;">
-        <button class="btn" style="background: #8e44ad;" onclick="saveOverrideSummary()">সেভ করুন</button>
-        <button class="btn" style="background: #7f8c8d;" onclick="closeOverrideModal()">বাতিল</button>
-      </div>
-    </div>
   </div>
 
   <footer class="app-footer">
@@ -845,9 +808,7 @@
   let currentCalcTab = 'general';
   let currentGeneralTotal = 0;
   let currentOxygenTotal = 0;
-  let editingWorkerKey = null;
 
-  // ডিফল্ট কর্মী অবজেক্ট
   let workerNames = {
     'rahmatullah': 'রহমাতুল্লাহ',
     'mojibor': 'মজিবর',
@@ -862,8 +823,7 @@
     malHistory: [],
     workerHistory: [],
     pendingRequests: [],
-    workers: null,
-    manualOverrides: {} // এডমিনের ওভাররাইড ডাটা সেভ করার অবজেক্ট
+    workers: null
   };
 
   window.onload = function() {
@@ -878,8 +838,7 @@
           malHistory: data.malHistory || [],
           workerHistory: data.workerHistory || [],
           pendingRequests: data.pendingRequests || [],
-          workers: data.workers || null,
-          manualOverrides: data.manualOverrides || {}
+          workers: data.workers || null
         };
 
         if (store.workers) {
@@ -902,74 +861,6 @@
     db.ref('ledgerData').set(store);
   }
 
-  // এডমিন দ্বারা ম্যানুয়ালি সারসংক্ষেপ এডিট করার মডাল ওপেন
-  function openOverrideModal(key) {
-    if (userRole !== 'admin') return;
-    editingWorkerKey = key;
-    document.getElementById('overrideModalWorkerTitle').innerText = `${workerNames[key]}-এর সারসংক্ষেপ এডিট`;
-    
-    // আগের ডাটা থাকলে লোড করবে
-    let currStats = getCalculatedWorkerStats(key);
-    document.getElementById('overrideWorkAmount').value = currStats.work;
-    document.getElementById('overridePayAmount').value = currStats.pay;
-
-    document.getElementById('overrideSummaryModal').style.display = 'flex';
-  }
-
-  function closeOverrideModal() {
-    document.getElementById('overrideSummaryModal').style.display = 'none';
-    editingWorkerKey = null;
-  }
-
-  function saveOverrideSummary() {
-    if (!editingWorkerKey || userRole !== 'admin') return;
-
-    const newWork = parseFloat(document.getElementById('overrideWorkAmount').value) || 0;
-    const newPay = parseFloat(document.getElementById('overridePayAmount').value) || 0;
-
-    if (!store.manualOverrides) store.manualOverrides = {};
-    store.manualOverrides[editingWorkerKey] = { work: newWork, pay: newPay };
-
-    saveDataToFirebase();
-    closeOverrideModal();
-    alert('সারসংক্ষেপ হিসাব সফলভাবে পরিবর্তন করা হয়েছে!');
-  }
-
-  function resetOverrideSummary(key) {
-    if (userRole !== 'admin') return;
-    if (confirm(`আপনি কি ${workerNames[key]}-এর ম্যানুয়াল পরিবর্তন মুছে আবার আগের অটোম্যাটিক হিসাবে ফিরে যেতে চান?`)) {
-      if (store.manualOverrides && store.manualOverrides[key]) {
-        delete store.manualOverrides[key];
-        saveDataToFirebase();
-        alert('অটোম্যাটিক ক্যাশ-হিসাব ফিরিয়ে আনা হয়েছে।');
-      }
-    }
-  }
-
-  function getCalculatedWorkerStats(wKey) {
-    let stats = { work: 0, pay: 0 };
-    if(store.workerHistory) {
-      store.workerHistory.forEach(item => {
-        if(item.worker === wKey && !item.deleted) {
-          if(item.type === 'work') stats.work += item.amount;
-          else if(item.type === 'pay') stats.pay += item.amount;
-        }
-      });
-    }
-
-    // যদি এডমিন ম্যানুয়ালি ওভাররাইড করে থাকেন
-    if (store.manualOverrides && store.manualOverrides[wKey]) {
-      return {
-        work: store.manualOverrides[wKey].work,
-        pay: store.manualOverrides[wKey].pay,
-        isOverridden: true
-      };
-    }
-
-    return stats;
-  }
-
-  // ডায়নামিক কর্মী ব্যবস্থাপনা ফাংশন
   function addNewWorker() {
     if (userRole !== 'admin') return;
     const name = document.getElementById('newWorkerName').value.trim();
@@ -997,7 +888,6 @@
     if (userRole !== 'admin') return;
     if (confirm(`আপনি কি সত্যিই ${workerNames[key]}-কে মুছে ফেলতে চান?`)) {
       delete workerNames[key];
-      if (store.manualOverrides) delete store.manualOverrides[key];
       const keys = Object.keys(workerNames);
       if (currentWorkerTab === key) {
         currentWorkerTab = keys.length > 0 ? keys[0] : '';
@@ -1007,10 +897,52 @@
     }
   }
 
+  function editWorkerSummary(workerKey) {
+    if (userRole !== 'admin') return;
+    const wName = workerNames[workerKey] || workerKey;
+
+    let type = prompt(`কর্মীর হিসাব সমন্বয় করুন (${wName}):\n\n'1' লিখুন: মোট কাজের জমা যোগ করতে\n'2' লিখুন: মোট পেমেন্টে কাটছাঁট/যোগ করতে`, "1");
+    
+    if (type === "1") {
+      let amtStr = prompt(`${wName}-এর কাজের জমার সাথে কত টাকা সমন্বয় করতে চান?`, "0");
+      let amt = parseFloat(amtStr);
+      if (!isNaN(amt) && amt !== 0) {
+        if (!store.workerHistory) store.workerHistory = [];
+        const today = new Date().toISOString().split('T')[0];
+        store.workerHistory.push({
+          date: today,
+          time: getCurrentTime(),
+          worker: workerKey,
+          type: 'work',
+          amount: amt,
+          desc: 'এডমিন ম্যানুয়াল হিসাব এডজাস্টমেন্ট'
+        });
+        saveDataToFirebase();
+        alert(`${wName}-এর কাজের হিসাবে ৳${amt} সমন্বয় করা হয়েছে!`);
+      }
+    } else if (type === "2") {
+      let amtStr = prompt(`${wName}-এর পেমেন্ট প্রাপ্তির সাথে কত টাকা সমন্বয় করতে চান?`, "0");
+      let amt = parseFloat(amtStr);
+      if (!isNaN(amt) && amt !== 0) {
+        if (!store.workerHistory) store.workerHistory = [];
+        const today = new Date().toISOString().split('T')[0];
+        store.workerHistory.push({
+          date: today,
+          time: getCurrentTime(),
+          worker: workerKey,
+          type: 'pay',
+          amount: amt,
+          desc: 'এডমিন ম্যানুয়াল হিসাব এডজাস্টমেন্ট'
+        });
+        saveDataToFirebase();
+        alert(`${wName}-এর পেমেন্ট হিসাবে ৳${amt} সমন্বয় করা হয়েছে!`);
+      }
+    }
+  }
+
   function renderWorkerOptionsAndTabs() {
     const keys = Object.keys(workerNames);
 
-    // ১. ড্রপডাউন রিফ্রেশ
     const selects = ['calcReqWorkerSelect', 'workerWorkSelect', 'workerPaySelect'];
     selects.forEach(selectId => {
       const el = document.getElementById(selectId);
@@ -1022,7 +954,6 @@
       }
     });
 
-    // ২. ট্যাব রিফ্রেশ
     const tabContainers = ['publicWorkerTabs', 'publicWorkerItemTabs', 'dashWorkerTabs', 'dashWorkerItemTabs'];
     tabContainers.forEach(containerId => {
       const el = document.getElementById(containerId);
@@ -1035,7 +966,6 @@
       }
     });
 
-    // ৩. এডমিন প্যানেলের কর্মী লিস্ট
     const adminList = document.getElementById('adminWorkerList');
     if (adminList) {
       adminList.innerHTML = '';
@@ -1407,7 +1337,38 @@
 
   function updateUI() {
     let totalBazar = 0, totalMalBuy = 0, totalMalSell = 0;
+    
+    let workerStats = {};
+    Object.keys(workerNames).forEach(w => {
+      workerStats[w] = { work: 0, pay: 0 };
+    });
 
+    // ১. বাজার খরচ সামারি হিসাব (হিস্ট্রি থেকে ডিলিট করা হলেও ব্যালেন্স কমবে না)
+    if(store.bazarHistory) {
+      store.bazarHistory.forEach(item => {
+        totalBazar += item.amount;
+      });
+    }
+
+    // ২. মাল কেনা-বেচা সামারি হিসাব (হিস্ট্রি থেকে ডিলিট করা হলেও মূল ক্যাশ কমবে না)
+    if(store.malHistory) {
+      store.malHistory.forEach(item => {
+        if(item.type === 'buy') totalMalBuy += item.amount;
+        if(item.type === 'sell') totalMalSell += item.amount;
+      });
+    }
+
+    // ৩. কর্মীদের ব্যালেন্স হিসাব (হিস্ট্রি থেকে ডিলিট করা হলেও কর্মীদের মূল পাওনা অপরিবর্তিত থাকবে)
+    if(store.workerHistory) {
+      store.workerHistory.forEach(item => {
+        if(workerStats[item.worker]) {
+          if(item.type === 'work') workerStats[item.worker].work += item.amount;
+          else if(item.type === 'pay') workerStats[item.worker].pay += item.amount;
+        }
+      });
+    }
+
+    // পেন্ডিং রিকোয়েস্ট রেন্ডার
     const renderPending = (tableId) => {
       const table = document.getElementById(tableId);
       if (!table) return;
@@ -1432,68 +1393,62 @@
     renderPending('pendingRequestTable');
     renderPending('calcPagePendingTable');
 
+    // বাজার খরচের হিস্ট্রি টেবিল (শুধুমাত্র যেগুলো ডিলিট করা হয়নি সেগুলো দেখাবে)
     const bazarTable = document.getElementById('bazarHistoryTable');
     if (bazarTable) {
       bazarTable.innerHTML = '';
       if(store.bazarHistory) {
-        store.bazarHistory.slice().reverse().forEach((item, index) => {
-          const origIdx = store.bazarHistory.length - 1 - index;
-          totalBazar += item.amount;
-          const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteBazar(${origIdx})">✕</button>` : `-`;
-          bazarTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}<span class="time-text">${item.time||''}</span></td><td>${item.desc||'-'}</td><td>৳${item.amount}</td><td>${del}</td></tr>`;
-        });
+        const activeBazar = store.bazarHistory
+          .map((item, originalIndex) => ({...item, originalIndex}))
+          .filter(i => !i.deletedFromHistory);
+
+        if(activeBazar.length === 0) {
+          bazarTable.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #666;">কোনো হিস্ট্রি নেই।</td></tr>`;
+        } else {
+          activeBazar.slice().reverse().forEach((item) => {
+            const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteBazar(${item.originalIndex})">✕</button>` : `-`;
+            bazarTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}<span class="time-text">${item.time||''}</span></td><td>${item.desc||'-'}</td><td>৳${item.amount}</td><td>${del}</td></tr>`;
+          });
+        }
       }
     }
 
+    // মাল কেনা-বেচার হিস্ট্রি টেবিল
     const malTable = document.getElementById('malHistoryTable');
     if (malTable) {
       malTable.innerHTML = '';
       if(store.malHistory) {
-        store.malHistory.slice().reverse().forEach((item, index) => {
-          const origIdx = store.malHistory.length - 1 - index;
-          if(item.type === 'buy') totalMalBuy += item.amount;
-          if(item.type === 'sell') totalMalSell += item.amount;
-          const badge = item.type === 'buy' ? 'badge-buy' : 'badge-sell';
-          const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteMal(${origIdx})">✕</button>` : `-`;
-          malTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}</td><td><span class="badge ${badge}">${item.type==='buy'?'কেনা':'বিক্রি'}</span></td><td>${item.desc||'-'}</td><td>৳${item.amount}</td><td>${del}</td></tr>`;
-        });
+        const activeMal = store.malHistory
+          .map((item, originalIndex) => ({...item, originalIndex}))
+          .filter(i => !i.deletedFromHistory);
+
+        if(activeMal.length === 0) {
+          malTable.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">কোনো হিস্ট্রি নেই।</td></tr>`;
+        } else {
+          activeMal.slice().reverse().forEach((item) => {
+            const badge = item.type === 'buy' ? 'badge-buy' : 'badge-sell';
+            const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteMal(${item.originalIndex})">✕</button>` : `-`;
+            malTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}</td><td><span class="badge ${badge}">${item.type==='buy'?'কেনা':'বিক্রি'}</span></td><td>${item.desc||'-'}</td><td>৳${item.amount}</td><td>${del}</td></tr>`;
+          });
+        }
       }
     }
 
-    const renderSummary = () => {
+    // কর্মীদের সারসংক্ষেপ কার্ড রেন্ডার
+    const renderSummary = (isAdminView = false) => {
       let html = '';
       Object.keys(workerNames).forEach(w => {
-        const stats = getCalculatedWorkerStats(w);
+        const stats = workerStats[w] || { work: 0, pay: 0 };
         const bal = stats.work - stats.pay;
-        
-        let editBtnHtml = '';
-        if (userRole === 'admin') {
-          editBtnHtml = `
-            <div>
-              <button class="btn-edit-sm" onclick="openOverrideModal('${w}')">✏️ এডিট</button>
-              ${stats.isOverridden ? `<button class="btn-edit-sm" style="background:#e74c3c;" onclick="resetOverrideSummary('${w}')">↺ রিসেট</button>` : ''}
-            </div>
-          `;
-        }
-
-        html += `
-          <div class="worker-item-card">
-            <h4>
-              <span>👤 ${workerNames[w]} ${stats.isOverridden ? '<small style="color:#e67e22;">(ম্যানুয়ালি সেট)</small>' : ''}</span>
-              ${editBtnHtml}
-            </h4>
-            <div class="worker-stats">
-              <span>কাজ: ৳${stats.work.toFixed(2)}</span>
-              <span>প্রাপ্তি: ৳${stats.pay.toFixed(2)}</span>
-              <span>পাওনা: <strong style="color: #27ae60;">৳${bal.toFixed(2)}</strong></span>
-            </div>
-          </div>`;
+        const editBtn = (isAdminView && userRole === 'admin') ? `<button class="btn-adjust" onclick="editWorkerSummary('${w}')">✏️ হিসাব এডজাস্ট</button>` : '';
+        html += `<div class="worker-item-card"><h4><span>👤 ${workerNames[w]}</span> ${editBtn}</h4><div class="worker-stats"><span>কাজ: ৳${stats.work.toFixed(2)}</span><span>প্রাপ্তি: ৳${stats.pay.toFixed(2)}</span><span>পাওনা: <strong style="color: #27ae60;">৳${bal.toFixed(2)}</strong></span></div></div>`;
       });
       return html;
     };
-    if(document.getElementById('publicWorkerSummary')) document.getElementById('publicWorkerSummary').innerHTML = renderSummary();
-    if(document.getElementById('dashboardWorkerSummary')) document.getElementById('dashboardWorkerSummary').innerHTML = renderSummary();
+    if(document.getElementById('publicWorkerSummary')) document.getElementById('publicWorkerSummary').innerHTML = renderSummary(false);
+    if(document.getElementById('dashboardWorkerSummary')) document.getElementById('dashboardWorkerSummary').innerHTML = renderSummary(true);
 
+    // মাসিক অ্যালার্ট বক্স
     const renderAlert = (m) => {
       if(!m) return '';
       let pays = {};
@@ -1501,7 +1456,7 @@
 
       if(store.workerHistory) {
         store.workerHistory.forEach(item => {
-          if(item.type === 'pay' && item.date && item.date.startsWith(m) && pays[item.worker] !== undefined && !item.deleted) {
+          if(item.type === 'pay' && item.date && item.date.startsWith(m) && pays[item.worker] !== undefined) {
             pays[item.worker] += item.amount;
           }
         });
@@ -1515,18 +1470,23 @@
     if(document.getElementById('publicMonthlyAlert')) document.getElementById('publicMonthlyAlert').innerHTML = renderAlert(document.getElementById('publicMonthFilter').value);
     if(document.getElementById('dashMonthlyAlert')) document.getElementById('dashMonthlyAlert').innerHTML = renderAlert(document.getElementById('dashMonthFilter').value);
 
+    // কর্মী হিস্ট্রি ফিল্টার (শুধুমাত্র হিস্ট্রি থেকে ডিলিট না হওয়া লেনদেন দেখাবে)
     const filteredWorker = (store.workerHistory || [])
       .map((item, originalIndex) => ({...item, originalIndex}))
-      .filter(i => i.worker === currentWorkerTab && !i.deleted);
+      .filter(i => i.worker === currentWorkerTab && !i.deletedFromHistory);
 
     const renderWorkerHistory = (tableId, showDel) => {
       const table = document.getElementById(tableId);
       if(!table) return;
       table.innerHTML = '';
+      if(filteredWorker.length === 0) {
+        table.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">কোনো হিস্ট্রি নেই।</td></tr>`;
+        return;
+      }
       filteredWorker.slice().reverse().forEach((item, idx) => {
         const badge = (item.type||'work') === 'work' ? 'badge-work' : 'badge-pay';
         const del = showDel && userRole === 'admin' ? `<button class="del-btn" onclick="deleteWorkerTransaction(${item.originalIndex})">✕</button>` : '-';
-        table.innerHTML += `<tr><td>#${filteredWorker.length - idx}</td><td>${formatDateToDMY(item.date)}</td><td><span class="badge ${badge}">${item.type==='work'?'কাজের জমা':'পেমেন্ট'}</span></td><td>৳${item.amount.toFixed(2)}</td>${showDel?`<td>${del}</td>`:''}</tr>`;
+        table.innerHTML += `<tr><td>#${filteredWorker.length - idx}</td><td>${formatDateToDMY(item.date)}${item.desc ? `<br><small style="color:#666">${item.desc}</small>` : ''}</td><td><span class="badge ${badge}">${item.type==='work'?'কাজের জমা':'পেমেন্ট'}</span></td><td>৳${item.amount.toFixed(2)}</td>${showDel?`<td>${del}</td>`:''}</tr>`;
       });
     };
     renderWorkerHistory('workerHistoryTable', true);
@@ -1611,13 +1571,29 @@
     switchWorkerTab(worker);
   }
 
-  function deleteBazar(idx) { if(userRole === 'admin') { store.bazarHistory.splice(idx, 1); saveDataToFirebase(); } }
-  function deleteMal(idx) { if(userRole === 'admin') { store.malHistory.splice(idx, 1); saveDataToFirebase(); } }
+  // হিস্ট্রি থেকে মুছে ফেলা হলেও মূল ব্যালেন্স/ক্যাশ অপরিবর্তিত থাকবে
+  function deleteBazar(idx) { 
+    if(userRole === 'admin') { 
+      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (মূল ক্যাশ ফান্ড এবং খরচের হিসাবে কোনো প্রভাব পড়বে না)')) {
+        store.bazarHistory[idx].deletedFromHistory = true; 
+        saveDataToFirebase(); 
+      }
+    } 
+  }
+
+  function deleteMal(idx) { 
+    if(userRole === 'admin') { 
+      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (মালের মূল ক্যাশ ব্যালেন্সে কোনো প্রভাব পড়বে না)')) {
+        store.malHistory[idx].deletedFromHistory = true; 
+        saveDataToFirebase(); 
+      }
+    } 
+  }
 
   function deleteWorkerTransaction(idx) { 
     if(userRole === 'admin') { 
-      if(confirm('হিস্টরি থেকে এটি মুছে ফেলতে চান?')) {
-        store.workerHistory[idx].deleted = true; 
+      if(confirm('হিস্টরি থেকে এটি মুছে ফেলতে চান? (কর্মীর মূল ব্যালেন্স ও মোট কাজের টাকায় কোনো প্রভাব পড়বে না)')) {
+        store.workerHistory[idx].deletedFromHistory = true; 
         saveDataToFirebase(); 
       }
     } 
@@ -1625,7 +1601,7 @@
 
   function resetAllData() {
     if(userRole === 'admin' && confirm('সব ডাটা মুছে ফেলতে চান?')) {
-      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [], workers: workerNames, manualOverrides: {} };
+      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [], workers: workerNames };
       saveDataToFirebase();
     }
   }
