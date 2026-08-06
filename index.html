@@ -1,346 +1,1360 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>দৈনিক হিসাব খাতা ও কর্মী পোর্টাল</title>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
-  #p{
-    color: white;
-  }
-  table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: black;
-}
-.rateBorder{
-  border-style: solid;
-  border-color: green;
-  border-width: 3px;
-  width: 450px;
-  margin-top: 30px;
-  margin-bottom:30px;
-}
-.workImg{
-  width: 70px;
-}
-  </style>
-  <title>Work Count!</title>
-</head>
-<body style='background-image: url("img/bodyBac.jpg");'>
-  <h1 style="text-align: center; color: green;">Md Ismail <span ondblclick="myIn()">S</span>audi<span id="in"></span></h1>
-  <a href='https://docs.google.com/document/d/12v4gpD3Qfv7c6Anw3XAqqI-1NKxd1avdGpKIdS65Wog/edit?usp=drivesdk'>Buisness Counter</a>
-  <!--Admin-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; ">Admin<a href="https://docs.google.com/document/d/1ksZt-uDJZT15DiisqnU-lm0CHguo9CdqaWew3H7Y9GY/edit?usp=drivesdk">.</a></h2>
-  </div>
-  <div class="col">
-   <img style="border-radius: 3%;"src="img/admin.jpg" >
-  </div>
-</div>
-  
-  
-  <!--রহমতুললা-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; "><a id="forRahmatollahKey">মোহাম্মদ রহমতুল্লাহ মিয়া হিসাব</a> </h2>
-    <center><a id="rahmatollahSelaryLink" style="display: none; padding:10px; color:black; font-size: 20px; background: green; border-radius:10px; border: none; width:250px" href="https://docs.google.com/document/d/17EsmjA-kN_q43rPLx1HvZ32XhhJyvVQgqan2QBnXaUI/edit?usp=drivesdk">আপনার হিসাব দেখুন।</a></center>
-  </div>
-  <div class="col">
-   <center><a href="#"><img id="" style="width:100px; border-radius: 50%;" src="img/rahmatollah.jpg"></a></center>
-  </div>
-</div>
-  
-  <!--মজিবর-->
-  <div class="row">
-  <div class="col">
-     <h2 style="text-align: center; color:white; "><a id="forMoziborKey">মোহাম্মদ মজিবর মিয়া হিসাব</a> </h2>
-   <center><a id="moziborSelaryLink" style="display: none; padding:10px; color:black; font-size: 20px; background: green; border-radius:10px; border: none; width:250px" href="https://docs.google.com/document/d/1rhhEL3BAJdFus61sK5Of2u7gq6PfOM_R3VxixL5q-C4/edit?usp=drivesdk">আপনার হিসাব দেখুন।</a></center>
-  </div>
-  <div class="col">
-   <center><a href="#"><img style="width:100px; border-radius: 50%;"src="img/mojibor.jpg" ></a></center>
-  </div>
-</div>
-  
-  <!--Akash-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1hBHb7z_0pJF-itgS-No624jDVqlqRkb9aIraqmrQajY/edit?usp=drivesdk">মোহাম্মদ আকাশ মিয়া হিসাব</a></h2>
-  </div>
-  <div class="col">
-    <center><a href="https://docs.google.com/document/d/1hBHb7z_0pJF-itgS-No624jDVqlqRkb9aIraqmrQajY/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/akash.jpg" ></a></center>
-  </div>
-</div>
-  
-  <!--mahedy-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1Y2UooCQchtW0QtqIT313ifMUtb5U7qJ7i9Dp3_lobs4/edit?usp=drivesdk">Mahedy</a></h2>
-  </div>
-  <div class="col">
-   <center><a href="#"><img style="width:100px; border-radius: 50%;"src="img/mahedy.jpg" ></a></center>
-  </div>
-</div>
-  
-  <!--Arif-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/17MheRWWqM4nvP3vDFJvH0RkPcpL09-sjhCu1UD1pZHI/edit?usp=drivesdk">মোহাম্মদ আরিফ মিয়া হিসাব</a></h2>
-  </div>
-  <div class="col">
-    <center><a href="https://docs.google.com/document/d/17MheRWWqM4nvP3vDFJvH0RkPcpL09-sjhCu1UD1pZHI/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/arif.jpg" ></a></center>
-  </div>
-</div>
-  
-  
-  <!--সপন-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1M2ZgWxT9AUdqBwq7Cban7sJH0XswUcKos71RocNTuwI/edit?usp=drivesdk">মোহাম্মদ সপন মিয়া হিসাব</a></h2>
-  </div>
-  <div class="col">
-   <center><a href="https://docs.google.com/document/d/1M2ZgWxT9AUdqBwq7Cban7sJH0XswUcKos71RocNTuwI/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/sapon.jpg" ></a></center>
-  </div>
-</div>
-  
-<!--হাবি-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color:white; "><a href="https://docs.google.com/document/d/1E3N5sYZonPmr6SB19n04rIqwdkbDPMLc-np8J0fytbI/edit?usp=drivesdk">মোহাম্মদ হাবি মিয়া হিসাব</a></h2>
-  </div>
-  <div class="col">
-   <center><a href="https://docs.google.com/document/d/1E3N5sYZonPmr6SB19n04rIqwdkbDPMLc-np8J0fytbI/edit?usp=drivesdk"><img style="width:100px; border-radius: 50%;"src="img/habi.jpg" ></a></center>
-  </div>
-</div>
-  
-  <div class="rateBorder"></div>
-  <!--work rate-->
-  <div style="margin:0 auto; margin-left: 35px;" class="row">
-  <div class="col">
-    <table>
-  <tr>
-    <th>Item</th>
-    <th>Img</th>
-    <th>Name</th>
-    <th>Rate</th>
-    <th>Corency</th>
-  </tr>
-  <tr>
-   <td>1</td>
-   <td><img class="workImg" src="img/work/blackSwich.jpg"></td>
-    <td>Black Swich & big Swich 0.90</td>
-    <td>900</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>2</td>
-   <td><img class="workImg" src="img/work/autoSwich.jpg"></td>
-    <td>Auto Swich 1.3</td>
-    <td>1300</td>
-    <td>SAR</td>
-  </tr>
-  <td>3</td>
-   <td><img class="workImg" src="img/work/redButton.jpg"></td>
-    <td>Red Button 1.5</td>
-    <td>1500</td>
-    <td>SAR</td>
-  </tr>
-  <td>4</td>
-   <td><img class="workImg" src="img/work/fregControl.jpg"></td>
-    <td>Freg Controler 1.1</td>
-    <td>1100</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td><img class="workImg" src="img/work/acControl.jpg"></td>
-    <td>Ac Controler 2.16</td>
-    <td>2160</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-  <tr>
-    <td>6</td>
-    <td><img class="workImg" src="img/work/hitter.jpg"></td>
-    <td>Hitter</td>
-    <td>2160</td>
-    <td>SAR</td>
-  </tr>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #27ae60;
+      --danger: #e74c3c;
+      --bg: #ebeeef;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg); padding: 12px; color: #333; }
+    .container { max-width: 680px; margin: 0 auto; padding-bottom: 20px; }
     
-   <tr>
-   <td>7</td>
-   <td><img class="workImg" src="img/work/oxijen-blackSwich-3.jpg"></td>
-    <td>Oxijen black Swich naim 3</td>
-    <td>30000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>8</td>
-   <td><img class="workImg" src="img/work/oxijen-hiter-4.jpg"></td>
-    <td>Oxijen Hiter 4</td>
-    <td>4,000</td>
-    <td>SAR</td>
-  </tr>
-    <tr>
-   <td>9</td>
-   <td><img class="workImg" src="img/work/oxijen-red-swich-5.jpg"></td>
-    <td>Oxijen Red Swich brass 5</td>
-    <td>5,000</td>
-    <td>SAR</td>
-  </tr>
-    <tr>
-   <td>10</td>
-   <td><img class="workImg" src="img/work/oxijen-mini-controlar-6.jpg"></td>
-    <td>Oxijen mini controlar brass 6</td>
-    <td>6,000</td>
-    <td>SAR</td>
-  </tr>
-    <tr>
-   <td>11</td>
-   <td><img class="workImg" src="img/work/oxijen-auto-6.jpg"></td>
-    <td>Oxijen Auto Swich brass 6</td>
-    <td>6,000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>12</td>
-   <td><img class="workImg" src="img/work/oxijen-mix-8.jpg"></td>
-    <td>Oxijen black controlar mix 8</td>
-    <td>8,000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>13</td>
-   <td><img class="workImg" src="img/work/oxijen-hiter-plastick-18.jpg"></td>
-    <td>Oxijen hiter plastic 18</td>
-    <td>18,000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>14</td>
-   <td><img class="workImg" src="img/work/oxijen-hitet-nanim-35.jpg"></td>
-    <td>Oxijen hiter naim 35</td>
-    <td>35,000</td>
-    <td>SAR</td>
-  </tr>
-  <td>15</td>
-   <td><img class="workImg" src="img/work/oxijen-hiter-mini-brass-35.jpg"></td>
-    <td>Oxijen hiter mini brass 35</td>
-    <td>35,000</td>
-    <td>SAR</td>
-  </tr>
-    <tr>
-    <td>16</td>
-    <td><img class="workImg" src="img/work/hiterOxizen.jpg"></td>
-    <td>Silver Brass & Copper Cutting 4</td>
-    <td>4000</td>
-    <td>SAR</td>
-  </tr>
-   <td>17</td>
-   <td><img class="workImg" src="img/work/cleanCopper6.jpg"></td>
-    <td>Clean Copper 6</td>
-    <td>6000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>18</td>
-   <td><img class="workImg" src="img/work/cleanBrass.jpg"></td>
-    <td>Clean Brass 7</td>
-    <td>7000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>19</td>
-   <td><img class="workImg" src="img/work/mlcc.jpg"></td>
-    <td>ML</td>
-    <td>1,50000</td>
-    <td>SAR</td>
-  </tr>
-  <tr>
-   <td>20</td>
-   <td><img class="workImg" src="img/work/goldPin.jpg"></td>
-    <td>GP</td>
-    <td>1,50000</td>
-    <td>SAR</td>
-  </tr>
-</table>
-  </div>
-</div>
-  
-<ul>
-  <li><a target="_blank" href="https://www.livepriceofgold.com/silver-price/saudi-arabia.html" target="_blank">Silver Rate In SAR</a></li>
-  <li><a href="https://www.livepriceofgold.com/riyadh-gold-price.html" target="_blank">Gold Rate in SAR</a></li>
-  <li><a href="https://tradingeconomics.com/commodity/copper" target="_blank">Copper Chart</a></li>
-  <li><a href="" target="_blank">Brass price per ton</a></li>
-  <li><a href="https://tradingeconomics.com/commodity/silver" target="_blank">Silver Chart</a></li>
-  <li><a href="https://tradingeconomics.com/commodity/gold" target="_blank">Gold Chart</a></li>
-  <li><a href="https://github.com/sft-rdp/mdismailsaudi" target="_blank">Github Link</a></li>
-  <li><a href="" target="_blank"></a></li>
-</ul>
-   <!--footer-->
-  <div class="row">
-  <div class="col">
-    <h2 style="text-align: center; color: #ffffff; background: black; padding:10px;">Powerd by Md Ismail</h2>
-  </div>
-</div>
-  
- <script>
-// for information
-  function myIn() {
-  var inF;
-  if (confirm("Press a button For In or Dont See!")) {
-    inF = "<a style='text-decoration:none; color: green; ' href='https://docs.google.com/document/d/16yveFiuXvz-TrSSqeBIcfoz2R9Wz2aWCQ9Qb2BM9Uhs/edit?usp=drivesdk'><span>.</span></a>";
-  } else {
-    inF = "You Dont See In!";
-  }
-  document.getElementById("in").innerHTML = inF;
-}
-  
-// for Rahmatollah user key
-document.getElementById("forRahmatollahKey").addEventListener("click", function() {
- let userKey = prompt("মোহাম্মদ রহমাতুল্লাহ সাহেব, আপনার পিন নাম্বার দিন।");
-  if(userKey == 9988){
-     if(confirm("আপনার হিসাব দেখতে চাইলে ওকে চাপুন।")){
-      document.getElementById("rahmatollahSelaryLink").style.display = "block";
-    }else{
-      alert("Thanks For Visit!");
+    #loginScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
     }
-  }else{
-    alert("মোহাম্মদ রহমাতুল্লাহ সাহেব আপনার পিন নাম্বার ভুল!");
-  }
-});
-
-
-// for mazobor user key
-document.getElementById("forMoziborKey").addEventListener("click", function() {
- let userKey = prompt("মোহাম্মদ মজিবর সাহেব, আপনার পিন নাম্বার দিন।");
-  if(userKey == 7755){
-     if(confirm("আপনার হিসাব দেখতে চাইলে ওকে চাপুন।")){
-      document.getElementById("moziborSelaryLink").style.display = "block";
-    }else{
-      alert("Thanks For Visit!");
+    .login-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
     }
-  }else{
-    alert("মোহাম্মদ মজিবর সাহেব আপনার পিন নাম্বার ভুল!");
-  }
-});
+    .login-card h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; }
+    
+    .login-role-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .role-tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #ccc;
+      background: #f1f1f1;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+    .role-tab-btn.active-editor {
+      background: #2980b9;
+      color: white;
+      border-color: #2980b9;
+    }
+    .role-tab-btn.active-admin {
+      background: #8e44ad;
+      color: white;
+      border-color: #8e44ad;
+    }
 
+    .btn-calc-launch {
+      background: linear-gradient(135deg, #0288d1, #01579b);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 12px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2, 136, 209, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.1s ease;
+    }
+    .btn-calc-launch:active {
+      transform: scale(0.98);
+    }
+
+    .section-block {
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      width: 100%;
+    }
+    .section-title {
+      font-size: 1.25rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-fund { background-color: #f3e5f5; border: 2px solid #ce93d8; }
+    .section-fund .section-title { color: #6a1b9a; }
+
+    .section-bazar { background-color: #d4e6f1; border: 2px solid #85c1e9; }
+    .section-bazar .section-title { color: #1b4f72; }
+
+    .section-mal { background-color: #c8e6c9; border: 2px solid #81c784; }
+    .section-mal .section-title { color: #1b5e20; }
+
+    .section-worker { background-color: #fff59d; border: 2px solid #fbc02d; }
+    .section-worker .section-title { color: #f57f17; }
+
+    .section-calc { background-color: #e1f5fe; border: 2px solid #03a9f4; }
+    .section-calc .section-title { color: #0277bd; }
+
+    .card {
+      background: var(--card-bg);
+      padding: 14px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 1.5px solid #eee; padding-bottom: 4px; }
+    
+    .input-group { margin-bottom: 10px; display: flex; flex-direction: column; gap: 4px; text-align: left; }
+    label { font-size: 0.85rem; font-weight: 600; }
+    input, select { padding: 9px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; width: 100%; }
+    
+    .btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .btn:active { opacity: 0.9; }
+    .btn-logout { background: #7f8c8d; width: auto; padding: 6px 15px; float: right; }
+    .btn-back { background: #546e7a; margin-bottom: 15px; display: inline-block; text-align: center; }
+    
+    .role-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .role-admin { background-color: #8e44ad; }
+    .role-editor { background-color: #2980b9; }
+
+    .summary-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .summary-box { background: #f8f9f9; padding: 10px 5px; border-radius: 6px; text-align: center; border: 1px solid #e5e7e9; }
+    .summary-box span { display: block; font-size: 0.75rem; color: #555; margin-bottom: 2px; }
+    .summary-box strong { font-size: 1rem; }
+
+    .worker-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 8px 4px;
+      background: #e0e0e0;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: #444;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .tab-btn.active {
+      background: #d4ac0d;
+      color: white;
+    }
+
+    .worker-item-card {
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+    .worker-item-card h4 { font-size: 0.95rem; color: #333; margin-bottom: 4px; }
+    .worker-stats { display: flex; justify-content: space-between; font-size: 0.85rem; color: #555; }
+
+    .monthly-alert-box {
+      background-color: #fce4ec;
+      border: 2px solid #f48fb1;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .monthly-alert-box h4 {
+      color: #c2185b;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .monthly-alert-list {
+      list-style: none;
+      font-size: 0.88rem;
+    }
+    .monthly-alert-list li {
+      padding: 4px 0;
+      border-bottom: 1px dashed #f8bbd0;
+    }
+    .monthly-alert-list li:last-child {
+      border-bottom: none;
+    }
+
+    .calc-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      background: #f1f8e9;
+      padding: 8px;
+      border-radius: 6px;
+    }
+    .calc-item-row label { flex: 1.5; font-weight: 600; font-size: 0.85rem; }
+    .calc-item-row .rate-text { flex: 1; font-size: 0.75rem; color: #666; text-align: center; }
+    .calc-item-row input { flex: 1.2; text-align: center; padding: 6px; }
+
+    .table-container { overflow-x: auto; margin-top: 5px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
+    th, td { padding: 8px 6px; border-bottom: 1px solid #ddd; }
+    th { background-color: #f8f9f9; color: #333; }
+    .badge { padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; color: #fff; display: inline-block; }
+    .badge-work { background-color: #27ae60; }
+    .badge-pay { background-color: #e74c3c; }
+    .badge-buy { background-color: #e67e22; }
+    .badge-sell { background-color: #27ae60; }
+    .time-text { font-size: 0.75rem; color: #666; display: block; margin-top: 2px; }
+    .del-btn { color: var(--danger); cursor: pointer; font-weight: bold; border: none; background: none; font-size: 1rem; }
+    .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; display: none; }
+    .item-detail-text { font-size: 0.8rem; color: #444; line-height: 1.4; }
+
+    .app-footer {
+      text-align: center;
+      margin-top: 25px;
+      padding: 15px 10px;
+      border-top: 1.5px dashed #cbd5e1;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    .app-footer p {
+      margin-bottom: 4px;
+    }
+    .app-footer .version-text {
+      font-weight: bold;
+      color: #0284c7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ১. হোম স্ক্রিন -->
+  <div id="loginScreen">
+    
+    <button class="btn-calc-launch" onclick="showPage('calcPage')">
+      🧮 দৈনিক কাজের রেট ক্যালকুলেটর (এখানে ক্লিক করুন)
+    </button>
+
+    <div class="login-card">
+      <h2>🔒 প্যানেল লগইন নির্বাচন করুন</h2>
+      
+      <div class="login-role-tabs">
+        <button id="btnTabEditor" class="role-tab-btn active-editor" onclick="switchLoginMode('editor')">✏️ এডিটর লগইন</button>
+        <button id="btnTabAdmin" class="role-tab-btn" onclick="switchLoginMode('admin')">👑 এডমিন লগইন</button>
+      </div>
+
+      <div id="editorLoginBox">
+        <div class="input-group">
+          <label for="editorPassword">এডিটর পাসওয়ার্ড:</label>
+          <input type="password" id="editorPassword" placeholder="এডিটর পাসওয়ার্ড লিখুন...">
+        </div>
+        <button class="btn" style="background: #2980b9;" onclick="loginEditor()">এডিটর হিসেবে প্রবেশ</button>
+      </div>
+
+      <div id="adminLoginBox" style="display: none;">
+        <div class="input-group">
+          <label for="adminPassword">এডমিন পাসওয়ার্ড:</label>
+          <input type="password" id="adminPassword" placeholder="এডমিন পাসওয়ার্ড লিখুন...">
+        </div>
+        <button class="btn" style="background: #8e44ad;" onclick="loginAdmin()">এডমিন হিসেবে প্রবেশ</button>
+      </div>
+
+      <p id="errorMsg" class="error-msg">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
+    </div>
+
+    <!-- হোম পেজে প্রকাশিত কর্মীদের পাবলিক হিসাব -->
+    <div class="section-block section-worker" style="max-width: 680px;">
+      <h2 class="section-title">👥 কর্মীদের মোট পাওনা ও প্রাপ্তির হিসাব (পাবলিক ভিউ)</h2>
+      
+      <div class="card">
+        <h3>💰 কর্মীদের মোট হিসাব সারসংক্ষেপ</h3>
+        <div id="publicWorkerSummary"></div>
+      </div>
+
+      <div class="card">
+        <h3>🚨 মাস শেষে কর্মী প্রতি মোট টাকা নেওয়ার এলার্ট</h3>
+        <div class="input-group">
+          <label for="publicMonthFilter">মাস ও বছর নির্বাচন করুন:</label>
+          <input type="month" id="publicMonthFilter" onchange="updateUI()">
+        </div>
+        <div id="publicMonthlyAlert" class="monthly-alert-box"></div>
+      </div>
+
+      <div class="card">
+        <h3>📜 পৃথক কর্মী কাজের ও টাকা পাওয়ার হিস্ট্রি</h3>
+        <div class="worker-tabs">
+          <button class="tab-btn public-tab-rahmatullah active" onclick="switchWorkerTab('rahmatullah')">রহমাতুল্লাহ</button>
+          <button class="tab-btn public-tab-mojibor" onclick="switchWorkerTab('mojibor')">মজিবর</button>
+          <button class="tab-btn public-tab-akash" onclick="switchWorkerTab('akash')">আকাশ</button>
+          <button class="tab-btn public-tab-mehedi" onclick="switchWorkerTab('mehedi')">মেহেদী</button>
+          <button class="tab-btn public-tab-hanif" onclick="switchWorkerTab('hanif')">হানিফ</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>তারিখ ও সময়</th>
+                <th>লেনদেনের ধরন</th>
+                <th>টাকা</th>
+              </tr>
+            </thead>
+            <tbody id="publicWorkerHistoryTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 15px; border: 2px solid #f57f17;">
+        <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
+        <div class="worker-tabs">
+          <button class="tab-btn public-item-tab-rahmatullah active" onclick="switchWorkerTab('rahmatullah')">রহমাতুল্লাহ</button>
+          <button class="tab-btn public-item-tab-mojibor" onclick="switchWorkerTab('mojibor')">মজিবর</button>
+          <button class="tab-btn public-item-tab-akash" onclick="switchWorkerTab('akash')">আকাশ</button>
+          <button class="tab-btn public-item-tab-mehedi" onclick="switchWorkerTab('mehedi')">মেহেদী</button>
+          <button class="tab-btn public-item-tab-hanif" onclick="switchWorkerTab('hanif')">হানিফ</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তারিখ</th>
+                <th>আইটেম ও কেজির বিস্তারিত</th>
+                <th>মোট টাকা</th>
+              </tr>
+            </thead>
+            <tbody id="publicItemBreakdownTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ২. আলাদা ক্যালকুলেটর পেজ -->
+  <div id="calcPage" style="display: none;">
+    <button class="btn btn-back" onclick="goBackFromCalc()">⬅️ ফিরে যান</button>
+    
+    <div class="section-block section-calc">
+      <h2 class="section-title">🧮 দৈনিক কাজের রেট ক্যালকুলেটর</h2>
+
+      <div class="login-role-tabs" style="margin-bottom: 15px;">
+        <button id="calcTabGeneral" class="role-tab-btn active-editor" onclick="switchCalcTab('general')">🧮 সাধারণ কাজের ক্যালকুলেটর</button>
+        <button id="calcTabOxygen" class="role-tab-btn" onclick="switchCalcTab('oxygen')">⚖️ অক্সিজেন ওয়ালাদের ক্যালকুলেটর</button>
+      </div>
+
+      <div id="generalCalcBox" class="card">
+        <h3>সাধারণ কাজের আইটেম ও কেজি টাইপ করুন:</h3>
+        
+        <div class="calc-item-row"><label>১. হিটার</label><span class="rate-text">রেট: ৳২.১৬</span><input type="number" class="calc-kg-gen" id="kg_heater" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>২. চায়না হিটার</label><span class="rate-text">রেট: ৳২.১৬</span><input type="number" class="calc-kg-gen" id="kg_china_heater" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৩. অটো সুইচ</label><span class="rate-text">রেট: ৳১.৫০</span><input type="number" class="calc-kg-gen" id="kg_auto_switch" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৪. কালো সুইচ</label><span class="rate-text">রেট: ৳০.৯০</span><input type="number" class="calc-kg-gen" id="kg_black_switch" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৫. বড় সুইচ</label><span class="rate-text">রেট: ৳০.৯০</span><input type="number" class="calc-kg-gen" id="kg_big_switch" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৬. মশা কয়েল</label><span class="rate-text">রেট: ৳১.৩০</span><input type="number" class="calc-kg-gen" id="kg_mosquito_coil" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৭. আজফার রাবার ক্লিন</label><span class="rate-text">রেট: ৳৪.০০</span><input type="number" class="calc-kg-gen" id="kg_azfar_rubber_clean" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৮. ঘোরা আসফার ক্লিন</label><span class="rate-text">রেট: ৳৭.০০</span><input type="number" class="calc-kg-gen" id="kg_ghura_asper_clean" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>৯. বড় সুইচ নাইম ক্লিন</label><span class="rate-text">রেট: ৳২.০০</span><input type="number" class="calc-kg-gen" id="kg_big_switch_naim_clean" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>১০. কম প্রেসার কাটিং</label><span class="rate-text">রেট: ৳৩.০০</span><input type="number" class="calc-kg-gen" id="kg_compressor_cutting" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>১১. কালো সুইচের নাইম ক্লিন</label><span class="rate-text">রেট: ৳৬.০০</span><input type="number" class="calc-kg-gen" id="kg_black_switch_naim_clean" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>১২. ছোট নাইমের গুডি ক্লিন</label><span class="rate-text">রেট: ৳৫.০০</span><input type="number" class="calc-kg-gen" id="kg_choto_naim_gudi_clean" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>১৩. কম প্রেসার বড়টা</label><span class="rate-text">রেট: ৳২.০০</span><input type="number" class="calc-kg-gen" id="kg_compressor_big" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+        <div class="calc-item-row"><label>১৪. ঘোড়ার মাল তারতিব</label><span class="rate-text">রেট: ৳২৫০/টন</span><input type="number" class="calc-kg-gen" id="kg_ghora_mal_tartib" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
+
+        <div class="summary-box" style="background: #e1f5fe; margin-top: 10px; padding: 12px;">
+          <span>সাধারণ ক্যালকুলেটর মোট টাকা</span>
+          <strong id="calcGeneralGrandTotal" style="color: #0277bd; font-size: 1.4rem;">৳ 0.00</strong>
+        </div>
+      </div>
+
+      <div id="oxygenCalcBox" class="card" style="display: none;">
+        <h3>অক্সিজেন ওয়ালাদের আইটেম ও কেজি টাইপ করুন:</h3>
+        
+        <div class="calc-item-row"><label>১. স্কয়ার আসপার</label><span class="rate-text">রেট: ৳৪.০০</span><input type="number" class="calc-kg-oxy" id="oxy_square_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>২. গুড়ো আসপার</label><span class="rate-text">রেট: ৳৩৫.০০</span><input type="number" class="calc-kg-oxy" id="oxy_powder_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৩. পাতলা নাইম</label><span class="rate-text">রেট: ৳৩৫.০০</span><input type="number" class="calc-kg-oxy" id="oxy_thin_naim" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৪. অটো সুইচ আসপার</label><span class="rate-text">রেট: ৳৬.০০</span><input type="number" class="calc-kg-oxy" id="oxy_auto_switch_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৫. চায়না আসপার</label><span class="rate-text">রেট: ৳৬.০০</span><input type="number" class="calc-kg-oxy" id="oxy_china_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৬. মুশাক্কেল আসপার</label><span class="rate-text">রেট: ৳৮.০০</span><input type="number" class="calc-kg-oxy" id="oxy_moshakkel_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৭. বড় সুইচ নাইম</label><span class="rate-text">রেট: ৳১.০০</span><input type="number" class="calc-kg-oxy" id="oxy_big_switch_naim" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৮. মিটারের নাইম</label><span class="rate-text">রেট: ৳২.০০</span><input type="number" class="calc-kg-oxy" id="oxy_meter_naim" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>৯. কালো সুইচের নাইম</label><span class="rate-text">রেট: ৳৩.০০</span><input type="number" class="calc-kg-oxy" id="oxy_black_switch_naim" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>১০. আসপার কাটিং</label><span class="rate-text">রেট: ৳৪.০০</span><input type="number" class="calc-kg-oxy" id="oxy_asper_cutting" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>১১. প্লাস্টিক আসপার</label><span class="rate-text">রেট: ৳১৮.০০</span><input type="number" class="calc-kg-oxy" id="oxy_plastic_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+
+        <div class="summary-box" style="background: #e1f5fe; margin-top: 10px; padding: 12px;">
+          <span>অক্সিজেন ক্যালকুলেটর মোট টাকা</span>
+          <strong id="calcOxygenGrandTotal" style="color: #0277bd; font-size: 1.4rem;">৳ 0.00</strong>
+        </div>
+      </div>
+
+      <div id="calcRequestSection" class="card" style="background: #fffde7; border: 1px solid #fbc02d; margin-top: 15px;">
+        <h3 id="calcReqTitle">📤 এই হিসাবটি অ্যাডমিন/এডিটরের কাছে রিকোয়েস্ট পাঠান</h3>
+        <div class="input-group">
+          <label for="calcReqDate">তারিখ:</label>
+          <input type="date" id="calcReqDate">
+        </div>
+        <div class="input-group">
+          <label for="calcReqWorkerSelect">কর্মী নির্বাচন করুন:</label>
+          <select id="calcReqWorkerSelect">
+            <option value="rahmatullah">রহমাতুল্লাহ</option>
+            <option value="mojibor">মজিবর</option>
+            <option value="akash">আকাশ</option>
+            <option value="mehedi">মেহেদী</option>
+            <option value="hanif">হানিফ</option>
+          </select>
+        </div>
+        <button id="calcReqBtn" class="btn" style="background: #2980b9;" onclick="sendCalculationRequest()">অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করুন</button>
+      </div>
+    </div>
+
+    <div id="calcPagePendingSection" class="section-block section-worker" style="margin-top: 15px;">
+      <h2 class="section-title">📜 আপনার পাঠানো পেন্ডিং রিকোয়েস্টসমূহের তালিকা</h2>
+      <div class="card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তারিখ ও সময়</th>
+                <th>কর্মী</th>
+                <th>বিভাগ</th>
+                <th>মোট টাকা</th>
+                <th>বিস্তারিত</th>
+              </tr>
+            </thead>
+            <tbody id="calcPagePendingTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ৩. এডমিন ও এডিটর ড্যাশবোর্ড -->
+  <div id="mainDashboard" style="display: none;">
+    <button class="btn btn-logout" onclick="logout()">লগআউট 🚪</button>
+    <span id="userRoleBadge" class="role-badge"></span>
+    <div style="clear: both;"></div>
+    
+    <h1 style="text-align: center; color: var(--primary); margin-bottom: 18px; font-size: 1.4rem;">📅 দৈনিক হিসাব খাতা (প্যানেল)</h1>
+
+    <button class="btn-calc-launch" onclick="showPage('calcPage')" style="margin-bottom: 20px;">
+      🧮 দৈনিক কাজের রেট ক্যালকুলেটর ওপেন করুন
+    </button>
+
+    <div class="section-block" style="background-color: #fff9c4; border: 2px solid #fbc02d;">
+      <h2 class="section-title" style="color: #f57f17;">⏳ ক্যালকুলেটর পেন্ডিং রিকোয়েস্ট রিভিউ</h2>
+      <div class="card">
+        <h3>কর্মীদের পাঠানো কাজের রিকোয়েস্ট তালিকা</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তারিখ ও সময়</th>
+                <th>কর্মী</th>
+                <th>বিভাগ</th>
+                <th>মোট টাকা</th>
+                <th>বিস্তারিত</th>
+                <th class="pendingActionHeader">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="pendingRequestTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block section-fund">
+      <h2 class="section-title">💵 ক্যাশ ফান্ড ম্যানেজমেন্ট (এডিটর ফান্ড)</h2>
+      
+      <div id="adminFundInputCard" class="card" style="display: none;">
+        <h3>এডিটরকে দেওয়া প্রাথমিক ফান্ড সেট করুন (শুধু এডমিন)</h3>
+        <div class="input-group">
+          <label for="initialFundAmount">নতুন ফান্ডের পরিমাণ (৳):</label>
+          <input type="number" id="initialFundAmount" placeholder="যেমন: ৫০০০">
+        </div>
+        <button class="btn" style="background: #8e44ad;" onclick="setInitialFund()">ফান্ড সেট / আপডেট করুন</button>
+      </div>
+
+      <div class="card">
+        <h3>📊 ক্যাশ ফান্ডের বর্তমান স্থিতি</h3>
+        <div class="summary-grid-3">
+          <div class="summary-box">
+            <span>প্রদত্ত প্রাথমিক ফান্ড</span>
+            <strong id="displayInitialFund" style="color: #8e44ad;">৳ 0</strong>
+          </div>
+          <div class="summary-box">
+            <span>মোট খরচ (বাজার + কেনা)</span>
+            <strong id="displayTotalExpenses" style="color: #e74c3c;">৳ 0</strong>
+          </div>
+          <div class="summary-box">
+            <span>হাতে থাকা বর্তমান ক্যাশ</span>
+            <strong id="displayCurrentCash" style="color: #27ae60; font-size: 1.1rem;">৳ 0</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ১. বাজার খরচ সেকশন -->
+    <div class="section-block section-bazar">
+      <h2 class="section-title">🛒 বাজার খরচ সেকশন</h2>
+      <div class="card">
+        <h3>বাজার খরচের ইনপুট</h3>
+        <div class="input-group"><label for="bazarDate">তারিখ:</label><input type="date" id="bazarDate"></div>
+        <div class="input-group"><label for="bazarDesc">বিবরণ (ঐচ্ছিক):</label><input type="text" id="bazarDesc" placeholder="যেমন: চাল, ডাল, তেল"></div>
+        <div class="input-group"><label for="bazarAmount">টাকার পরিমাণ (৳):</label><input type="number" id="bazarAmount" placeholder="যেমন: ৫০"></div>
+        <button class="btn" onclick="addBazar()">বাজার খরচ যোগ করুন</button>
+      </div>
+
+      <div class="card">
+        <h3>📊 মোট বাজার খরচ</h3>
+        <div class="summary-box" style="background: #eaf2f8;">
+          <span>সর্বমোট বাজার খরচ</span>
+          <strong id="totalBazar" style="color: #2980b9; font-size: 1.2rem;">৳ 0</strong>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📜 বাজার খরচের হিস্ট্রি</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তারিখ ও সময়</th>
+                <th>বিবরণ</th>
+                <th>টাকা</th>
+                <th class="bazarActionHeader">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="bazarHistoryTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ২. মাল কেনা ও বেচা সেকশন -->
+    <div class="section-block section-mal">
+      <h2 class="section-title">📦 মাল কেনা ও বেচা সেকশন</h2>
+      <div class="card">
+        <h3>মাল কেনা / বিক্রির ইনপুট</h3>
+        <div class="input-group"><label for="malDate">তারিখ:</label><input type="date" id="malDate"></div>
+        <div class="input-group">
+          <label for="malType">লেনদেনের ধরন:</label>
+          <select id="malType">
+            <option value="buy">মাল কেনা (ক্রয়)</option>
+            <option value="sell">মাল বিক্রি (বিক্রয়)</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="malDesc">বিবরণ (ঐচ্ছিক):</label><input type="text" id="malDesc" placeholder="যেমন: স্ক্র্যাপ মাল"></div>
+        <div class="input-group"><label for="malAmount">টাকার পরিমাণ (৳):</label><input type="number" id="malAmount" placeholder="যেমন: ৫০০"></div>
+        <button class="btn" style="background: #27ae60;" onclick="addMalTransaction()">লেনদেন যোগ করুন</button>
+      </div>
+
+      <div class="card">
+        <h3>📊 মালের হিসাব সামারি</h3>
+        <div class="summary-grid-3">
+          <div class="summary-box"><span>মোট কেনা</span><strong id="totalMalBuy" style="color: #e67e22;">৳ 0</strong></div>
+          <div class="summary-box"><span>মোট বিক্রি</span><strong id="totalMalSell" style="color: #27ae60;">৳ 0</strong></div>
+          <div class="summary-box"><span>ক্যাশ ব্যালেন্স</span><strong id="malNetProfit" style="color: #2980b9;">৳ 0</strong></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📜 মাল কেনা-বেচার হিস্ট্রি</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তারিখ ও সময়</th>
+                <th>ধরন</th>
+                <th>বিবরণ</th>
+                <th>টাকা</th>
+                <th class="malActionHeader">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="malHistoryTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ৩. কর্মীদের হিসাব ম্যানাজমেন্ট সেকশন -->
+    <div class="section-block section-worker">
+      <h2 class="section-title">👥 কর্মীদের হিসাব ও পাওনা (প্যানেল)</h2>
+      
+      <div class="card">
+        <h3>🛠️ কর্মীদের কাজ যুক্ত করুন (জমা)</h3>
+        <div class="input-group"><label for="workerWorkDate">তারিখ:</label><input type="date" id="workerWorkDate"></div>
+        <div class="input-group">
+          <label for="workerWorkSelect">কর্মী নির্বাচন করুন:</label>
+          <select id="workerWorkSelect">
+            <option value="rahmatullah">রহমাতুল্লাহ</option>
+            <option value="mojibor">মজিবর</option>
+            <option value="akash">আকাশ</option>
+            <option value="mehedi">মেহেদী</option>
+            <option value="hanif">হানিফ</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="workerWorkAmount">কাজের টাকা (৳):</label><input type="number" id="workerWorkAmount" placeholder="যেমন: ৫০০"></div>
+        <button class="btn" style="background: #27ae60;" onclick="addWorkerWork()">কাজের হিসাব যোগ করুন</button>
+      </div>
+
+      <div class="card">
+        <h3>💵 কর্মীদের টাকা প্রদান করুন (Payment)</h3>
+        <div class="input-group"><label for="workerPayDate">তারিখ:</label><input type="date" id="workerPayDate"></div>
+        <div class="input-group">
+          <label for="workerPaySelect">কর্মী নির্বাচন করুন:</label>
+          <select id="workerPaySelect">
+            <option value="rahmatullah">রহমাতুল্লাহ</option>
+            <option value="mojibor">মজিবর</option>
+            <option value="akash">আকাশ</option>
+            <option value="mehedi">মেহেদী</option>
+            <option value="hanif">হানিফ</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="workerPayAmount">টাকার পরিমাণ (৳):</label><input type="number" id="workerPayAmount" placeholder="যেমন: ৩০০"></div>
+        <button class="btn" style="background: #e74c3c;" onclick="addWorkerPayment()">টাকা প্রদান নিশ্চিত করুন</button>
+      </div>
+
+      <div class="card">
+        <h3>💰 কর্মীদের মোট হিসাব সারসংক্ষেপ</h3>
+        <div id="dashboardWorkerSummary"></div>
+      </div>
+
+      <div class="card">
+        <h3>🚨 মাস শেষে কর্মী প্রতি মোট টাকা নেওয়ার এলার্ট</h3>
+        <div class="input-group"><label for="dashMonthFilter">মাস ও বছর নির্বাচন করুন:</label><input type="month" id="dashMonthFilter" onchange="updateUI()"></div>
+        <div id="dashMonthlyAlert" class="monthly-alert-box"></div>
+      </div>
+
+      <div class="card">
+        <h3>📜 পৃথক কর্মী কাজ ও টাকা পরিশোধের হিস্ট্রি</h3>
+        <div class="worker-tabs">
+          <button class="tab-btn dashboard-tab-rahmatullah active" onclick="switchWorkerTab('rahmatullah')">রহমাতুল্লাহ</button>
+          <button class="tab-btn dashboard-tab-mojibor" onclick="switchWorkerTab('mojibor')">মজিবর</button>
+          <button class="tab-btn dashboard-tab-akash" onclick="switchWorkerTab('akash')">আকাশ</button>
+          <button class="tab-btn dashboard-tab-mehedi" onclick="switchWorkerTab('mehedi')">মেহেদী</button>
+          <button class="tab-btn dashboard-tab-hanif" onclick="switchWorkerTab('hanif')">হানিফ</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>তারিখ ও সময়</th>
+                <th>ধরন</th>
+                <th>টাকা</th>
+                <th class="workerActionHeader">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="workerHistoryTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 15px; border: 2px solid #f57f17;">
+        <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
+        <div class="worker-tabs">
+          <button class="tab-btn dash-item-tab-rahmatullah active" onclick="switchWorkerTab('rahmatullah')">রহমাতুল্লাহ</button>
+          <button class="tab-btn dash-item-tab-mojibor" onclick="switchWorkerTab('mojibor')">মজিবর</button>
+          <button class="tab-btn dash-item-tab-akash" onclick="switchWorkerTab('akash')">আকাশ</button>
+          <button class="tab-btn dash-item-tab-mehedi" onclick="switchWorkerTab('mehedi')">মেহেদী</button>
+          <button class="tab-btn dash-item-tab-hanif" onclick="switchWorkerTab('hanif')">হানিফ</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তারিখ</th>
+                <th>আইটেম ও কেজির বিস্তারিত</th>
+                <th>মোট টাকা</th>
+              </tr>
+            </thead>
+            <tbody id="dashItemBreakdownTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <button id="resetAllBtn" class="btn" style="background: var(--danger); display: none; margin-bottom: 20px;" onclick="resetAllData()">সব ডাটা রিসেট করুন</button>
+  </div>
+
+  <footer class="app-footer">
+    <p>পাওয়ারড বাই <strong>এমডি ইসমাইল</strong></p>
+    <p>ভার্সন: <span class="version-text">v1.1.0-Firebase</span></p>
+  </footer>
+
+</div>
+
+<script>
+  // ==========================================
+  // ফায়ারবেস কনফিগারেশন (আপনার প্রজেক্টের তথ্য এখানে দিন)
+  // ==========================================
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // ফায়ারবেস ইনিশিয়ালাইজ করুন
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const PASS_ADMIN = "sft10";
+  const PASS_EDITOR = "mehidy103050";
+
+  const ITEM_RATES = {
+    heater: 2.16, china_heater: 2.16, auto_switch: 1.50, black_switch: 0.90,
+    big_switch: 0.90, mosquito_coil: 1.30, azfar_rubber_clean: 4.00,
+    ghura_asper_clean: 7.00, big_switch_naim_clean: 2.00, compressor_cutting: 3.00,
+    black_switch_naim_clean: 6.00, choto_naim_gudi_clean: 5.00,
+    compressor_big: 2.00, ghora_mal_tartib: 0.25
+  };
+
+  const OXYGEN_ITEM_RATES = {
+    square_asper: 4.00, powder_asper: 35.00, thin_naim: 35.00,
+    auto_switch_asper: 6.00, china_asper: 6.00, moshakkel_asper: 8.00,
+    big_switch_naim: 1.00, meter_naim: 2.00, black_switch_naim: 3.00,
+    asper_cutting: 4.00, plastic_asper: 18.00
+  };
+
+  let userRole = null;
+  let currentWorkerTab = 'rahmatullah';
+  let currentCalcTab = 'general';
+  let currentGeneralTotal = 0;
+  let currentOxygenTotal = 0;
+
+  const workerNames = {
+    'rahmatullah': 'রহমাতুল্লাহ',
+    'mojibor': 'মজিবর',
+    'akash': 'আকাশ',
+    'mehedi': 'মেহেদী',
+    'hanif': 'হানিফ'
+  };
+
+  let store = {
+    initialFund: 0,
+    bazarHistory: [],
+    malHistory: [],
+    workerHistory: [],
+    pendingRequests: []
+  };
+
+  window.onload = function() {
+    setTodayDate();
+    
+    // ফায়ারবেস থেকে রিয়েল-টাইমে ডেটা সিঙ্ক করা
+    db.ref('ledgerData').on('value', (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        store = {
+          initialFund: data.initialFund || 0,
+          bazarHistory: data.bazarHistory || [],
+          malHistory: data.malHistory || [],
+          workerHistory: data.workerHistory || [],
+          pendingRequests: data.pendingRequests || []
+        };
+      }
+      updateUI();
+    });
+  };
+
+  function saveDataToFirebase() {
+    db.ref('ledgerData').set(store);
+  }
+
+  function switchLoginMode(mode) {
+    document.getElementById('errorMsg').style.display = 'none';
+    const btnEditor = document.getElementById('btnTabEditor');
+    const btnAdmin = document.getElementById('btnTabAdmin');
+    const boxEditor = document.getElementById('editorLoginBox');
+    const boxAdmin = document.getElementById('adminLoginBox');
+
+    if (mode === 'editor') {
+      btnEditor.className = 'role-tab-btn active-editor';
+      btnAdmin.className = 'role-tab-btn';
+      boxEditor.style.display = 'block';
+      boxAdmin.style.display = 'none';
+    } else {
+      btnAdmin.className = 'role-tab-btn active-admin';
+      btnEditor.className = 'role-tab-btn';
+      boxAdmin.style.display = 'block';
+      boxEditor.style.display = 'none';
+    }
+  }
+
+  function loginEditor() {
+    const pass = document.getElementById('editorPassword').value;
+    if (pass === PASS_EDITOR) {
+      userRole = 'editor';
+      sessionStorage.setItem('userRole', 'editor');
+      showDashboard();
+    } else {
+      document.getElementById('errorMsg').style.display = 'block';
+    }
+  }
+
+  function loginAdmin() {
+    const pass = document.getElementById('adminPassword').value;
+    if (pass === PASS_ADMIN) {
+      userRole = 'admin';
+      sessionStorage.setItem('userRole', 'admin');
+      showDashboard();
+    } else {
+      document.getElementById('errorMsg').style.display = 'block';
+    }
+  }
+
+  function showPage(pageId) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('calcPage').style.display = 'none';
+    document.getElementById('mainDashboard').style.display = 'none';
+
+    document.getElementById(pageId).style.display = 'block';
+
+    if (pageId === 'calcPage') {
+      const reqSecTitle = document.getElementById('calcReqTitle');
+      const reqBtn = document.getElementById('calcReqBtn');
+      const calcPagePendingSection = document.getElementById('calcPagePendingSection');
+
+      if (userRole === 'admin' || userRole === 'editor') {
+        reqSecTitle.innerText = '📤 এই হিসাবটি সরাসরি কর্মীর অ্যাকাউন্টে জমা করুন';
+        reqBtn.innerText = 'এই টাকা কর্মীর একাউন্টে জমা করুন';
+        reqBtn.setAttribute('onclick', 'addCalculationDirectly()');
+        reqBtn.style.background = '#27ae60';
+        if (calcPagePendingSection) calcPagePendingSection.style.display = 'none';
+      } else {
+        reqSecTitle.innerText = '📤 এই হিসাবটি অ্যাডমিন/এডিটরের কাছে রিকোয়েস্ট পাঠান';
+        reqBtn.innerText = 'অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করুন';
+        reqBtn.setAttribute('onclick', 'sendCalculationRequest()');
+        reqBtn.style.background = '#2980b9';
+        if (calcPagePendingSection) calcPagePendingSection.style.display = 'block';
+      }
+    }
+  }
+
+  function goBackFromCalc() {
+    if (userRole) {
+      showPage('mainDashboard');
+    } else {
+      showPage('loginScreen');
+    }
+  }
+
+  function switchCalcTab(tab) {
+    currentCalcTab = tab;
+    const btnGen = document.getElementById('calcTabGeneral');
+    const btnOxy = document.getElementById('calcTabOxygen');
+    const boxGen = document.getElementById('generalCalcBox');
+    const boxOxy = document.getElementById('oxygenCalcBox');
+
+    if (tab === 'general') {
+      btnGen.className = 'role-tab-btn active-editor';
+      btnOxy.className = 'role-tab-btn';
+      boxGen.style.display = 'block';
+      boxOxy.style.display = 'none';
+    } else {
+      btnOxy.className = 'role-tab-btn active-admin';
+      btnGen.className = 'role-tab-btn';
+      boxOxy.style.display = 'block';
+      boxGen.style.display = 'none';
+    }
+  }
+
+  function calculateGeneralWorkTotal() {
+    const getVal = id => parseFloat(document.getElementById(id).value) || 0;
+    currentGeneralTotal = (getVal('kg_heater') * ITEM_RATES.heater) +
+                          (getVal('kg_china_heater') * ITEM_RATES.china_heater) +
+                          (getVal('kg_auto_switch') * ITEM_RATES.auto_switch) +
+                          (getVal('kg_black_switch') * ITEM_RATES.black_switch) +
+                          (getVal('kg_big_switch') * ITEM_RATES.big_switch) +
+                          (getVal('kg_mosquito_coil') * ITEM_RATES.mosquito_coil) +
+                          (getVal('kg_azfar_rubber_clean') * ITEM_RATES.azfar_rubber_clean) +
+                          (getVal('kg_ghura_asper_clean') * ITEM_RATES.ghura_asper_clean) +
+                          (getVal('kg_big_switch_naim_clean') * ITEM_RATES.big_switch_naim_clean) +
+                          (getVal('kg_compressor_cutting') * ITEM_RATES.compressor_cutting) +
+                          (getVal('kg_black_switch_naim_clean') * ITEM_RATES.black_switch_naim_clean) +
+                          (getVal('kg_choto_naim_gudi_clean') * ITEM_RATES.choto_naim_gudi_clean) +
+                          (getVal('kg_compressor_big') * ITEM_RATES.compressor_big) +
+                          (getVal('kg_ghora_mal_tartib') * ITEM_RATES.ghora_mal_tartib);
+
+    document.getElementById('calcGeneralGrandTotal').innerText = '৳ ' + currentGeneralTotal.toFixed(2);
+  }
+
+  function calculateOxygenWorkTotal() {
+    const getVal = id => parseFloat(document.getElementById(id).value) || 0;
+    currentOxygenTotal = (getVal('oxy_square_asper') * OXYGEN_ITEM_RATES.square_asper) +
+                         (getVal('oxy_powder_asper') * OXYGEN_ITEM_RATES.powder_asper) +
+                         (getVal('oxy_thin_naim') * OXYGEN_ITEM_RATES.thin_naim) +
+                         (getVal('oxy_auto_switch_asper') * OXYGEN_ITEM_RATES.auto_switch_asper) +
+                         (getVal('oxy_china_asper') * OXYGEN_ITEM_RATES.china_asper) +
+                         (getVal('oxy_moshakkel_asper') * OXYGEN_ITEM_RATES.moshakkel_asper) +
+                         (getVal('oxy_big_switch_naim') * OXYGEN_ITEM_RATES.big_switch_naim) +
+                         (getVal('oxy_meter_naim') * OXYGEN_ITEM_RATES.meter_naim) +
+                         (getVal('oxy_black_switch_naim') * OXYGEN_ITEM_RATES.black_switch_naim) +
+                         (getVal('oxy_asper_cutting') * OXYGEN_ITEM_RATES.asper_cutting) +
+                         (getVal('oxy_plastic_asper') * OXYGEN_ITEM_RATES.plastic_asper);
+
+    document.getElementById('calcOxygenGrandTotal').innerText = '৳ ' + currentOxygenTotal.toFixed(2);
+  }
+
+  function sendCalculationRequest() {
+    const date = document.getElementById('calcReqDate').value;
+    const worker = document.getElementById('calcReqWorkerSelect').value;
+    const time = getCurrentTime();
+
+    let amount = currentCalcTab === 'general' ? currentGeneralTotal : currentOxygenTotal;
+    if (!date || amount <= 0) {
+      alert('দয়া করে সঠিক তারিখ দিন এবং কিছু পরিমাণ কেজি ইনপুট করুন!');
+      return;
+    }
+
+    let itemsBreakdown = {};
+    if (currentCalcTab === 'general') {
+      itemsBreakdown = {
+        'হিটার': parseFloat(document.getElementById('kg_heater').value) || 0,
+        'চায়না হিটার': parseFloat(document.getElementById('kg_china_heater').value) || 0,
+        'অটো সুইচ': parseFloat(document.getElementById('kg_auto_switch').value) || 0,
+        'কালো সুইচ': parseFloat(document.getElementById('kg_black_switch').value) || 0,
+        'বড় সুইচ': parseFloat(document.getElementById('kg_big_switch').value) || 0,
+        'মশা কয়েল': parseFloat(document.getElementById('kg_mosquito_coil').value) || 0,
+        'আজফার রাবার ক্লিন': parseFloat(document.getElementById('kg_azfar_rubber_clean').value) || 0,
+        'ঘোরা আসফার ক্লিন': parseFloat(document.getElementById('kg_ghura_asper_clean').value) || 0,
+        'বড় সুইচ নাইম ক্লিন': parseFloat(document.getElementById('kg_big_switch_naim_clean').value) || 0,
+        'কম প্রেসার কাটিং': parseFloat(document.getElementById('kg_compressor_cutting').value) || 0,
+        'কালো সুইচের নাইম ক্লিন': parseFloat(document.getElementById('kg_black_switch_naim_clean').value) || 0,
+        'ছোট নাইমের গুডি ক্লিন': parseFloat(document.getElementById('kg_choto_naim_gudi_clean').value) || 0,
+        'কম প্রেসার বড়টা': parseFloat(document.getElementById('kg_compressor_big').value) || 0,
+        'ঘোড়ার মাল তারতিব': parseFloat(document.getElementById('kg_ghora_mal_tartib').value) || 0
+      };
+    } else {
+      itemsBreakdown = {
+        'স্কয়ার আসপার': parseFloat(document.getElementById('oxy_square_asper').value) || 0,
+        'গুড়ো আসপার': parseFloat(document.getElementById('oxy_powder_asper').value) || 0,
+        'পাতলা নাইম': parseFloat(document.getElementById('oxy_thin_naim').value) || 0,
+        'অটো সুইচ আসপার': parseFloat(document.getElementById('oxy_auto_switch_asper').value) || 0,
+        'চায়না আসপার': parseFloat(document.getElementById('oxy_china_asper').value) || 0,
+        'মুশাক্কেল আসপার': parseFloat(document.getElementById('oxy_moshakkel_asper').value) || 0,
+        'বড় সুইচ নাইম': parseFloat(document.getElementById('oxy_big_switch_naim').value) || 0,
+        'মিটারের নাইম': parseFloat(document.getElementById('oxy_meter_naim').value) || 0,
+        'কালো সুইচের নাইম': parseFloat(document.getElementById('oxy_black_switch_naim').value) || 0,
+        'আসপার কাটিং': parseFloat(document.getElementById('oxy_asper_cutting').value) || 0,
+        'প্লাস্টিক আসপার': parseFloat(document.getElementById('oxy_plastic_asper').value) || 0
+      };
+    }
+
+    if (!store.pendingRequests) store.pendingRequests = [];
+    store.pendingRequests.push({ date, time, worker, calcType: currentCalcTab === 'general' ? 'সাধারণ ক্যালকুলেটর' : 'অক্সিজেন ক্যালকুলেটর', amount, items: itemsBreakdown });
+    
+    saveDataToFirebase();
+    resetCalcInputs();
+    alert('অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করা হয়েছে!');
+    showPage('loginScreen');
+  }
+
+  function addCalculationDirectly() {
+    const date = document.getElementById('calcReqDate').value;
+    const worker = document.getElementById('calcReqWorkerSelect').value;
+    const time = getCurrentTime();
+
+    let amount = currentCalcTab === 'general' ? currentGeneralTotal : currentOxygenTotal;
+    if (!date || amount <= 0) {
+      alert('দয়া করে সঠিক তারিখ দিন এবং কিছু পরিমাণ কেজি ইনপুট করুন!');
+      return;
+    }
+
+    let itemsBreakdown = {};
+    if (currentCalcTab === 'general') {
+      itemsBreakdown = {
+        'হিটার': parseFloat(document.getElementById('kg_heater').value) || 0,
+        'চায়না হিটার': parseFloat(document.getElementById('kg_china_heater').value) || 0,
+        'অটো সুইচ': parseFloat(document.getElementById('kg_auto_switch').value) || 0,
+        'কালো সুইচ': parseFloat(document.getElementById('kg_black_switch').value) || 0,
+        'বড় সুইচ': parseFloat(document.getElementById('kg_big_switch').value) || 0,
+        'মশা কয়েল': parseFloat(document.getElementById('kg_mosquito_coil').value) || 0,
+        'আজফার রাবার ক্লিন': parseFloat(document.getElementById('kg_azfar_rubber_clean').value) || 0,
+        'ঘোরা আসফার ক্লিন': parseFloat(document.getElementById('kg_ghura_asper_clean').value) || 0,
+        'বড় সুইচ নাইম ক্লিন': parseFloat(document.getElementById('kg_big_switch_naim_clean').value) || 0,
+        'কম প্রেসার কাটিং': parseFloat(document.getElementById('kg_compressor_cutting').value) || 0,
+        'কালো সুইচের নাইম ক্লিন': parseFloat(document.getElementById('kg_black_switch_naim_clean').value) || 0,
+        'ছোট নাইমের গুডি ক্লিন': parseFloat(document.getElementById('kg_choto_naim_gudi_clean').value) || 0,
+        'কম প্রেসার বড়টা': parseFloat(document.getElementById('kg_compressor_big').value) || 0,
+        'ঘোড়ার মাল তারতিব': parseFloat(document.getElementById('kg_ghora_mal_tartib').value) || 0
+      };
+    } else {
+      itemsBreakdown = {
+        'স্কয়ার আসপার': parseFloat(document.getElementById('oxy_square_asper').value) || 0,
+        'গুড়ো আসপার': parseFloat(document.getElementById('oxy_powder_asper').value) || 0,
+        'পাতলা নাইম': parseFloat(document.getElementById('oxy_thin_naim').value) || 0,
+        'অটো সুইচ আসপার': parseFloat(document.getElementById('oxy_auto_switch_asper').value) || 0,
+        'চায়না আসপার': parseFloat(document.getElementById('oxy_china_asper').value) || 0,
+        'মুশাক্কেল আসপার': parseFloat(document.getElementById('oxy_moshakkel_asper').value) || 0,
+        'বড় সুইচ নাইম': parseFloat(document.getElementById('oxy_big_switch_naim').value) || 0,
+        'মিটারের নাইম': parseFloat(document.getElementById('oxy_meter_naim').value) || 0,
+        'কালো সুইচের নাইম': parseFloat(document.getElementById('oxy_black_switch_naim').value) || 0,
+        'আসপার কাটিং': parseFloat(document.getElementById('oxy_asper_cutting').value) || 0,
+        'প্লাস্টিক আসপার': parseFloat(document.getElementById('oxy_plastic_asper').value) || 0
+      };
+    }
+
+    if (!store.workerHistory) store.workerHistory = [];
+    store.workerHistory.push({ date, time, worker, type: 'work', amount, items: itemsBreakdown });
+    
+    saveDataToFirebase();
+    resetCalcInputs();
+    alert('সফলভাবে কর্মীর অ্যাকাউন্টে জমা করা হয়েছে!');
+    showPage('mainDashboard');
+  }
+
+  function resetCalcInputs() {
+    document.querySelectorAll('.calc-kg-gen, .calc-kg-oxy').forEach(input => input.value = '');
+    currentGeneralTotal = 0;
+    currentOxygenTotal = 0;
+    document.getElementById('calcGeneralGrandTotal').innerText = '৳ 0.00';
+    document.getElementById('calcOxygenGrandTotal').innerText = '৳ 0.00';
+  }
+
+  function acceptRequest(index) {
+    if (userRole !== 'admin') return;
+    const req = store.pendingRequests[index];
+    if (!req) return;
+
+    if (!store.workerHistory) store.workerHistory = [];
+    store.workerHistory.push({ date: req.date, time: req.time, worker: req.worker, type: 'work', amount: req.amount, items: req.items });
+    store.pendingRequests.splice(index, 1);
+    
+    saveDataToFirebase();
+    alert('রিকোয়েস্ট গ্রহণ করা হয়েছে!');
+  }
+
+  function rejectRequest(index) {
+    if (userRole !== 'admin') return;
+    if (confirm('রহিত করতে চান?')) {
+      store.pendingRequests.splice(index, 1);
+      saveDataToFirebase();
+    }
+  }
+
+  function showDashboard() {
+    showPage('mainDashboard');
+    const badge = document.getElementById('userRoleBadge');
+    const adminFundCard = document.getElementById('adminFundInputCard');
+
+    if (userRole === 'admin') {
+      badge.innerText = 'অ্যাডমিন অ্যাকাউন্ট';
+      badge.className = 'role-badge role-admin';
+      document.getElementById('resetAllBtn').style.display = 'block';
+      if(adminFundCard) adminFundCard.style.display = 'block';
+    } else {
+      badge.innerText = 'এডিটর অ্যাকাউন্ট';
+      badge.className = 'role-badge role-editor';
+      if(adminFundCard) adminFundCard.style.display = 'none';
+    }
+    setTodayDate();
+    updateUI();
+  }
+
+  function logout() {
+    sessionStorage.clear();
+    userRole = null;
+    location.reload();
+  }
+
+  if (sessionStorage.getItem('userRole')) {
+    userRole = sessionStorage.getItem('userRole');
+    showDashboard();
+  }
+
+  function getCurrentTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
+  }
+
+  function formatDateToDMY(dateString) {
+    if (!dateString) return '-';
+    const parts = dateString.split('-');
+    return parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : dateString;
+  }
+
+  function setTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}`;
+    const formattedFullDate = `${year}-${month}-${day}`;
+
+    ['bazarDate', 'malDate', 'workerWorkDate', 'workerPayDate', 'calcReqDate'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.value = formattedFullDate;
+    });
+
+    ['publicMonthFilter', 'dashMonthFilter'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el && !el.value) el.value = formattedDate;
+    });
+  }
+
+  function switchWorkerTab(workerKey) {
+    currentWorkerTab = workerKey;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll(`[onclick*="${workerKey}"]`).forEach(btn => btn.classList.add('active'));
+    updateUI();
+  }
+
+  function setInitialFund() {
+    if(userRole !== 'admin') return;
+    const amount = parseFloat(document.getElementById('initialFundAmount').value);
+    if(isNaN(amount)) return alert('সঠিক পরিমাণ লিখুন!');
+    store.initialFund = amount;
+    document.getElementById('initialFundAmount').value = '';
+    saveDataToFirebase();
+    alert('ফান্ড আপডেট হয়েছে!');
+  }
+
+  function updateUI() {
+    let totalBazar = 0, totalMalBuy = 0, totalMalSell = 0;
+    let workerStats = { "rahmatullah": {work:0, pay:0}, "mojibor": {work:0, pay:0}, "akash": {work:0, pay:0}, "mehedi": {work:0, pay:0}, "hanif": {work:0, pay:0} };
+
+    const renderPending = (tableId) => {
+      const table = document.getElementById(tableId);
+      if (!table) return;
+      table.innerHTML = '';
+      if (!store.pendingRequests || store.pendingRequests.length === 0) {
+        table.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #666;">কোনো পেন্ডিং রিকোয়েস্ট নেই।</td></tr>`;
+        return;
+      }
+      store.pendingRequests.slice().reverse().forEach((req, index) => {
+        const origIdx = store.pendingRequests.length - 1 - index;
+        let itemsStr = '';
+        if (req.items) {
+          for (let [k, v] of Object.entries(req.items)) { if (v > 0) itemsStr += `• ${k}: ${v} কেজি<br>`; }
+        }
+        const action = (tableId === 'pendingRequestTable' && userRole === 'admin') ? 
+          `<td><button class="btn" style="background: #27ae60; padding: 5px; font-size: 0.8rem;" onclick="acceptRequest(${origIdx})">গ্রহণ</button> <button class="btn" style="background: #e74c3c; padding: 5px; font-size: 0.8rem;" onclick="rejectRequest(${origIdx})">বাতিল</button></td>` : `<td>-</td>`;
+
+        table.innerHTML += `<tr><td>${formatDateToDMY(req.date)}<span class="time-text">${req.time||''}</span></td><td><strong>${workerNames[req.worker]}</strong></td><td>${req.calcType}</td><td>৳${req.amount.toFixed(2)}</td><td>${itemsStr}</td>${action}</tr>`;
+      });
+    };
+    renderPending('pendingRequestTable');
+    renderPending('calcPagePendingTable');
+
+    const bazarTable = document.getElementById('bazarHistoryTable');
+    if (bazarTable) {
+      bazarTable.innerHTML = '';
+      if(store.bazarHistory) {
+        store.bazarHistory.slice().reverse().forEach((item, index) => {
+          const origIdx = store.bazarHistory.length - 1 - index;
+          totalBazar += item.amount;
+          const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteBazar(${origIdx})">✕</button>` : `-`;
+          bazarTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}<span class="time-text">${item.time||''}</span></td><td>${item.desc||'-'}</td><td>৳${item.amount}</td><td>${del}</td></tr>`;
+        });
+      }
+    }
+
+    const malTable = document.getElementById('malHistoryTable');
+    if (malTable) {
+      malTable.innerHTML = '';
+      if(store.malHistory) {
+        store.malHistory.slice().reverse().forEach((item, index) => {
+          const origIdx = store.malHistory.length - 1 - index;
+          if(item.type === 'buy') totalMalBuy += item.amount;
+          if(item.type === 'sell') totalMalSell += item.amount;
+          const badge = item.type === 'buy' ? 'badge-buy' : 'badge-sell';
+          const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteMal(${origIdx})">✕</button>` : `-`;
+          malTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}</td><td><span class="badge ${badge}">${item.type==='buy'?'কেনা':'বিক্রি'}</span></td><td>${item.desc||'-'}</td><td>৳${item.amount}</td><td>${del}</td></tr>`;
+        });
+      }
+    }
+
+    if(store.workerHistory) {
+      store.workerHistory.forEach(item => {
+        if(workerStats[item.worker]) {
+          if(item.type === 'work') workerStats[item.worker].work += item.amount;
+          else if(item.type === 'pay') workerStats[item.worker].pay += item.amount;
+        }
+      });
+    }
+
+    const renderSummary = () => {
+      let html = '';
+      ["rahmatullah", "mojibor", "akash", "mehedi", "hanif"].forEach(w => {
+        const bal = workerStats[w].work - workerStats[w].pay;
+        html += `<div class="worker-item-card"><h4>👤 ${workerNames[w]}</h4><div class="worker-stats"><span>কাজ: ৳${workerStats[w].work.toFixed(2)}</span><span>প্রাপ্তি: ৳${workerStats[w].pay.toFixed(2)}</span><span>পাওনা: <strong style="color: #27ae60;">৳${bal.toFixed(2)}</strong></span></div></div>`;
+      });
+      return html;
+    };
+    if(document.getElementById('publicWorkerSummary')) document.getElementById('publicWorkerSummary').innerHTML = renderSummary();
+    if(document.getElementById('dashboardWorkerSummary')) document.getElementById('dashboardWorkerSummary').innerHTML = renderSummary();
+
+    const renderAlert = (m) => {
+      if(!m) return '';
+      let pays = {"rahmatullah":0, "mojibor":0, "akash":0, "mehedi":0, "hanif":0};
+      if(store.workerHistory) {
+        store.workerHistory.forEach(item => {
+          if(item.type === 'pay' && item.date && item.date.startsWith(m)) pays[item.worker] += item.amount;
+        });
+      }
+      let html = `<h4>📋 ${m} মাসে পেমেন্ট:</h4><ul class="monthly-alert-list">`;
+      ["rahmatullah", "mojibor", "akash", "mehedi", "hanif"].forEach(w => {
+        html += `<li>👉 ${workerNames[w]}: <strong>৳${pays[w].toFixed(2)}</strong></li>`;
+      });
+      return html + `</ul>`;
+    };
+    if(document.getElementById('publicMonthlyAlert')) document.getElementById('publicMonthlyAlert').innerHTML = renderAlert(document.getElementById('publicMonthFilter').value);
+    if(document.getElementById('dashMonthlyAlert')) document.getElementById('dashMonthlyAlert').innerHTML = renderAlert(document.getElementById('dashMonthFilter').value);
+
+    const filteredWorker = (store.workerHistory || []).map((item, originalIndex) => ({...item, originalIndex})).filter(i => i.worker === currentWorkerTab);
+
+    const renderWorkerHistory = (tableId, showDel) => {
+      const table = document.getElementById(tableId);
+      if(!table) return;
+      table.innerHTML = '';
+      filteredWorker.slice().reverse().forEach((item, idx) => {
+        const badge = (item.type||'work') === 'work' ? 'badge-work' : 'badge-pay';
+        const del = showDel && userRole === 'admin' ? `<button class="del-btn" onclick="deleteWorkerTransaction(${item.originalIndex})">✕</button>` : '-';
+        table.innerHTML += `<tr><td>#${filteredWorker.length - idx}</td><td>${formatDateToDMY(item.date)}</td><td><span class="badge ${badge}">${item.type==='work'?'কাজের জমা':'পেমেন্ট'}</span></td><td>৳${item.amount.toFixed(2)}</td>${showDel?`<td>${del}</td>`:''}</tr>`;
+      });
+    };
+    renderWorkerHistory('workerHistoryTable', true);
+    renderWorkerHistory('publicWorkerHistoryTable', false);
+
+    const renderBreakdown = (tableId) => {
+      const table = document.getElementById(tableId);
+      if(!table) return;
+      table.innerHTML = '';
+      const works = filteredWorker.filter(i => (i.type||'work') === 'work' && i.items);
+      if(works.length === 0) {
+        table.innerHTML = `<tr><td colspan="3" style="text-align: center;">কোনো বিবরণ নেই</td></tr>`;
+        return;
+      }
+      works.slice().reverse().forEach(item => {
+        let str = '';
+        for(let [k,v] of Object.entries(item.items)) { if(v > 0) str += `• ${k}: ${v} কেজি<br>`; }
+        table.innerHTML += `<tr><td>${formatDateToDMY(item.date)}</td><td>${str||'সাধারণ'}</td><td><strong>৳${item.amount.toFixed(2)}</strong></td></tr>`;
+      });
+    };
+    renderBreakdown('dashItemBreakdownTable');
+    renderBreakdown('publicItemBreakdownTable');
+
+    if(document.getElementById('totalBazar')) document.getElementById('totalBazar').innerText = '৳ ' + totalBazar.toFixed(2);
+    if(document.getElementById('totalMalBuy')) document.getElementById('totalMalBuy').innerText = '৳ ' + totalMalBuy.toFixed(2);
+    if(document.getElementById('totalMalSell')) document.getElementById('totalMalSell').innerText = '৳ ' + totalMalSell.toFixed(2);
+    if(document.getElementById('malNetProfit')) document.getElementById('malNetProfit').innerText = '৳ ' + (totalMalSell - totalMalBuy).toFixed(2);
+
+    let expenses = totalBazar + totalMalBuy;
+    let cash = (store.initialFund + totalMalSell) - expenses;
+    if(document.getElementById('displayInitialFund')) document.getElementById('displayInitialFund').innerText = '৳ ' + (store.initialFund||0).toFixed(2);
+    if(document.getElementById('displayTotalExpenses')) document.getElementById('displayTotalExpenses').innerText = '৳ ' + expenses.toFixed(2);
+    if(document.getElementById('displayCurrentCash')) document.getElementById('displayCurrentCash').innerText = '৳ ' + cash.toFixed(2);
+  }
+
+  function addBazar() {
+    const date = document.getElementById('bazarDate').value;
+    const desc = document.getElementById('bazarDesc').value;
+    const amount = parseFloat(document.getElementById('bazarAmount').value);
+    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!store.bazarHistory) store.bazarHistory = [];
+    store.bazarHistory.push({ date, time: getCurrentTime(), desc, amount });
+    document.getElementById('bazarAmount').value = '';
+    document.getElementById('bazarDesc').value = '';
+    saveDataToFirebase();
+  }
+
+  function addMalTransaction() {
+    const date = document.getElementById('malDate').value;
+    const type = document.getElementById('malType').value;
+    const desc = document.getElementById('malDesc').value;
+    const amount = parseFloat(document.getElementById('malAmount').value);
+    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!store.malHistory) store.malHistory = [];
+    store.malHistory.push({ date, time: getCurrentTime(), type, desc, amount });
+    document.getElementById('malAmount').value = '';
+    document.getElementById('malDesc').value = '';
+    saveDataToFirebase();
+  }
+
+  function addWorkerWork() {
+    const date = document.getElementById('workerWorkDate').value;
+    const worker = document.getElementById('workerWorkSelect').value;
+    const amount = parseFloat(document.getElementById('workerWorkAmount').value);
+    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!store.workerHistory) store.workerHistory = [];
+    store.workerHistory.push({ date, time: getCurrentTime(), worker, type: 'work', amount });
+    document.getElementById('workerWorkAmount').value = '';
+    saveDataToFirebase();
+    switchWorkerTab(worker);
+  }
+
+  function addWorkerPayment() {
+    const date = document.getElementById('workerPayDate').value;
+    const worker = document.getElementById('workerPaySelect').value;
+    const amount = parseFloat(document.getElementById('workerPayAmount').value);
+    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!store.workerHistory) store.workerHistory = [];
+    store.workerHistory.push({ date, time: getCurrentTime(), worker, type: 'pay', amount });
+    document.getElementById('workerPayAmount').value = '';
+    saveDataToFirebase();
+    switchWorkerTab(worker);
+  }
+
+  function deleteBazar(idx) { if(userRole === 'admin') { store.bazarHistory.splice(idx, 1); saveDataToFirebase(); } }
+  function deleteMal(idx) { if(userRole === 'admin') { store.malHistory.splice(idx, 1); saveDataToFirebase(); } }
+  function deleteWorkerTransaction(idx) { if(userRole === 'admin') { store.workerHistory.splice(idx, 1); saveDataToFirebase(); } }
+
+  function resetAllData() {
+    if(userRole === 'admin' && confirm('সব ডাটা মুছে ফেলতে চান?')) {
+      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [] };
+      saveDataToFirebase();
+    }
+  }
 </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+
 </body>
 </html>
