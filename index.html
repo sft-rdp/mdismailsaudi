@@ -12,6 +12,7 @@
       --primary: #2c3e50;
       --secondary: #27ae60;
       --danger: #e74c3c;
+      --warning: #f39c12;
       --bg: #ebeeef;
       --card-bg: #ffffff;
     }
@@ -139,6 +140,9 @@
     .section-calc { background-color: #e1f5fe; border: 2px solid #03a9f4; }
     .section-calc .section-title { color: #0277bd; }
 
+    .section-recycle { background-color: #fbe9e7; border: 2px solid #ffab91; }
+    .section-recycle .section-title { color: #d84315; }
+
     .card {
       background: var(--card-bg);
       padding: 14px;
@@ -169,6 +173,43 @@
     .btn-logout { background: #7f8c8d; width: auto; padding: 6px 15px; float: right; }
     .btn-back { background: #546e7a; margin-bottom: 15px; display: inline-block; text-align: center; }
     
+    .btn-reset-sec {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .btn-restore {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 4px;
+    }
+
+    .btn-perm-delete {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .btn-adjust {
       background: #8e44ad;
       color: white;
@@ -271,10 +312,36 @@
     .calc-item-row .rate-text { flex: 1; font-size: 0.75rem; color: #666; text-align: center; }
     .calc-item-row input { flex: 1.2; text-align: center; padding: 6px; }
 
-    .table-container { overflow-x: auto; margin-top: 5px; }
+    details.history-dropdown {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    details.history-dropdown summary {
+      padding: 10px 14px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #f8fafc;
+      color: var(--primary);
+      user-select: none;
+      outline: none;
+    }
+    details.history-dropdown summary:hover {
+      background: #f1f5f9;
+    }
+    .table-container { 
+      overflow-x: auto; 
+      max-height: 280px; 
+      overflow-y: auto; 
+      margin-top: 0;
+      padding: 0 5px;
+    }
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
     th, td { padding: 8px 6px; border-bottom: 1px solid #ddd; }
-    th { background-color: #f8f9f9; color: #333; }
+    th { position: sticky; top: 0; background-color: #f1f5f9; color: #333; z-index: 1; }
     .badge { padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; color: #fff; display: inline-block; }
     .badge-work { background-color: #27ae60; }
     .badge-pay { background-color: #e74c3c; }
@@ -322,7 +389,6 @@
 
   <!-- ১. হোম স্ক্রিন -->
   <div id="loginScreen">
-    
     <div class="profile-header">
       <img src="admin.jpg" alt="এডমিন প্রোফাইল" class="profile-avatar">
       <span class="profile-name">এমডি ইসমাইল (অ্যাডমিন)</span>
@@ -379,41 +445,47 @@
       <div class="card">
         <h3>📜 পৃথক কর্মী কাজের ও টাকা পাওয়ার হিস্ট্রি</h3>
         <div class="worker-tabs" id="publicWorkerTabs"></div>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>তারিখ ও সময়</th>
-                <th>লেনদেনের ধরন</th>
-                <th>টাকা</th>
-              </tr>
-            </thead>
-            <tbody id="publicWorkerHistoryTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 হিস্ট্রি তালিকা দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>তারিখ ও সময়</th>
+                  <th>লেনদেনের ধরন</th>
+                  <th>টাকা</th>
+                </tr>
+              </thead>
+              <tbody id="publicWorkerHistoryTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
 
       <div class="card" style="margin-top: 15px; border: 2px solid #f57f17;">
         <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
         <div class="worker-tabs" id="publicWorkerItemTabs"></div>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>তারিখ</th>
-                <th>আইটেম ও কেজির বিস্তারিত</th>
-                <th>মোট টাকা</th>
-              </tr>
-            </thead>
-            <tbody id="publicItemBreakdownTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 ডে-বাই-ডে আইটেম বিস্তারিত দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ</th>
+                  <th>আইটেম ও কেজির বিস্তারিত</th>
+                  <th>মোট টাকা</th>
+                </tr>
+              </thead>
+              <tbody id="publicItemBreakdownTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </div>
   </div>
 
-  <!-- ২. আলাদা ক্যালকুলেটর পেজ -->
+  <!-- ২. ক্যালকুলেটর পেজ -->
   <div id="calcPage" style="display: none;">
     <div class="profile-header">
       <img src="admin.jpg" alt="এডমিন প্রোফাইল" class="profile-avatar">
@@ -492,20 +564,23 @@
     <div id="calcPagePendingSection" class="section-block section-worker" style="margin-top: 15px;">
       <h2 class="section-title">📜 আপনার পাঠানো পেন্ডিং রিকোয়েস্টসমূহের তালিকা</h2>
       <div class="card">
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>তারিখ ও সময়</th>
-                <th>কর্মী</th>
-                <th>বিভাগ</th>
-                <th>মোট টাকা</th>
-                <th>বিস্তারিত</th>
-              </tr>
-            </thead>
-            <tbody id="calcPagePendingTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 পেন্ডিং রিকোয়েস্ট তালিকা দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ ও সময়</th>
+                  <th>কর্মী</th>
+                  <th>বিভাগ</th>
+                  <th>মোট টাকা</th>
+                  <th>বিস্তারিত</th>
+                </tr>
+              </thead>
+              <tbody id="calcPagePendingTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </div>
   </div>
@@ -551,21 +626,24 @@
       <h2 class="section-title" style="color: #f57f17;">⏳ ক্যালকুলেটর পেন্ডিং রিকোয়েস্ট রিভিউ</h2>
       <div class="card">
         <h3>কর্মীদের পাঠানো কাজের রিকোয়েস্ট তালিকা</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>তারিখ ও সময়</th>
-                <th>কর্মী</th>
-                <th>বিভাগ</th>
-                <th>মোট টাকা</th>
-                <th>বিস্তারিত</th>
-                <th class="pendingActionHeader">অ্যাকশন</th>
-              </tr>
-            </thead>
-            <tbody id="pendingRequestTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 রিকোয়েস্টের তালিকা দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ ও সময়</th>
+                  <th>কর্মী</th>
+                  <th>বিভাগ</th>
+                  <th>মোট টাকা</th>
+                  <th>বিস্তারিত</th>
+                  <th class="pendingActionHeader">অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="pendingRequestTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -617,23 +695,27 @@
           <span>সর্বমোট বাজার খরচ</span>
           <strong id="totalBazar" style="color: #2980b9; font-size: 1.2rem;">৳ 0</strong>
         </div>
+        <button id="btnResetBazar" class="btn-reset-sec" onclick="resetBazarSection()">🔄 মাস শেষে বাজার খরচ রিসেট করুন</button>
       </div>
 
       <div class="card">
         <h3>📜 বাজার খরচের হিস্ট্রি</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>তারিখ ও সময়</th>
-                <th>বিবরণ</th>
-                <th>টাকা</th>
-                <th class="bazarActionHeader">অ্যাকশন</th>
-              </tr>
-            </thead>
-            <tbody id="bazarHistoryTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 বাজার খরচের হিস্ট্রি দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ ও সময়</th>
+                  <th>বিবরণ</th>
+                  <th>টাকা</th>
+                  <th class="bazarActionHeader">অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="bazarHistoryTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -662,24 +744,28 @@
           <div class="summary-box"><span>মোট বিক্রি</span><strong id="totalMalSell" style="color: #27ae60;">৳ 0</strong></div>
           <div class="summary-box"><span>ক্যাশ ব্যালেন্স</span><strong id="malNetProfit" style="color: #2980b9;">৳ 0</strong></div>
         </div>
+        <button id="btnResetMal" class="btn-reset-sec" onclick="resetMalSection()">🔄 মাস শেষে কেনা-বেচা হিসাব রিসেট করুন</button>
       </div>
 
       <div class="card">
         <h3>📜 মাল কেনা-বেচার হিস্ট্রি</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>তারিখ ও সময়</th>
-                <th>ধরন</th>
-                <th>বিবরণ</th>
-                <th>টাকা</th>
-                <th class="malActionHeader">অ্যাকশন</th>
-              </tr>
-            </thead>
-            <tbody id="malHistoryTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 মাল কেনা-বেচার হিস্ট্রি দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ ও সময়</th>
+                  <th>ধরন</th>
+                  <th>বিবরণ</th>
+                  <th>টাকা</th>
+                  <th class="malActionHeader">অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="malHistoryTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -723,37 +809,71 @@
       <div class="card">
         <h3>📜 পৃথক কর্মী কাজ ও টাকা পরিশোধের হিস্ট্রি</h3>
         <div class="worker-tabs" id="dashWorkerTabs"></div>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>তারিখ ও সময়</th>
-                <th>ধরন</th>
-                <th>টাকা</th>
-                <th class="workerActionHeader">অ্যাকশন</th>
-              </tr>
-            </thead>
-            <tbody id="workerHistoryTable"></tbody>
-          </table>
-        </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 কর্মী লেনদেন হিস্ট্রি দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>তারিখ ও সময়</th>
+                  <th>ধরন</th>
+                  <th>টাকা</th>
+                  <th class="workerActionHeader">অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="workerHistoryTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
 
       <div class="card" style="margin-top: 15px; border: 2px solid #f57f17;">
         <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
         <div class="worker-tabs" id="dashWorkerItemTabs"></div>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>তারিখ</th>
-                <th>আইটেম ও কেজির বিস্তারিত</th>
-                <th>মোট টাকা</th>
-              </tr>
-            </thead>
-            <tbody id="dashItemBreakdownTable"></tbody>
-          </table>
+        <details class="history-dropdown" open>
+          <summary>🔍 ডে-বাই-ডে কাজের বিবরণী দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ</th>
+                  <th>আইটেম ও কেজির বিস্তারিত</th>
+                  <th>মোট টাকা</th>
+                </tr>
+              </thead>
+              <tbody id="dashItemBreakdownTable"></tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ৪. ডাটা রিকভারি সেন্টার (মুছে ফেলা লেনদেন পুনরুদ্ধার ও পারমানেন্ট ডিলিট) -->
+    <div id="recycleBinSection" class="section-block section-recycle">
+      <h2 class="section-title">♻️ রিকভারি সেন্টার (মুছে ফেলা ডাটা ব্যবস্থাপনা)</h2>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="border-bottom: none; margin-bottom: 0;">মুছে ফেলা ডাটাসমূহ</h3>
+          <button id="btnDeleteAllPermanent" class="btn-perm-delete" style="display: none; padding: 6px 12px;" onclick="deleteAllPermanently()">🗑️ সব ডিলিট ডাটা পারমানেন্টলি মুছুন</button>
         </div>
+        <details class="history-dropdown" open>
+          <summary>🔍 মুছে ফেলা ডাটার তালিকা দেখুন / লুকান</summary>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>তারিখ</th>
+                  <th>সেকশন</th>
+                  <th>বিবরণ / ধরন</th>
+                  <th>টাকা</th>
+                  <th>অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="recycleBinTable"></tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -762,7 +882,7 @@
 
   <footer class="app-footer">
     <p>পাওয়ারড বাই <strong>এমডি ইসমাইল</strong></p>
-    <p>ভার্সন: <span class="version-text">v1.2.0-Firebase</span></p>
+    <p>ভার্সন: <span class="version-text">v1.4.0-Firebase</span></p>
   </footer>
 
 </div>
@@ -1257,6 +1377,9 @@
     const badge = document.getElementById('userRoleBadge');
     const adminFundCard = document.getElementById('adminFundInputCard');
     const adminWorkerMgmt = document.getElementById('adminWorkerManagementSection');
+    const btnResetBazar = document.getElementById('btnResetBazar');
+    const btnResetMal = document.getElementById('btnResetMal');
+    const btnDeleteAllPermanent = document.getElementById('btnDeleteAllPermanent');
 
     if (userRole === 'admin') {
       badge.innerText = 'অ্যাডমিন অ্যাকাউন্ট';
@@ -1264,11 +1387,17 @@
       document.getElementById('resetAllBtn').style.display = 'block';
       if(adminFundCard) adminFundCard.style.display = 'block';
       if(adminWorkerMgmt) adminWorkerMgmt.style.display = 'block';
+      if(btnResetBazar) btnResetBazar.style.display = 'block';
+      if(btnResetMal) btnResetMal.style.display = 'block';
+      if(btnDeleteAllPermanent) btnDeleteAllPermanent.style.display = 'inline-block';
     } else {
       badge.innerText = 'এডিটর অ্যাকাউন্ট';
       badge.className = 'role-badge role-editor';
       if(adminFundCard) adminFundCard.style.display = 'none';
       if(adminWorkerMgmt) adminWorkerMgmt.style.display = 'none';
+      if(btnResetBazar) btnResetBazar.style.display = 'none';
+      if(btnResetMal) btnResetMal.style.display = 'none';
+      if(btnDeleteAllPermanent) btnDeleteAllPermanent.style.display = 'none';
     }
     setTodayDate();
     updateUI();
@@ -1335,6 +1464,81 @@
     alert('ফান্ড আপডেট হয়েছে!');
   }
 
+  // ==========================================
+  // রিসেট ফাংশনসমূহ (বাজার ও মাল সেকশন)
+  // ==========================================
+  function resetBazarSection() {
+    if (userRole !== 'admin') return;
+    if (confirm('আপনি কি নিশ্চিত যে বাজার খরচের সমস্ত হিসাব রিসেট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে, ভুল হলে ফিরিয়ে আনা যাবে)')) {
+      if (store.bazarHistory) {
+        store.bazarHistory.forEach(item => item.deletedFromHistory = true);
+      }
+      saveDataToFirebase();
+      alert('বাজার খরচ সেকশন রিসেট করা হয়েছে!');
+    }
+  }
+
+  function resetMalSection() {
+    if (userRole !== 'admin') return;
+    if (confirm('আপনি কি নিশ্চিত যে মাল কেনা-বেচার সমস্ত হিসাব রিসেট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে, ভুল হলে ফিরিয়ে আনা যাবে)')) {
+      if (store.malHistory) {
+        store.malHistory.forEach(item => item.deletedFromHistory = true);
+      }
+      saveDataToFirebase();
+      alert('মাল কেনা-বেচা সেকশন রিসেট করা হয়েছে!');
+    }
+  }
+
+  // ==========================================
+  // রিকভারি ও পারমানেন্ট ডিলিট ফাংশনসমূহ
+  // ==========================================
+  function restoreItem(type, index) {
+    if (userRole !== 'admin') return;
+    if (type === 'bazar' && store.bazarHistory[index]) {
+      delete store.bazarHistory[index].deletedFromHistory;
+    } else if (type === 'mal' && store.malHistory[index]) {
+      delete store.malHistory[index].deletedFromHistory;
+    } else if (type === 'worker' && store.workerHistory[index]) {
+      delete store.workerHistory[index].deletedFromHistory;
+    }
+    saveDataToFirebase();
+    alert('ডাটা সফলতার সাথে পুনরুদ্ধার (Restore) করা হয়েছে!');
+  }
+
+  // সিঙ্গেল আইটেম পারমানেন্ট ডিলিট
+  function deletePermanently(type, index) {
+    if (userRole !== 'admin') return;
+    if (confirm('⚠️ সাবধান! এটি ডিলিট করলে ডাটা চিরতরে মুছে যাবে এবং আর কখনো রিকভার করা যাবে না। আপনি কি নিশ্চিত?')) {
+      if (type === 'bazar' && store.bazarHistory[index]) {
+        store.bazarHistory.splice(index, 1);
+      } else if (type === 'mal' && store.malHistory[index]) {
+        store.malHistory.splice(index, 1);
+      } else if (type === 'worker' && store.workerHistory[index]) {
+        store.workerHistory.splice(index, 1);
+      }
+      saveDataToFirebase();
+      alert('ডাটা স্থায়ীভাবে (Permanently) মুছে ফেলা হয়েছে!');
+    }
+  }
+
+  // সব ডিলিটেড ডাটা একসাথে পারমানেন্ট ডিলিট
+  function deleteAllPermanently() {
+    if (userRole !== 'admin') return;
+    if (confirm('🚨 সাবধান! রিকভারি সেন্টারে থাকা সমস্ত ডাটা চিরতরে মুছে যাবে। আপনি কি সব মুছে ফেলা ডাটা স্থায়ীভাবে ধ্বংস করতে চান?')) {
+      if (store.bazarHistory) {
+        store.bazarHistory = store.bazarHistory.filter(item => !item.deletedFromHistory);
+      }
+      if (store.malHistory) {
+        store.malHistory = store.malHistory.filter(item => !item.deletedFromHistory);
+      }
+      if (store.workerHistory) {
+        store.workerHistory = store.workerHistory.filter(item => !item.deletedFromHistory);
+      }
+      saveDataToFirebase();
+      alert('রিকভারি সেন্টারের সব ডিলিটেড ডাটা পারমানেন্টলি মুছে ফেলা হয়েছে!');
+    }
+  }
+
   function updateUI() {
     let totalBazar = 0, totalMalBuy = 0, totalMalSell = 0;
     
@@ -1343,25 +1547,29 @@
       workerStats[w] = { work: 0, pay: 0 };
     });
 
-    // ১. বাজার খরচ সামারি হিসাব (হিস্ট্রি থেকে ডিলিট করা হলেও ব্যালেন্স কমবে না)
+    // ১. বাজার খরচ সামারি হিসাব (শুধু সক্রিয়/যেগুলো ডিলিট হয়নি সেগুলো গণনায় আসবে)
     if(store.bazarHistory) {
       store.bazarHistory.forEach(item => {
-        totalBazar += item.amount;
+        if(!item.deletedFromHistory) {
+          totalBazar += item.amount;
+        }
       });
     }
 
-    // ২. মাল কেনা-বেচা সামারি হিসাব (হিস্ট্রি থেকে ডিলিট করা হলেও মূল ক্যাশ কমবে না)
+    // ২. মাল কেনা-বেচা সামারি হিসাব (শুধু সক্রিয়/যেগুলো ডিলিট হয়নি)
     if(store.malHistory) {
       store.malHistory.forEach(item => {
-        if(item.type === 'buy') totalMalBuy += item.amount;
-        if(item.type === 'sell') totalMalSell += item.amount;
+        if(!item.deletedFromHistory) {
+          if(item.type === 'buy') totalMalBuy += item.amount;
+          if(item.type === 'sell') totalMalSell += item.amount;
+        }
       });
     }
 
-    // ৩. কর্মীদের ব্যালেন্স হিসাব (হিস্ট্রি থেকে ডিলিট করা হলেও কর্মীদের মূল পাওনা অপরিবর্তিত থাকবে)
+    // ৩. কর্মীদের ব্যালেন্স হিসাব (শুধু সক্রিয়/যেগুলো ডিলিট হয়নি)
     if(store.workerHistory) {
       store.workerHistory.forEach(item => {
-        if(workerStats[item.worker]) {
+        if(workerStats[item.worker] && !item.deletedFromHistory) {
           if(item.type === 'work') workerStats[item.worker].work += item.amount;
           else if(item.type === 'pay') workerStats[item.worker].pay += item.amount;
         }
@@ -1393,7 +1601,7 @@
     renderPending('pendingRequestTable');
     renderPending('calcPagePendingTable');
 
-    // বাজার খরচের হিস্ট্রি টেবিল (শুধুমাত্র যেগুলো ডিলিট করা হয়নি সেগুলো দেখাবে)
+    // বাজার খরচের হিস্ট্রি টেবিল
     const bazarTable = document.getElementById('bazarHistoryTable');
     if (bazarTable) {
       bazarTable.innerHTML = '';
@@ -1456,7 +1664,7 @@
 
       if(store.workerHistory) {
         store.workerHistory.forEach(item => {
-          if(item.type === 'pay' && item.date && item.date.startsWith(m) && pays[item.worker] !== undefined) {
+          if(!item.deletedFromHistory && item.type === 'pay' && item.date && item.date.startsWith(m) && pays[item.worker] !== undefined) {
             pays[item.worker] += item.amount;
           }
         });
@@ -1470,7 +1678,7 @@
     if(document.getElementById('publicMonthlyAlert')) document.getElementById('publicMonthlyAlert').innerHTML = renderAlert(document.getElementById('publicMonthFilter').value);
     if(document.getElementById('dashMonthlyAlert')) document.getElementById('dashMonthlyAlert').innerHTML = renderAlert(document.getElementById('dashMonthFilter').value);
 
-    // কর্মী হিস্ট্রি ফিল্টার (শুধুমাত্র হিস্ট্রি থেকে ডিলিট না হওয়া লেনদেন দেখাবে)
+    // কর্মী হিস্ট্রি ফিল্টার
     const filteredWorker = (store.workerHistory || [])
       .map((item, originalIndex) => ({...item, originalIndex}))
       .filter(i => i.worker === currentWorkerTab && !i.deletedFromHistory);
@@ -1509,6 +1717,53 @@
     };
     renderBreakdown('dashItemBreakdownTable');
     renderBreakdown('publicItemBreakdownTable');
+
+    // ♻️ রিকভারি সেন্টার রেন্ডারিং (মুছে ফেলা সমস্ত ডাটা এখানে থাকবে)
+    const recycleTable = document.getElementById('recycleBinTable');
+    if (recycleTable) {
+      recycleTable.innerHTML = '';
+      let deletedList = [];
+
+      if(store.bazarHistory) {
+        store.bazarHistory.forEach((item, idx) => {
+          if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'বাজার খরচ', secKey: 'bazar', originalIndex: idx });
+        });
+      }
+      if(store.malHistory) {
+        store.malHistory.forEach((item, idx) => {
+          if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'মাল কেনা/বেচা', secKey: 'mal', originalIndex: idx });
+        });
+      }
+      if(store.workerHistory) {
+        store.workerHistory.forEach((item, idx) => {
+          if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'কর্মী লেনদেন', secKey: 'worker', originalIndex: idx });
+        });
+      }
+
+      if (deletedList.length === 0) {
+        recycleTable.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">কোনো মুছে ফেলা ডাটা নেই।</td></tr>`;
+      } else {
+        deletedList.slice().reverse().forEach((item) => {
+          const descStr = item.desc || (item.type ? (item.type==='buy'?'মাল কেনা':(item.type==='sell'?'মাল বিক্রি':(item.type==='work'?'কাজের জমা':'পেমেন্ট'))) : '-');
+          
+          let actionBtns = 'শুধু এডমিন';
+          if (userRole === 'admin') {
+            actionBtns = `
+              <button class="btn-restore" onclick="restoreItem('${item.secKey}', ${item.originalIndex})">↩️ রিকভার</button>
+              <button class="btn-perm-delete" onclick="deletePermanently('${item.secKey}', ${item.originalIndex})">🗑️ স্থায়ী ডিলিট</button>
+            `;
+          }
+
+          recycleTable.innerHTML += `<tr>
+            <td>${formatDateToDMY(item.date)}</td>
+            <td><strong>${item.sec}</strong></td>
+            <td>${descStr}</td>
+            <td>৳${item.amount}</td>
+            <td style="white-space: nowrap;">${actionBtns}</td>
+          </tr>`;
+        });
+      }
+    }
 
     if(document.getElementById('totalBazar')) document.getElementById('totalBazar').innerText = '৳ ' + totalBazar.toFixed(2);
     if(document.getElementById('totalMalBuy')) document.getElementById('totalMalBuy').innerText = '৳ ' + totalMalBuy.toFixed(2);
@@ -1571,10 +1826,10 @@
     switchWorkerTab(worker);
   }
 
-  // হিস্ট্রি থেকে মুছে ফেলা হলেও মূল ব্যালেন্স/ক্যাশ অপরিবর্তিত থাকবে
+  // সফট ডিলিট ফাংশনসমূহ (রিকভারি সেন্টারে পাঠানো)
   function deleteBazar(idx) { 
     if(userRole === 'admin') { 
-      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (মূল ক্যাশ ফান্ড এবং খরচের হিসাবে কোনো প্রভাব পড়বে না)')) {
+      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে)')) {
         store.bazarHistory[idx].deletedFromHistory = true; 
         saveDataToFirebase(); 
       }
@@ -1583,7 +1838,7 @@
 
   function deleteMal(idx) { 
     if(userRole === 'admin') { 
-      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (মালের মূল ক্যাশ ব্যালেন্সে কোনো প্রভাব পড়বে না)')) {
+      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে)')) {
         store.malHistory[idx].deletedFromHistory = true; 
         saveDataToFirebase(); 
       }
@@ -1592,7 +1847,7 @@
 
   function deleteWorkerTransaction(idx) { 
     if(userRole === 'admin') { 
-      if(confirm('হিস্টরি থেকে এটি মুছে ফেলতে চান? (কর্মীর মূল ব্যালেন্স ও মোট কাজের টাকায় কোনো প্রভাব পড়বে না)')) {
+      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে)')) {
         store.workerHistory[idx].deletedFromHistory = true; 
         saveDataToFirebase(); 
       }
