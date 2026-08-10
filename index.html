@@ -9,15 +9,15 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
     :root {
-      --primary: #2c3e50;
-      --secondary: #27ae60;
-      --danger: #e74c3c;
-      --warning: #f39c12;
-      --bg: #ebeeef;
+      --primary: #1e293b;
+      --secondary: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --bg: #f1f5f9;
       --card-bg: #ffffff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg); padding: 12px; color: #333; }
+    body { background-color: var(--bg); padding: 12px; color: #334155; }
     .container { max-width: 680px; margin: 0 auto; padding-bottom: 20px; }
     
     .profile-header {
@@ -26,24 +26,25 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 15px;
-      padding: 10px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 15px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
     }
     .profile-avatar {
-      width: 75px;
-      height: 75px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #0284c7;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border: 3px solid #0ea5e9;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
     }
     .profile-name {
-      font-size: 1rem;
-      font-weight: bold;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--primary);
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     #loginScreen {
@@ -54,13 +55,14 @@
     }
     .login-card {
       background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
       width: 100%;
       text-align: center;
     }
-    .login-card h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; }
+    .login-card h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.25rem; font-weight: 700; }
     
     .login-role-tabs {
       display: flex;
@@ -69,155 +71,165 @@
     }
     .role-tab-btn {
       flex: 1;
-      padding: 10px;
-      border: 2px solid #ccc;
-      background: #f1f1f1;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 12px;
+      border: 2px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      font-weight: 700;
       cursor: pointer;
       font-size: 0.95rem;
-      transition: 0.2s ease;
+      transition: all 0.2s ease;
+      color: #64748b;
     }
     .role-tab-btn.active-editor {
-      background: #2980b9;
+      background: #0284c7;
       color: white;
-      border-color: #2980b9;
+      border-color: #0284c7;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
     }
     .role-tab-btn.active-admin {
-      background: #8e44ad;
+      background: #9333ea;
       color: white;
-      border-color: #8e44ad;
+      border-color: #9333ea;
+      box-shadow: 0 4px 12px rgba(147, 51, 234, 0.2);
     }
 
     .btn-calc-launch {
-      background: linear-gradient(135deg, #0288d1, #01579b);
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
       color: white;
       font-size: 1.1rem;
-      font-weight: bold;
+      font-weight: 700;
       padding: 16px 20px;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       width: 100%;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(2, 136, 209, 0.3);
+      box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      transition: transform 0.1s ease;
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
     }
     .btn-calc-launch:active {
       transform: scale(0.98);
     }
 
     .section-block {
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 18px;
       margin-bottom: 22px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
       width: 100%;
+      border: 1px solid rgba(0,0,0,0.05);
     }
     .section-title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
+      font-weight: 700;
     }
 
-    .section-fund { background-color: #f3e5f5; border: 2px solid #ce93d8; }
-    .section-fund .section-title { color: #6a1b9a; }
+    .section-fund { background: linear-gradient(135deg, #f3e8ff 100%, #faf5ff 0%); border: 1px solid #d8b4fe; }
+    .section-fund .section-title { color: #7e22ce; }
 
-    .section-bazar { background-color: #d4e6f1; border: 2px solid #85c1e9; }
-    .section-bazar .section-title { color: #1b4f72; }
+    .section-bazar { background: linear-gradient(135deg, #e0f2fe 100%, #f0f9ff 0%); border: 1px solid #bae6fd; }
+    .section-bazar .section-title { color: #0369a1; }
 
-    .section-mal { background-color: #c8e6c9; border: 2px solid #81c784; }
-    .section-mal .section-title { color: #1b5e20; }
+    .section-mal { background: linear-gradient(135deg, #dcfce7 100%, #f0fdf4 0%); border: 1px solid #bbf7d0; }
+    .section-mal .section-title { color: #15803d; }
 
-    .section-worker { background-color: #fff59d; border: 2px solid #fbc02d; }
-    .section-worker .section-title { color: #f57f17; }
+    .section-worker { background: linear-gradient(135deg, #fef9c3 100%, #fefce8 0%); border: 1px solid #fde047; }
+    .section-worker .section-title { color: #a16207; }
 
-    .section-calc { background-color: #e1f5fe; border: 2px solid #03a9f4; }
-    .section-calc .section-title { color: #0277bd; }
+    .section-calc { background: linear-gradient(135deg, #e0f2fe 100%, #f0f9ff 0%); border: 1px solid #7dd3fc; }
+    .section-calc .section-title { color: #0284c7; }
 
-    .section-recycle { background-color: #fbe9e7; border: 2px solid #ffab91; }
-    .section-recycle .section-title { color: #d84315; }
+    .section-recycle { background: linear-gradient(135deg, #ffedd5 100%, #fff7ed 0%); border: 1px solid #fed7aa; }
+    .section-recycle .section-title { color: #c2410c; }
 
     .card {
       background: var(--card-bg);
-      padding: 14px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
-      margin-bottom: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      margin-bottom: 14px;
+      border: 1px solid #f1f5f9;
     }
     .card:last-child { margin-bottom: 0; }
-    .card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 1.5px solid #eee; padding-bottom: 4px; }
+    .card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px; font-weight: 700; }
     
-    .input-group { margin-bottom: 10px; display: flex; flex-direction: column; gap: 4px; text-align: left; }
-    label { font-size: 0.85rem; font-weight: 600; }
-    input, select { padding: 9px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; width: 100%; }
+    .input-group { margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+    label { font-size: 0.85rem; font-weight: 600; color: #475569; }
+    input, select { padding: 11px 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; width: 100%; background: #fff; transition: border-color 0.2s; }
+    input:focus, select:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
     
     .btn {
       background: var(--secondary);
       color: white;
       border: none;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px;
+      border-radius: 8px;
       font-size: 0.95rem;
-      font-weight: bold;
+      font-weight: 700;
       width: 100%;
       cursor: pointer;
       margin-top: 5px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+      transition: opacity 0.2s;
     }
     .btn:active { opacity: 0.9; }
-    .btn-logout { background: #7f8c8d; width: auto; padding: 6px 15px; float: right; }
-    .btn-back { background: #546e7a; margin-bottom: 15px; display: inline-block; text-align: center; }
+    .btn-logout { background: #64748b; width: auto; padding: 8px 16px; float: right; border-radius: 8px; font-weight: 600; }
+    .btn-back { background: #475569; margin-bottom: 15px; display: inline-block; text-align: center; }
     
     .btn-reset-sec {
-      background: #e74c3c;
+      background: #ef4444;
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 12px;
       display: inline-block;
       width: 100%;
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
     }
 
     .btn-restore {
-      background: #27ae60;
+      background: #10b981;
       color: white;
       border: none;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       margin-right: 4px;
     }
 
     .btn-perm-delete {
-      background: #c0392b;
+      background: #dc2626;
       color: white;
       border: none;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
     }
 
     .btn-adjust {
-      background: #8e44ad;
+      background: #9333ea;
       color: white;
       border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       margin-top: 6px;
       display: inline-block;
@@ -225,77 +237,153 @@
 
     .role-badge {
       display: inline-block;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: bold;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: white;
       margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .role-admin { background-color: #8e44ad; }
-    .role-editor { background-color: #2980b9; }
+    .role-admin { background: linear-gradient(135deg, #9333ea, #7e22ce); }
+    .role-editor { background: linear-gradient(135deg, #0284c7, #0369a1); }
 
-    .summary-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .summary-box { background: #f8f9f9; padding: 10px 5px; border-radius: 6px; text-align: center; border: 1px solid #e5e7e9; }
-    .summary-box span { display: block; font-size: 0.75rem; color: #555; margin-bottom: 2px; }
-    .summary-box strong { font-size: 1rem; }
+    .summary-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .summary-box { background: #f8fafc; padding: 12px 8px; border-radius: 10px; text-align: center; border: 1px solid #e2e8f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+    .summary-box span { display: block; font-size: 0.75rem; color: #64748b; margin-bottom: 4px; font-weight: 600; }
+    .summary-box strong { font-size: 1.05rem; }
 
     .worker-tabs {
       display: flex;
-      gap: 6px;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-bottom: 14px;
       overflow-x: auto;
+      padding-bottom: 4px;
     }
     .tab-btn {
       flex: 1;
-      padding: 8px 4px;
-      background: #e0e0e0;
+      padding: 10px 8px;
+      background: #e2e8f0;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 0.85rem;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      color: #444;
+      color: #475569;
       text-align: center;
       white-space: nowrap;
+      transition: all 0.2s;
     }
     .tab-btn.active {
-      background: #d4ac0d;
+      background: #eab308;
       color: white;
+      box-shadow: 0 4px 10px rgba(234, 179, 8, 0.3);
     }
 
     .worker-item-card {
-      background: #fafafa;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 8px;
-    }
-    .worker-item-card h4 { font-size: 0.95rem; color: #333; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
-    .worker-stats { display: flex; justify-content: space-between; font-size: 0.85rem; color: #555; flex-wrap: wrap; gap: 4px; }
-
-    .monthly-alert-box {
-      background-color: #fce4ec;
-      border: 2px solid #f48fb1;
-      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
       padding: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .worker-item-card h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+    .worker-stats { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; flex-wrap: wrap; gap: 6px; }
+
+    /* সুন্দর ডিজাইনযুক্ত অ্যালার্ট বক্স */
+    .monthly-alert-box {
+      background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+      border: 1px solid #fbcfe8;
+      border-left: 5px solid #ec4899;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.08);
     }
     .monthly-alert-box h4 {
-      color: #c2185b;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
+      color: #be185d;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .monthly-alert-list {
       list-style: none;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
     }
     .monthly-alert-list li {
-      padding: 4px 0;
-      border-bottom: 1px dashed #f8bbd0;
+      padding: 6px 0;
+      border-bottom: 1px dashed #fbcfe8;
+      color: #831843;
+      display: flex;
+      justify-content: space-between;
     }
     .monthly-alert-list li:last-child {
       border-bottom: none;
+    }
+
+    /* নোটিফিকেশন ব্যানার ডিজাইন */
+    .notification-banner {
+      background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+      border: 1px solid #6ee7b7;
+      border-left: 5px solid #10b981;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #065f46;
+      display: none;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* আধুনিক কাস্টম টোস্ট এলার্ট স্টাইল */
+    #customToastContainer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 320px;
+      width: 100%;
+    }
+
+    .custom-toast {
+      background: #ffffff;
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1);
+      border-left: 5px solid #0ea5e9;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    }
+
+    .custom-toast.success { border-left-color: #10b981; }
+    .custom-toast.error { border-left-color: #ef4444; }
+    .custom-toast.warning { border-left-color: #f59e0b; }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(-10px); }
     }
 
     .calc-item-row {
@@ -303,31 +391,34 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 8px;
-      background: #f1f8e9;
-      padding: 8px;
-      border-radius: 6px;
+      margin-bottom: 10px;
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
     }
-    .calc-item-row label { flex: 1.5; font-weight: 600; font-size: 0.85rem; }
-    .calc-item-row .rate-text { flex: 1; font-size: 0.75rem; color: #666; text-align: center; }
-    .calc-item-row input { flex: 1.2; text-align: center; padding: 6px; }
+    .calc-item-row label { flex: 1.5; font-weight: 600; font-size: 0.85rem; color: #334155; }
+    .calc-item-row .rate-text { flex: 1; font-size: 0.75rem; color: #64748b; text-align: center; background: #e2e8f0; padding: 4px; border-radius: 4px; font-weight: 600; }
+    .calc-item-row input { flex: 1.2; text-align: center; padding: 8px; }
 
     details.history-dropdown {
       background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
       overflow: hidden;
-      margin-top: 5px;
+      margin-top: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
     details.history-dropdown summary {
-      padding: 10px 14px;
-      font-weight: bold;
+      padding: 12px 16px;
+      font-weight: 700;
       font-size: 0.95rem;
       cursor: pointer;
       background: #f8fafc;
       color: var(--primary);
       user-select: none;
       outline: none;
+      border-bottom: 1px solid #e2e8f0;
     }
     details.history-dropdown summary:hover {
       background: #f1f5f9;
@@ -337,25 +428,25 @@
       max-height: 280px; 
       overflow-y: auto; 
       margin-top: 0;
-      padding: 0 5px;
+      padding: 0;
     }
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
-    th, td { padding: 8px 6px; border-bottom: 1px solid #ddd; }
-    th { position: sticky; top: 0; background-color: #f1f5f9; color: #333; z-index: 1; }
-    .badge { padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; color: #fff; display: inline-block; }
-    .badge-work { background-color: #27ae60; }
-    .badge-pay { background-color: #e74c3c; }
-    .badge-buy { background-color: #e67e22; }
-    .badge-sell { background-color: #27ae60; }
-    .time-text { font-size: 0.75rem; color: #666; display: block; margin-top: 2px; }
-    .del-btn { color: var(--danger); cursor: pointer; font-weight: bold; border: none; background: none; font-size: 1rem; }
-    .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; display: none; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; }
+    th { position: sticky; top: 0; background-color: #f8fafc; color: #475569; z-index: 1; font-weight: 700; }
+    .badge { padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; color: #fff; display: inline-block; font-weight: 700; }
+    .badge-work { background-color: #10b981; }
+    .badge-pay { background-color: #ef4444; }
+    .badge-buy { background-color: #f97316; }
+    .badge-sell { background-color: #10b981; }
+    .time-text { font-size: 0.75rem; color: #94a3b8; display: block; margin-top: 2px; }
+    .del-btn { color: var(--danger); cursor: pointer; font-weight: bold; border: none; background: none; font-size: 1.1rem; padding: 4px; }
+    .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 600; background: #fee2e2; padding: 8px; border-radius: 6px; }
 
     .app-footer {
       text-align: center;
       margin-top: 25px;
       padding: 15px 10px;
-      border-top: 1.5px dashed #cbd5e1;
+      border-top: 2px dashed #cbd5e1;
       color: #64748b;
       font-size: 0.85rem;
     }
@@ -363,8 +454,8 @@
       margin-bottom: 4px;
     }
     .app-footer .version-text {
-      font-weight: bold;
-      color: #0284c7;
+      font-weight: 700;
+      color: #0ea5e9;
     }
 
     .worker-manage-list {
@@ -375,15 +466,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px;
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 6px;
-      margin-bottom: 6px;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
+
+<!-- কাস্টম টোস্ট এলার্ট কন্টেইনার -->
+<div id="customToastContainer"></div>
 
 <div class="container">
 
@@ -411,7 +505,7 @@
           <label for="editorPassword">এডিটর পাসওয়ার্ড:</label>
           <input type="password" id="editorPassword" placeholder="এডিটর পাসওয়ার্ড লিখুন...">
         </div>
-        <button class="btn" style="background: #2980b9;" onclick="loginEditor()">এডিটর হিসেবে প্রবেশ</button>
+        <button class="btn" style="background: #0284c7;" onclick="loginEditor()">এডিটর হিসেবে প্রবেশ</button>
       </div>
 
       <div id="adminLoginBox" style="display: none;">
@@ -419,7 +513,7 @@
           <label for="adminPassword">এডমিন পাসওয়ার্ড:</label>
           <input type="password" id="adminPassword" placeholder="এডমিন পাসওয়ার্ড লিখুন...">
         </div>
-        <button class="btn" style="background: #8e44ad;" onclick="loginAdmin()">এডমিন হিসেবে প্রবেশ</button>
+        <button class="btn" style="background: #9333ea;" onclick="loginAdmin()">এডমিন হিসেবে প্রবেশ</button>
       </div>
 
       <p id="errorMsg" class="error-msg">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
@@ -428,6 +522,9 @@
     <div class="section-block section-worker" style="max-width: 680px;">
       <h2 class="section-title">👥 কর্মীদের মোট পাওনা ও প্রাপ্তির হিসাব (পাবলিক ভিউ)</h2>
       
+      <!-- কর্মীর নোটিফিকেশন ব্যানার -->
+      <div id="workerNotificationBanner" class="notification-banner"></div>
+
       <div class="card">
         <h3>💰 কর্মীদের মোট হিসাব সারসংক্ষেপ</h3>
         <div id="publicWorkerSummary"></div>
@@ -463,7 +560,7 @@
         </details>
       </div>
 
-      <div class="card" style="margin-top: 15px; border: 2px solid #f57f17;">
+      <div class="card" style="margin-top: 15px; border: 1px solid #fde047;">
         <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
         <div class="worker-tabs" id="publicWorkerItemTabs"></div>
         <details class="history-dropdown" open>
@@ -520,9 +617,9 @@
         <div class="calc-item-row"><label>১৩. কম প্রেসার বড়টা</label><span class="rate-text">রেট: ৳২.০০</span><input type="number" class="calc-kg-gen" id="kg_compressor_big" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
         <div class="calc-item-row"><label>১৪. ঘোড়ার মাল তারতিব</label><span class="rate-text">রেট: ৳২৫০/টন</span><input type="number" class="calc-kg-gen" id="kg_ghora_mal_tartib" step="0.01" placeholder="০ কেজি" oninput="calculateGeneralWorkTotal()"></div>
 
-        <div class="summary-box" style="background: #e1f5fe; margin-top: 10px; padding: 12px;">
+        <div class="summary-box" style="background: #e0f2fe; margin-top: 10px; padding: 12px; border-color: #bae6fd;">
           <span>সাধারণ ক্যালকুলেটর মোট টাকা</span>
-          <strong id="calcGeneralGrandTotal" style="color: #0277bd; font-size: 1.4rem;">৳ 0.00</strong>
+          <strong id="calcGeneralGrandTotal" style="color: #0284c7; font-size: 1.3rem;">৳ 0.00</strong>
         </div>
       </div>
 
@@ -540,14 +637,15 @@
         <div class="calc-item-row"><label>৯. কালো সুইচের নাইম</label><span class="rate-text">রেট: ৳৩.০০</span><input type="number" class="calc-kg-oxy" id="oxy_black_switch_naim" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
         <div class="calc-item-row"><label>১০. আসপার কাটিং</label><span class="rate-text">রেট: ৳৪.০০</span><input type="number" class="calc-kg-oxy" id="oxy_asper_cutting" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
         <div class="calc-item-row"><label>১১. প্লাস্টিক আসপার</label><span class="rate-text">রেট: ৳১৮.০০</span><input type="number" class="calc-kg-oxy" id="oxy_plastic_asper" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
+        <div class="calc-item-row"><label>১২. সাদা লাল সুইচ</label><span class="rate-text">রেট: ৳৫.০০</span><input type="number" class="calc-kg-oxy" id="oxy_white_red_switch" step="0.01" placeholder="০ কেজি" oninput="calculateOxygenWorkTotal()"></div>
 
-        <div class="summary-box" style="background: #e1f5fe; margin-top: 10px; padding: 12px;">
+        <div class="summary-box" style="background: #e0f2fe; margin-top: 10px; padding: 12px; border-color: #bae6fd;">
           <span>অক্সিজেন ক্যালকুলেটর মোট টাকা</span>
-          <strong id="calcOxygenGrandTotal" style="color: #0277bd; font-size: 1.4rem;">৳ 0.00</strong>
+          <strong id="calcOxygenGrandTotal" style="color: #0284c7; font-size: 1.3rem;">৳ 0.00</strong>
         </div>
       </div>
 
-      <div id="calcRequestSection" class="card" style="background: #fffde7; border: 1px solid #fbc02d; margin-top: 15px;">
+      <div id="calcRequestSection" class="card" style="background: #fffbeb; border: 1px solid #fde047; margin-top: 15px;">
         <h3 id="calcReqTitle">📤 এই হিসাবটি অ্যাডমিন/এডিটরের কাছে রিকোয়েস্ট পাঠান</h3>
         <div class="input-group">
           <label for="calcReqDate">তারিখ:</label>
@@ -557,7 +655,7 @@
           <label for="calcReqWorkerSelect">কর্মী নির্বাচন করুন:</label>
           <select id="calcReqWorkerSelect"></select>
         </div>
-        <button id="calcReqBtn" class="btn" style="background: #2980b9;" onclick="sendCalculationRequest()">অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করুন</button>
+        <button id="calcReqBtn" class="btn" style="background: #0284c7;" onclick="sendCalculationRequest()">অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করুন</button>
       </div>
     </div>
 
@@ -596,14 +694,14 @@
     <span id="userRoleBadge" class="role-badge"></span>
     <div style="clear: both;"></div>
     
-    <h1 style="text-align: center; color: var(--primary); margin-bottom: 18px; font-size: 1.4rem;">📅 দৈনিক হিসাব খাতা (প্যানেল)</h1>
+    <h1 style="text-align: center; color: var(--primary); margin-bottom: 18px; font-size: 1.35rem; font-weight: 700;">📅 দৈনিক হিসাব খাতা (প্যানেল)</h1>
 
     <button class="btn-calc-launch" onclick="showPage('calcPage')" style="margin-bottom: 20px;">
       🧮 দৈনিক কাজের রেট ক্যালকুলেটর ওপেন করুন
     </button>
 
-    <div id="adminWorkerManagementSection" class="section-block" style="background-color: #e8f8f5; border: 2px solid #2ecc71; display: none;">
-      <h2 class="section-title" style="color: #27ae60;">➕ কর্মী যুক্ত ও ব্যবস্থাপনা সেকশন (শুধু এডমিন)</h2>
+    <div id="adminWorkerManagementSection" class="section-block" style="background: linear-gradient(135deg, #ecfdf5 100%, #f0fdf4 0%); border: 1px solid #a7f3d0; display: none;">
+      <h2 class="section-title" style="color: #059669;">➕ কর্মী যুক্ত ও ব্যবস্থাপনা সেকশন (শুধু এডমিন)</h2>
       <div class="card">
         <h3>নতুন কর্মী যুক্ত করুন</h3>
         <div class="input-group">
@@ -614,7 +712,7 @@
           <label for="newWorkerKey">কর্মীর আইডি/কী (English Single Word):</label>
           <input type="text" id="newWorkerKey" placeholder="যেমন: rohim">
         </div>
-        <button class="btn" style="background: #27ae60;" onclick="addNewWorker()">কর্মী যুক্ত করুন</button>
+        <button class="btn" style="background: #10b981;" onclick="addNewWorker()">কর্মী যুক্ত করুন</button>
       </div>
       <div class="card">
         <h3>বর্তমান কর্মীদের তালিকা</h3>
@@ -622,8 +720,8 @@
       </div>
     </div>
 
-    <div class="section-block" style="background-color: #fff9c4; border: 2px solid #fbc02d;">
-      <h2 class="section-title" style="color: #f57f17;">⏳ ক্যালকুলেটর পেন্ডিং রিকোয়েস্ট রিভিউ</h2>
+    <div class="section-block" style="background: linear-gradient(135deg, #fef9c3 100%, #fefce8 0%); border: 1px solid #fde047;">
+      <h2 class="section-title" style="color: #ca8a04;">⏳ ক্যালকুলেটর পেন্ডিং রিকোয়েস্ট রিভিউ</h2>
       <div class="card">
         <h3>কর্মীদের পাঠানো কাজের রিকোয়েস্ট তালিকা</h3>
         <details class="history-dropdown" open>
@@ -656,7 +754,7 @@
           <label for="initialFundAmount">নতুন ফান্ডের পরিমাণ (৳):</label>
           <input type="number" id="initialFundAmount" placeholder="যেমন: ৫০০০">
         </div>
-        <button class="btn" style="background: #8e44ad;" onclick="setInitialFund()">ফান্ড সেট / আপডেট করুন</button>
+        <button class="btn" style="background: #9333ea;" onclick="setInitialFund()">ফান্ড সেট / আপডেট করুন</button>
       </div>
 
       <div class="card">
@@ -664,15 +762,15 @@
         <div class="summary-grid-3">
           <div class="summary-box">
             <span>প্রদত্ত প্রাথমিক ফান্ড</span>
-            <strong id="displayInitialFund" style="color: #8e44ad;">৳ 0</strong>
+            <strong id="displayInitialFund" style="color: #9333ea;">৳ 0</strong>
           </div>
           <div class="summary-box">
             <span>মোট খরচ (বাজার + কেনা)</span>
-            <strong id="displayTotalExpenses" style="color: #e74c3c;">৳ 0</strong>
+            <strong id="displayTotalExpenses" style="color: #ef4444;">৳ 0</strong>
           </div>
           <div class="summary-box">
             <span>হাতে থাকা বর্তমান ক্যাশ</span>
-            <strong id="displayCurrentCash" style="color: #27ae60; font-size: 1.1rem;">৳ 0</strong>
+            <strong id="displayCurrentCash" style="color: #10b981; font-size: 1.1rem;">৳ 0</strong>
           </div>
         </div>
       </div>
@@ -686,14 +784,14 @@
         <div class="input-group"><label for="bazarDate">তারিখ:</label><input type="date" id="bazarDate"></div>
         <div class="input-group"><label for="bazarDesc">বিবরণ (ঐচ্ছিক):</label><input type="text" id="bazarDesc" placeholder="যেমন: চাল, ডাল, তেল"></div>
         <div class="input-group"><label for="bazarAmount">টাকার পরিমাণ (৳):</label><input type="number" id="bazarAmount" placeholder="যেমন: ৫০"></div>
-        <button class="btn" onclick="addBazar()">বাজার খরচ যোগ করুন</button>
+        <button class="btn" style="background: #0284c7;" onclick="addBazar()">বাজার খরচ যোগ করুন</button>
       </div>
 
       <div class="card">
         <h3>📊 মোট বাজার খরচ</h3>
-        <div class="summary-box" style="background: #eaf2f8;">
+        <div class="summary-box" style="background: #e0f2fe; border-color: #bae6fd;">
           <span>সর্বমোট বাজার খরচ</span>
-          <strong id="totalBazar" style="color: #2980b9; font-size: 1.2rem;">৳ 0</strong>
+          <strong id="totalBazar" style="color: #0284c7; font-size: 1.2rem;">৳ 0</strong>
         </div>
         <button id="btnResetBazar" class="btn-reset-sec" onclick="resetBazarSection()">🔄 মাস শেষে বাজার খরচ রিসেট করুন</button>
       </div>
@@ -734,15 +832,15 @@
         </div>
         <div class="input-group"><label for="malDesc">বিবরণ (ঐচ্ছিক):</label><input type="text" id="malDesc" placeholder="যেমন: স্ক্র্যাপ মাল"></div>
         <div class="input-group"><label for="malAmount">টাকার পরিমাণ (৳):</label><input type="number" id="malAmount" placeholder="যেমন: ৫০০"></div>
-        <button class="btn" style="background: #27ae60;" onclick="addMalTransaction()">লেনদেন যোগ করুন</button>
+        <button class="btn" style="background: #10b981;" onclick="addMalTransaction()">লেনদেন যোগ করুন</button>
       </div>
 
       <div class="card">
         <h3>📊 মালের হিসাব সামারি</h3>
         <div class="summary-grid-3">
-          <div class="summary-box"><span>মোট কেনা</span><strong id="totalMalBuy" style="color: #e67e22;">৳ 0</strong></div>
-          <div class="summary-box"><span>মোট বিক্রি</span><strong id="totalMalSell" style="color: #27ae60;">৳ 0</strong></div>
-          <div class="summary-box"><span>ক্যাশ ব্যালেন্স</span><strong id="malNetProfit" style="color: #2980b9;">৳ 0</strong></div>
+          <div class="summary-box"><span>মোট কেনা</span><strong id="totalMalBuy" style="color: #f97316;">৳ 0</strong></div>
+          <div class="summary-box"><span>মোট বিক্রি</span><strong id="totalMalSell" style="color: #10b981;">৳ 0</strong></div>
+          <div class="summary-box"><span>ক্যাশ ব্যালেন্স</span><strong id="malNetProfit" style="color: #0284c7;">৳ 0</strong></div>
         </div>
         <button id="btnResetMal" class="btn-reset-sec" onclick="resetMalSection()">🔄 মাস শেষে কেনা-বেচা হিসাব রিসেট করুন</button>
       </div>
@@ -781,7 +879,7 @@
           <select id="workerWorkSelect"></select>
         </div>
         <div class="input-group"><label for="workerWorkAmount">কাজের টাকা (৳):</label><input type="number" id="workerWorkAmount" placeholder="যেমন: ৫০০"></div>
-        <button class="btn" style="background: #27ae60;" onclick="addWorkerWork()">কাজের হিসাব যোগ করুন</button>
+        <button class="btn" style="background: #10b981;" onclick="addWorkerWork()">কাজের হিসাব যোগ করুন</button>
       </div>
 
       <div class="card">
@@ -792,7 +890,7 @@
           <select id="workerPaySelect"></select>
         </div>
         <div class="input-group"><label for="workerPayAmount">টাকার পরিমাণ (৳):</label><input type="number" id="workerPayAmount" placeholder="যেমন: ৩০০"></div>
-        <button class="btn" style="background: #e74c3c;" onclick="addWorkerPayment()">টাকা প্রদান নিশ্চিত করুন</button>
+        <button class="btn" style="background: #ef4444;" onclick="addWorkerPayment()">টাকা প্রদান নিশ্চিত করুন</button>
       </div>
 
       <div class="card">
@@ -828,7 +926,7 @@
         </details>
       </div>
 
-      <div class="card" style="margin-top: 15px; border: 2px solid #f57f17;">
+      <div class="card" style="margin-top: 15px; border: 1px solid #fde047;">
         <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
         <div class="worker-tabs" id="dashWorkerItemTabs"></div>
         <details class="history-dropdown" open>
@@ -849,7 +947,7 @@
       </div>
     </div>
 
-    <!-- ৪. ডাটা রিকভারি সেন্টার (মুছে ফেলা লেনদেন পুনরুদ্ধার ও পারমানেন্ট ডিলিট) -->
+    <!-- ৪. ডাটা রিকভারি সেন্টার -->
     <div id="recycleBinSection" class="section-block section-recycle">
       <h2 class="section-title">♻️ রিকভারি সেন্টার (মুছে ফেলা ডাটা ব্যবস্থাপনা)</h2>
       <div class="card">
@@ -882,12 +980,34 @@
 
   <footer class="app-footer">
     <p>পাওয়ারড বাই <strong>এমডি ইসমাইল</strong></p>
-    <p>ভার্সন: <span class="version-text">v1.4.0-Firebase</span></p>
+    <p>ভার্সন: <span class="version-text">v1.5.0-Firebase</span></p>
   </footer>
 
 </div>
 
 <script>
+  // ==========================================
+  // কাস্টম টোস্ট এলার্ট ফাংশন (Alert Replace)
+  // ==========================================
+  function showToast(message, type = 'success') {
+    let container = document.getElementById('customToastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'customToastContainer';
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `custom-toast ${type}`;
+    toast.innerHTML = `<span>${message}</span>`;
+    
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
+  }
+
   // ==========================================
   // ফায়ারবেস কনফিগারেশন
   // ==========================================
@@ -920,7 +1040,7 @@
     square_asper: 4.00, powder_asper: 35.00, thin_naim: 35.00,
     auto_switch_asper: 6.00, china_asper: 6.00, moshakkel_asper: 8.00,
     big_switch_naim: 1.00, meter_naim: 2.00, black_switch_naim: 3.00,
-    asper_cutting: 4.00, plastic_asper: 18.00
+    asper_cutting: 4.00, plastic_asper: 18.00, white_red_switch: 5.00
   };
 
   let userRole = null;
@@ -943,6 +1063,7 @@
     malHistory: [],
     workerHistory: [],
     pendingRequests: [],
+    notifications: {},
     workers: null
   };
 
@@ -958,6 +1079,7 @@
           malHistory: data.malHistory || [],
           workerHistory: data.workerHistory || [],
           pendingRequests: data.pendingRequests || [],
+          notifications: data.notifications || {},
           workers: data.workers || null
         };
 
@@ -973,6 +1095,7 @@
 
       renderWorkerOptionsAndTabs();
       updateUI();
+      checkWorkerNotifications();
     });
   };
 
@@ -981,18 +1104,31 @@
     db.ref('ledgerData').set(store);
   }
 
+  function checkWorkerNotifications() {
+    const banner = document.getElementById('workerNotificationBanner');
+    if (!banner) return;
+    
+    if (store.notifications && store.notifications[currentWorkerTab]) {
+      banner.style.display = 'block';
+      banner.innerHTML = `🔔 ${store.notifications[currentWorkerTab]}`;
+    } else {
+      banner.style.display = 'none';
+      banner.innerHTML = '';
+    }
+  }
+
   function addNewWorker() {
     if (userRole !== 'admin') return;
     const name = document.getElementById('newWorkerName').value.trim();
     const key = document.getElementById('newWorkerKey').value.trim().toLowerCase();
 
     if (!name || !key) {
-      alert('কর্মী নাম এবং আইডি দুটোই লিখুন!');
+      showToast('কর্মী নাম এবং আইডি দুটোই লিখুন!', 'warning');
       return;
     }
 
     if (workerNames[key]) {
-      alert('এই আইডি দিয়ে অলরেডি কর্মী যুক্ত আছে!');
+      showToast('এই আইডি দিয়ে অলরেডি কর্মী যুক্ত আছে!', 'error');
       return;
     }
 
@@ -1001,7 +1137,7 @@
     document.getElementById('newWorkerKey').value = '';
 
     saveDataToFirebase();
-    alert('নতুন কর্মী যোগ করা হয়েছে!');
+    showToast('নতুন কর্মী সফলভাবে যোগ করা হয়েছে!', 'success');
   }
 
   function deleteWorker(key) {
@@ -1013,7 +1149,7 @@
         currentWorkerTab = keys.length > 0 ? keys[0] : '';
       }
       saveDataToFirebase();
-      alert('কর্মী মুছে ফেলা হয়েছে!');
+      showToast('কর্মী সফলভাবে মুছে ফেলা হয়েছে!', 'success');
     }
   }
 
@@ -1038,7 +1174,7 @@
           desc: 'এডমিন ম্যানুয়াল হিসাব এডজাস্টমেন্ট'
         });
         saveDataToFirebase();
-        alert(`${wName}-এর কাজের হিসাবে ৳${amt} সমন্বয় করা হয়েছে!`);
+        showToast(`${wName}-এর কাজের হিসাবে ৳${amt} সমন্বয় করা হয়েছে!`, 'success');
       }
     } else if (type === "2") {
       let amtStr = prompt(`${wName}-এর পেমেন্ট প্রাপ্তির সাথে কত টাকা সমন্বয় করতে চান?`, "0");
@@ -1055,7 +1191,7 @@
           desc: 'এডমিন ম্যানুয়াল হিসাব এডজাস্টমেন্ট'
         });
         saveDataToFirebase();
-        alert(`${wName}-এর পেমেন্ট হিসাবে ৳${amt} সমন্বয় করা হয়েছে!`);
+        showToast(`${wName}-এর পেমেন্ট হিসাবে ৳${amt} সমন্বয় করা হয়েছে!`, 'success');
       }
     }
   }
@@ -1125,9 +1261,11 @@
     if (pass === PASS_EDITOR) {
       userRole = 'editor';
       sessionStorage.setItem('userRole', 'editor');
+      showToast('এডিটর হিসেবে সফলভাবে লগইন হয়েছে!', 'success');
       showDashboard();
     } else {
       document.getElementById('errorMsg').style.display = 'block';
+      showToast('ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।', 'error');
     }
   }
 
@@ -1136,9 +1274,11 @@
     if (pass === PASS_ADMIN) {
       userRole = 'admin';
       sessionStorage.setItem('userRole', 'admin');
+      showToast('অ্যাডমিন হিসেবে সফলভাবে লগইন হয়েছে!', 'success');
       showDashboard();
     } else {
       document.getElementById('errorMsg').style.display = 'block';
+      showToast('ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।', 'error');
     }
   }
 
@@ -1158,13 +1298,13 @@
         reqSecTitle.innerText = '📤 এই হিসাবটি সরাসরি কর্মীর অ্যাকাউন্টে জমা করুন';
         reqBtn.innerText = 'এই টাকা কর্মীর একাউন্টে জমা করুন';
         reqBtn.setAttribute('onclick', 'addCalculationDirectly()');
-        reqBtn.style.background = '#27ae60';
+        reqBtn.style.background = '#10b981';
         if (calcPagePendingSection) calcPagePendingSection.style.display = 'none';
       } else {
         reqSecTitle.innerText = '📤 এই হিসাবটি অ্যাডমিন/এডিটরের কাছে রিকোয়েস্ট পাঠান';
         reqBtn.innerText = 'অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করুন';
         reqBtn.setAttribute('onclick', 'sendCalculationRequest()');
-        reqBtn.style.background = '#2980b9';
+        reqBtn.style.background = '#0284c7';
         if (calcPagePendingSection) calcPagePendingSection.style.display = 'block';
       }
     }
@@ -1230,7 +1370,8 @@
                          (getVal('oxy_meter_naim') * OXYGEN_ITEM_RATES.meter_naim) +
                          (getVal('oxy_black_switch_naim') * OXYGEN_ITEM_RATES.black_switch_naim) +
                          (getVal('oxy_asper_cutting') * OXYGEN_ITEM_RATES.asper_cutting) +
-                         (getVal('oxy_plastic_asper') * OXYGEN_ITEM_RATES.plastic_asper);
+                         (getVal('oxy_plastic_asper') * OXYGEN_ITEM_RATES.plastic_asper) +
+                         (getVal('oxy_white_red_switch') * OXYGEN_ITEM_RATES.white_red_switch);
 
     document.getElementById('calcOxygenGrandTotal').innerText = '৳ ' + currentOxygenTotal.toFixed(2);
   }
@@ -1242,7 +1383,7 @@
 
     let amount = currentCalcTab === 'general' ? currentGeneralTotal : currentOxygenTotal;
     if (!date || amount <= 0) {
-      alert('দয়া করে সঠিক তারিখ দিন এবং কিছু পরিমাণ কেজি ইনপুট করুন!');
+      showToast('দয়া করে সঠিক তারিখ দিন এবং কিছু পরিমাণ কেজি ইনপুট করুন!', 'warning');
       return;
     }
 
@@ -1276,16 +1417,20 @@
         'মিটারের নাইম': parseFloat(document.getElementById('oxy_meter_naim').value) || 0,
         'কালো সুইচের নাইম': parseFloat(document.getElementById('oxy_black_switch_naim').value) || 0,
         'আসপার কাটিং': parseFloat(document.getElementById('oxy_asper_cutting').value) || 0,
-        'প্লাস্টিক আসপার': parseFloat(document.getElementById('oxy_plastic_asper').value) || 0
+        'প্লাস্টিক আসপার': parseFloat(document.getElementById('oxy_plastic_asper').value) || 0,
+        'সাদা লাল সুইচ': parseFloat(document.getElementById('oxy_white_red_switch').value) || 0
       };
     }
 
     if (!store.pendingRequests) store.pendingRequests = [];
     store.pendingRequests.push({ date, time, worker, calcType: currentCalcTab === 'general' ? 'সাধারণ ক্যালকুলেটর' : 'অক্সিজেন ক্যালকুলেটর', amount, items: itemsBreakdown });
     
+    if (!store.notifications) store.notifications = {};
+    store.notifications[worker] = `আপনার ৳${amount.toFixed(2)} টাকার কাজের রিকোয়েস্ট অ্যাডমিনের কাছে পাঠানো হয়েছে।`;
+
     saveDataToFirebase();
     resetCalcInputs();
-    alert('অনুমোদনের জন্য রিকোয়েস্ট সেন্ড করা হয়েছে!');
+    showToast('অনুমোদনের জন্য রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!', 'success');
     showPage('loginScreen');
   }
 
@@ -1296,7 +1441,7 @@
 
     let amount = currentCalcTab === 'general' ? currentGeneralTotal : currentOxygenTotal;
     if (!date || amount <= 0) {
-      alert('দয়া করে সঠিক তারিখ দিন এবং কিছু পরিমাণ কেজি ইনপুট করুন!');
+      showToast('দয়া করে সঠিক তারিখ দিন এবং কিছু পরিমাণ কেজি ইনপুট করুন!', 'warning');
       return;
     }
 
@@ -1330,16 +1475,20 @@
         'মিটারের নাইম': parseFloat(document.getElementById('oxy_meter_naim').value) || 0,
         'কালো সুইচের নাইম': parseFloat(document.getElementById('oxy_black_switch_naim').value) || 0,
         'আসপার কাটিং': parseFloat(document.getElementById('oxy_asper_cutting').value) || 0,
-        'প্লাস্টিক আসপার': parseFloat(document.getElementById('oxy_plastic_asper').value) || 0
+        'প্লাস্টিক আসপার': parseFloat(document.getElementById('oxy_plastic_asper').value) || 0,
+        'সাদা লাল সুইচ': parseFloat(document.getElementById('oxy_white_red_switch').value) || 0
       };
     }
 
     if (!store.workerHistory) store.workerHistory = [];
     store.workerHistory.push({ date, time, worker, type: 'work', amount, items: itemsBreakdown });
     
+    if (!store.notifications) store.notifications = {};
+    store.notifications[worker] = `আপনার ৳${amount.toFixed(2)} টাকার কাজের হিসাব সরাসরি একাউন্টে জমা করা হয়েছে।`;
+
     saveDataToFirebase();
     resetCalcInputs();
-    alert('সফলভাবে কর্মীর অ্যাকাউন্টে জমা করা হয়েছে!');
+    showToast('সফলভাবে কর্মীর অ্যাকাউন্টে জমা করা হয়েছে!', 'success');
     showPage('mainDashboard');
   }
 
@@ -1358,17 +1507,27 @@
 
     if (!store.workerHistory) store.workerHistory = [];
     store.workerHistory.push({ date: req.date, time: req.time, worker: req.worker, type: 'work', amount: req.amount, items: req.items });
+    
+    if (!store.notifications) store.notifications = {};
+    store.notifications[req.worker] = `✅ আপনার ৳${req.amount.toFixed(2)} টাকার রিকোয়েস্ট অ্যাডমিন কর্তৃক গৃহীত ও অনুমোদিত হয়েছে!`;
+
     store.pendingRequests.splice(index, 1);
     
     saveDataToFirebase();
-    alert('রিকোয়েস্ট গ্রহণ করা হয়েছে!');
+    showToast('রিকোয়েস্ট সফলভাবে গ্রহণ করা হয়েছে!', 'success');
   }
 
   function rejectRequest(index) {
     if (userRole !== 'admin') return;
     if (confirm('রহিত করতে চান?')) {
+      const req = store.pendingRequests[index];
+      if (req) {
+        if (!store.notifications) store.notifications = {};
+        store.notifications[req.worker] = `❌ আপনার ৳${req.amount.toFixed(2)} টাকার রিকোয়েস্ট বাতিল করা হয়েছে।`;
+      }
       store.pendingRequests.splice(index, 1);
       saveDataToFirebase();
+      showToast('রিকোয়েস্ট বাতিল করা হয়েছে!', 'error');
     }
   }
 
@@ -1452,46 +1611,44 @@
     currentWorkerTab = workerKey;
     renderWorkerOptionsAndTabs();
     updateUI();
+    checkWorkerNotifications();
   }
 
   function setInitialFund() {
     if(userRole !== 'admin') return;
     const amount = parseFloat(document.getElementById('initialFundAmount').value);
-    if(isNaN(amount)) return alert('সঠিক পরিমাণ লিখুন!');
+    if(isNaN(amount)) {
+      showToast('সঠিক পরিমাণ লিখুন!', 'warning');
+      return;
+    }
     store.initialFund = amount;
     document.getElementById('initialFundAmount').value = '';
     saveDataToFirebase();
-    alert('ফান্ড আপডেট হয়েছে!');
+    showToast('ফান্ড সফলভাবে আপডেট হয়েছে!', 'success');
   }
 
-  // ==========================================
-  // রিসেট ফাংশনসমূহ (বাজার ও মাল সেকশন)
-  // ==========================================
   function resetBazarSection() {
     if (userRole !== 'admin') return;
-    if (confirm('আপনি কি নিশ্চিত যে বাজার খরচের সমস্ত হিসাব রিসেট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে, ভুল হলে ফিরিয়ে আনা যাবে)')) {
+    if (confirm('আপনি কি নিশ্চিত যে বাজার খরচের সমস্ত হিসাব রিসেট করতে চান?')) {
       if (store.bazarHistory) {
         store.bazarHistory.forEach(item => item.deletedFromHistory = true);
       }
       saveDataToFirebase();
-      alert('বাজার খরচ সেকশন রিসেট করা হয়েছে!');
+      showToast('বাজার খরচ সেকশন রিসেট করা হয়েছে!', 'success');
     }
   }
 
   function resetMalSection() {
     if (userRole !== 'admin') return;
-    if (confirm('আপনি কি নিশ্চিত যে মাল কেনা-বেচার সমস্ত হিসাব রিসেট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে, ভুল হলে ফিরিয়ে আনা যাবে)')) {
+    if (confirm('আপনি কি নিশ্চিত যে মাল কেনা-বেচার সমস্ত হিসাব রিসেট করতে চান?')) {
       if (store.malHistory) {
         store.malHistory.forEach(item => item.deletedFromHistory = true);
       }
       saveDataToFirebase();
-      alert('মাল কেনা-বেচা সেকশন রিসেট করা হয়েছে!');
+      showToast('মাল কেনা-বেচা সেকশন রিসেট করা হয়েছে!', 'success');
     }
   }
 
-  // ==========================================
-  // রিকভারি ও পারমানেন্ট ডিলিট ফাংশনসমূহ
-  // ==========================================
   function restoreItem(type, index) {
     if (userRole !== 'admin') return;
     if (type === 'bazar' && store.bazarHistory[index]) {
@@ -1502,13 +1659,12 @@
       delete store.workerHistory[index].deletedFromHistory;
     }
     saveDataToFirebase();
-    alert('ডাটা সফলতার সাথে পুনরুদ্ধার (Restore) করা হয়েছে!');
+    showToast('ডাটা সফলতার সাথে পুনরুদ্ধার (Restore) করা হয়েছে!', 'success');
   }
 
-  // সিঙ্গেল আইটেম পারমানেন্ট ডিলিট
   function deletePermanently(type, index) {
     if (userRole !== 'admin') return;
-    if (confirm('⚠️ সাবধান! এটি ডিলিট করলে ডাটা চিরতরে মুছে যাবে এবং আর কখনো রিকভার করা যাবে না। আপনি কি নিশ্চিত?')) {
+    if (confirm('⚠️ সাবধান! এটি চিরতরে মুছে যাবে। আপনি কি নিশ্চিত?')) {
       if (type === 'bazar' && store.bazarHistory[index]) {
         store.bazarHistory.splice(index, 1);
       } else if (type === 'mal' && store.malHistory[index]) {
@@ -1517,25 +1673,18 @@
         store.workerHistory.splice(index, 1);
       }
       saveDataToFirebase();
-      alert('ডাটা স্থায়ীভাবে (Permanently) মুছে ফেলা হয়েছে!');
+      showToast('ডাটা স্থায়ীভাবে মুছে ফেলা হয়েছে!', 'error');
     }
   }
 
-  // সব ডিলিটেড ডাটা একসাথে পারমানেন্ট ডিলিট
   function deleteAllPermanently() {
     if (userRole !== 'admin') return;
-    if (confirm('🚨 সাবধান! রিকভারি সেন্টারে থাকা সমস্ত ডাটা চিরতরে মুছে যাবে। আপনি কি সব মুছে ফেলা ডাটা স্থায়ীভাবে ধ্বংস করতে চান?')) {
-      if (store.bazarHistory) {
-        store.bazarHistory = store.bazarHistory.filter(item => !item.deletedFromHistory);
-      }
-      if (store.malHistory) {
-        store.malHistory = store.malHistory.filter(item => !item.deletedFromHistory);
-      }
-      if (store.workerHistory) {
-        store.workerHistory = store.workerHistory.filter(item => !item.deletedFromHistory);
-      }
+    if (confirm('🚨 সাবধান! রিকভারি সেন্টারে থাকা সমস্ত ডাটা চিরতরে মুছে যাবে।')) {
+      if (store.bazarHistory) store.bazarHistory = store.bazarHistory.filter(item => !item.deletedFromHistory);
+      if (store.malHistory) store.malHistory = store.malHistory.filter(item => !item.deletedFromHistory);
+      if (store.workerHistory) store.workerHistory = store.workerHistory.filter(item => !item.deletedFromHistory);
       saveDataToFirebase();
-      alert('রিকভারি সেন্টারের সব ডিলিটেড ডাটা পারমানেন্টলি মুছে ফেলা হয়েছে!');
+      showToast('সব ডিলিটেড ডাটা পারমানেন্টলি মুছে ফেলা হয়েছে!', 'error');
     }
   }
 
@@ -1547,16 +1696,12 @@
       workerStats[w] = { work: 0, pay: 0 };
     });
 
-    // ১. বাজার খরচ সামারি হিসাব (শুধু সক্রিয়/যেগুলো ডিলিট হয়নি সেগুলো গণনায় আসবে)
     if(store.bazarHistory) {
       store.bazarHistory.forEach(item => {
-        if(!item.deletedFromHistory) {
-          totalBazar += item.amount;
-        }
+        if(!item.deletedFromHistory) totalBazar += item.amount;
       });
     }
 
-    // ২. মাল কেনা-বেচা সামারি হিসাব (শুধু সক্রিয়/যেগুলো ডিলিট হয়নি)
     if(store.malHistory) {
       store.malHistory.forEach(item => {
         if(!item.deletedFromHistory) {
@@ -1566,7 +1711,6 @@
       });
     }
 
-    // ৩. কর্মীদের ব্যালেন্স হিসাব (শুধু সক্রিয়/যেগুলো ডিলিট হয়নি)
     if(store.workerHistory) {
       store.workerHistory.forEach(item => {
         if(workerStats[item.worker] && !item.deletedFromHistory) {
@@ -1576,13 +1720,12 @@
       });
     }
 
-    // পেন্ডিং রিকোয়েস্ট রেন্ডার
     const renderPending = (tableId) => {
       const table = document.getElementById(tableId);
       if (!table) return;
       table.innerHTML = '';
       if (!store.pendingRequests || store.pendingRequests.length === 0) {
-        table.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #666;">কোনো পেন্ডিং রিকোয়েস্ট নেই।</td></tr>`;
+        table.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #64748b;">কোনো পেন্ডিং রিকোয়েস্ট নেই।</td></tr>`;
         return;
       }
       store.pendingRequests.slice().reverse().forEach((req, index) => {
@@ -1592,7 +1735,7 @@
           for (let [k, v] of Object.entries(req.items)) { if (v > 0) itemsStr += `• ${k}: ${v} কেজি<br>`; }
         }
         const action = (tableId === 'pendingRequestTable' && userRole === 'admin') ? 
-          `<td><button class="btn" style="background: #27ae60; padding: 5px; font-size: 0.8rem;" onclick="acceptRequest(${origIdx})">গ্রহণ</button> <button class="btn" style="background: #e74c3c; padding: 5px; font-size: 0.8rem;" onclick="rejectRequest(${origIdx})">বাতিল</button></td>` : `<td>-</td>`;
+          `<td><button class="btn" style="background: #10b981; padding: 5px; font-size: 0.8rem;" onclick="acceptRequest(${origIdx})">গ্রহণ</button> <button class="btn" style="background: #ef4444; padding: 5px; font-size: 0.8rem;" onclick="rejectRequest(${origIdx})">বাতিল</button></td>` : `<td>-</td>`;
 
         const wName = workerNames[req.worker] || req.worker;
         table.innerHTML += `<tr><td>${formatDateToDMY(req.date)}<span class="time-text">${req.time||''}</span></td><td><strong>${wName}</strong></td><td>${req.calcType}</td><td>৳${req.amount.toFixed(2)}</td><td>${itemsStr}</td>${action}</tr>`;
@@ -1601,17 +1744,13 @@
     renderPending('pendingRequestTable');
     renderPending('calcPagePendingTable');
 
-    // বাজার খরচের হিস্ট্রি টেবিল
     const bazarTable = document.getElementById('bazarHistoryTable');
     if (bazarTable) {
       bazarTable.innerHTML = '';
       if(store.bazarHistory) {
-        const activeBazar = store.bazarHistory
-          .map((item, originalIndex) => ({...item, originalIndex}))
-          .filter(i => !i.deletedFromHistory);
-
+        const activeBazar = store.bazarHistory.map((item, originalIndex) => ({...item, originalIndex})).filter(i => !i.deletedFromHistory);
         if(activeBazar.length === 0) {
-          bazarTable.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #666;">কোনো হিস্ট্রি নেই।</td></tr>`;
+          bazarTable.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #64748b;">কোনো হিস্ট্রি নেই।</td></tr>`;
         } else {
           activeBazar.slice().reverse().forEach((item) => {
             const del = userRole === 'admin' ? `<button class="del-btn" onclick="deleteBazar(${item.originalIndex})">✕</button>` : `-`;
@@ -1621,17 +1760,13 @@
       }
     }
 
-    // মাল কেনা-বেচার হিস্ট্রি টেবিল
     const malTable = document.getElementById('malHistoryTable');
     if (malTable) {
       malTable.innerHTML = '';
       if(store.malHistory) {
-        const activeMal = store.malHistory
-          .map((item, originalIndex) => ({...item, originalIndex}))
-          .filter(i => !i.deletedFromHistory);
-
+        const activeMal = store.malHistory.map((item, originalIndex) => ({...item, originalIndex})).filter(i => !i.deletedFromHistory);
         if(activeMal.length === 0) {
-          malTable.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">কোনো হিস্ট্রি নেই।</td></tr>`;
+          malTable.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b;">কোনো হিস্ট্রি নেই।</td></tr>`;
         } else {
           activeMal.slice().reverse().forEach((item) => {
             const badge = item.type === 'buy' ? 'badge-buy' : 'badge-sell';
@@ -1642,21 +1777,19 @@
       }
     }
 
-    // কর্মীদের সারসংক্ষেপ কার্ড রেন্ডার
     const renderSummary = (isAdminView = false) => {
       let html = '';
       Object.keys(workerNames).forEach(w => {
         const stats = workerStats[w] || { work: 0, pay: 0 };
         const bal = stats.work - stats.pay;
         const editBtn = (isAdminView && userRole === 'admin') ? `<button class="btn-adjust" onclick="editWorkerSummary('${w}')">✏️ হিসাব এডজাস্ট</button>` : '';
-        html += `<div class="worker-item-card"><h4><span>👤 ${workerNames[w]}</span> ${editBtn}</h4><div class="worker-stats"><span>কাজ: ৳${stats.work.toFixed(2)}</span><span>প্রাপ্তি: ৳${stats.pay.toFixed(2)}</span><span>পাওনা: <strong style="color: #27ae60;">৳${bal.toFixed(2)}</strong></span></div></div>`;
+        html += `<div class="worker-item-card"><h4><span>👤 ${workerNames[w]}</span> ${editBtn}</h4><div class="worker-stats"><span>কাজ: ৳${stats.work.toFixed(2)}</span><span>প্রাপ্তি: ৳${stats.pay.toFixed(2)}</span><span>পাওনা: <strong style="color: #10b981;">৳${bal.toFixed(2)}</strong></span></div></div>`;
       });
       return html;
     };
     if(document.getElementById('publicWorkerSummary')) document.getElementById('publicWorkerSummary').innerHTML = renderSummary(false);
     if(document.getElementById('dashboardWorkerSummary')) document.getElementById('dashboardWorkerSummary').innerHTML = renderSummary(true);
 
-    // মাসিক অ্যালার্ট বক্স
     const renderAlert = (m) => {
       if(!m) return '';
       let pays = {};
@@ -1669,32 +1802,29 @@
           }
         });
       }
-      let html = `<h4>📋 ${m} মাসে পেমেন্ট:</h4><ul class="monthly-alert-list">`;
+      let html = `<h4>📊 ${m} মাসের পেমেন্ট বিবরণী:</h4><ul class="monthly-alert-list">`;
       Object.keys(workerNames).forEach(w => {
-        html += `<li>👉 ${workerNames[w]}: <strong>৳${pays[w].toFixed(2)}</strong></li>`;
+        html += `<li><span>👉 ${workerNames[w]}</span> <strong>৳${pays[w].toFixed(2)}</strong></li>`;
       });
       return html + `</ul>`;
     };
     if(document.getElementById('publicMonthlyAlert')) document.getElementById('publicMonthlyAlert').innerHTML = renderAlert(document.getElementById('publicMonthFilter').value);
     if(document.getElementById('dashMonthlyAlert')) document.getElementById('dashMonthlyAlert').innerHTML = renderAlert(document.getElementById('dashMonthFilter').value);
 
-    // কর্মী হিস্ট্রি ফিল্টার
-    const filteredWorker = (store.workerHistory || [])
-      .map((item, originalIndex) => ({...item, originalIndex}))
-      .filter(i => i.worker === currentWorkerTab && !i.deletedFromHistory);
+    const filteredWorker = (store.workerHistory || []).map((item, originalIndex) => ({...item, originalIndex})).filter(i => i.worker === currentWorkerTab && !i.deletedFromHistory);
 
     const renderWorkerHistory = (tableId, showDel) => {
       const table = document.getElementById(tableId);
       if(!table) return;
       table.innerHTML = '';
       if(filteredWorker.length === 0) {
-        table.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">কোনো হিস্ট্রি নেই।</td></tr>`;
+        table.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b;">কোনো হিস্ট্রি নেই।</td></tr>`;
         return;
       }
       filteredWorker.slice().reverse().forEach((item, idx) => {
         const badge = (item.type||'work') === 'work' ? 'badge-work' : 'badge-pay';
         const del = showDel && userRole === 'admin' ? `<button class="del-btn" onclick="deleteWorkerTransaction(${item.originalIndex})">✕</button>` : '-';
-        table.innerHTML += `<tr><td>#${filteredWorker.length - idx}</td><td>${formatDateToDMY(item.date)}${item.desc ? `<br><small style="color:#666">${item.desc}</small>` : ''}</td><td><span class="badge ${badge}">${item.type==='work'?'কাজের জমা':'পেমেন্ট'}</span></td><td>৳${item.amount.toFixed(2)}</td>${showDel?`<td>${del}</td>`:''}</tr>`;
+        table.innerHTML += `<tr><td>#${filteredWorker.length - idx}</td><td>${formatDateToDMY(item.date)}${item.desc ? `<br><small style="color:#64748b">${item.desc}</small>` : ''}</td><td><span class="badge ${badge}">${item.type==='work'?'কাজের জমা':'পেমেন্ট'}</span></td><td>৳${item.amount.toFixed(2)}</td>${showDel?`<td>${del}</td>`:''}</tr>`;
       });
     };
     renderWorkerHistory('workerHistoryTable', true);
@@ -1706,7 +1836,7 @@
       table.innerHTML = '';
       const works = filteredWorker.filter(i => (i.type||'work') === 'work' && i.items);
       if(works.length === 0) {
-        table.innerHTML = `<tr><td colspan="3" style="text-align: center;">কোনো বিবরণ নেই</td></tr>`;
+        table.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #64748b;">কোনো বিবরণ নেই</td></tr>`;
         return;
       }
       works.slice().reverse().forEach(item => {
@@ -1718,34 +1848,20 @@
     renderBreakdown('dashItemBreakdownTable');
     renderBreakdown('publicItemBreakdownTable');
 
-    // ♻️ রিকভারি সেন্টার রেন্ডারিং (মুছে ফেলা সমস্ত ডাটা এখানে থাকবে)
     const recycleTable = document.getElementById('recycleBinTable');
     if (recycleTable) {
       recycleTable.innerHTML = '';
       let deletedList = [];
 
-      if(store.bazarHistory) {
-        store.bazarHistory.forEach((item, idx) => {
-          if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'বাজার খরচ', secKey: 'bazar', originalIndex: idx });
-        });
-      }
-      if(store.malHistory) {
-        store.malHistory.forEach((item, idx) => {
-          if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'মাল কেনা/বেচা', secKey: 'mal', originalIndex: idx });
-        });
-      }
-      if(store.workerHistory) {
-        store.workerHistory.forEach((item, idx) => {
-          if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'কর্মী লেনদেন', secKey: 'worker', originalIndex: idx });
-        });
-      }
+      if(store.bazarHistory) store.bazarHistory.forEach((item, idx) => { if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'বাজার খরচ', secKey: 'bazar', originalIndex: idx }); });
+      if(store.malHistory) store.malHistory.forEach((item, idx) => { if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'মাল কেনা/বেচা', secKey: 'mal', originalIndex: idx }); });
+      if(store.workerHistory) store.workerHistory.forEach((item, idx) => { if(item.deletedFromHistory) deletedList.push({ ...item, sec: 'কর্মী লেনদেন', secKey: 'worker', originalIndex: idx }); });
 
       if (deletedList.length === 0) {
-        recycleTable.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">কোনো মুছে ফেলা ডাটা নেই।</td></tr>`;
+        recycleTable.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b;">কোনো মুছে ফেলা ডাটা নেই।</td></tr>`;
       } else {
         deletedList.slice().reverse().forEach((item) => {
           const descStr = item.desc || (item.type ? (item.type==='buy'?'মাল কেনা':(item.type==='sell'?'মাল বিক্রি':(item.type==='work'?'কাজের জমা':'পেমেন্ট'))) : '-');
-          
           let actionBtns = 'শুধু এডমিন';
           if (userRole === 'admin') {
             actionBtns = `
@@ -1753,14 +1869,7 @@
               <button class="btn-perm-delete" onclick="deletePermanently('${item.secKey}', ${item.originalIndex})">🗑️ স্থায়ী ডিলিট</button>
             `;
           }
-
-          recycleTable.innerHTML += `<tr>
-            <td>${formatDateToDMY(item.date)}</td>
-            <td><strong>${item.sec}</strong></td>
-            <td>${descStr}</td>
-            <td>৳${item.amount}</td>
-            <td style="white-space: nowrap;">${actionBtns}</td>
-          </tr>`;
+          recycleTable.innerHTML += `<tr><td>${formatDateToDMY(item.date)}</td><td><strong>${item.sec}</strong></td><td>${descStr}</td><td>৳${item.amount}</td><td style="white-space: nowrap;">${actionBtns}</td></tr>`;
         });
       }
     }
@@ -1781,12 +1890,16 @@
     const date = document.getElementById('bazarDate').value;
     const desc = document.getElementById('bazarDesc').value;
     const amount = parseFloat(document.getElementById('bazarAmount').value);
-    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!date || !amount || amount <= 0) {
+      showToast('দয়া করে সঠিক তথ্য দিন!', 'warning');
+      return;
+    }
     if(!store.bazarHistory) store.bazarHistory = [];
     store.bazarHistory.push({ date, time: getCurrentTime(), desc, amount });
     document.getElementById('bazarAmount').value = '';
     document.getElementById('bazarDesc').value = '';
     saveDataToFirebase();
+    showToast('বাজার খরচ সফলভাবে যোগ করা হয়েছে!', 'success');
   }
 
   function addMalTransaction() {
@@ -1794,70 +1907,79 @@
     const type = document.getElementById('malType').value;
     const desc = document.getElementById('malDesc').value;
     const amount = parseFloat(document.getElementById('malAmount').value);
-    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!date || !amount || amount <= 0) {
+      showToast('দয়া করে সঠিক তথ্য দিন!', 'warning');
+      return;
+    }
     if(!store.malHistory) store.malHistory = [];
     store.malHistory.push({ date, time: getCurrentTime(), type, desc, amount });
     document.getElementById('malAmount').value = '';
     document.getElementById('malDesc').value = '';
     saveDataToFirebase();
+    showToast('মালের লেনদেন সফলভাবে যোগ করা হয়েছে!', 'success');
   }
 
   function addWorkerWork() {
     const date = document.getElementById('workerWorkDate').value;
     const worker = document.getElementById('workerWorkSelect').value;
     const amount = parseFloat(document.getElementById('workerWorkAmount').value);
-    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!date || !amount || amount <= 0) {
+      showToast('দয়া করে সঠিক তথ্য দিন!', 'warning');
+      return;
+    }
     if(!store.workerHistory) store.workerHistory = [];
     store.workerHistory.push({ date, time: getCurrentTime(), worker, type: 'work', amount });
     document.getElementById('workerWorkAmount').value = '';
     saveDataToFirebase();
     switchWorkerTab(worker);
+    showToast('কর্মীর কাজের হিসাব সফলভাবে যোগ করা হয়েছে!', 'success');
   }
 
   function addWorkerPayment() {
     const date = document.getElementById('workerPayDate').value;
     const worker = document.getElementById('workerPaySelect').value;
     const amount = parseFloat(document.getElementById('workerPayAmount').value);
-    if(!date || !amount || amount <= 0) return alert('সঠিক তথ্য দিন!');
+    if(!date || !amount || amount <= 0) {
+      showToast('দয়া করে সঠিক তথ্য দিন!', 'warning');
+      return;
+    }
     if(!store.workerHistory) store.workerHistory = [];
     store.workerHistory.push({ date, time: getCurrentTime(), worker, type: 'pay', amount });
     document.getElementById('workerPayAmount').value = '';
     saveDataToFirebase();
     switchWorkerTab(worker);
+    showToast('টাকা প্রদান সফলভাবে নিশ্চিত করা হয়েছে!', 'success');
   }
 
-  // সফট ডিলিট ফাংশনসমূহ (রিকভারি সেন্টারে পাঠানো)
   function deleteBazar(idx) { 
-    if(userRole === 'admin') { 
-      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে)')) {
-        store.bazarHistory[idx].deletedFromHistory = true; 
-        saveDataToFirebase(); 
-      }
-    } 
+    if(userRole === 'admin' && confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান?')) {
+      store.bazarHistory[idx].deletedFromHistory = true; 
+      saveDataToFirebase(); 
+      showToast('আইটেমটি রিকভারি সেন্টারে পাঠানো হয়েছে!', 'error');
+    }
   }
 
   function deleteMal(idx) { 
-    if(userRole === 'admin') { 
-      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে)')) {
-        store.malHistory[idx].deletedFromHistory = true; 
-        saveDataToFirebase(); 
-      }
-    } 
+    if(userRole === 'admin' && confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান?')) {
+      store.malHistory[idx].deletedFromHistory = true; 
+      saveDataToFirebase(); 
+      showToast('আইটেমটি রিকভারি সেন্টারে পাঠানো হয়েছে!', 'error');
+    }
   }
 
   function deleteWorkerTransaction(idx) { 
-    if(userRole === 'admin') { 
-      if(confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান? (এটি রিকভারি সেন্টারে জমা থাকবে)')) {
-        store.workerHistory[idx].deletedFromHistory = true; 
-        saveDataToFirebase(); 
-      }
-    } 
+    if(userRole === 'admin' && confirm('হিস্ট্রি থেকে এটি ডিলিট করতে চান?')) {
+      store.workerHistory[idx].deletedFromHistory = true; 
+      saveDataToFirebase(); 
+      showToast('আইটেমটি রিকভারি সেন্টারে পাঠানো হয়েছে!', 'error');
+    }
   }
 
   function resetAllData() {
     if(userRole === 'admin' && confirm('সব ডাটা মুছে ফেলতে চান?')) {
-      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [], workers: workerNames };
+      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [], notifications: {}, workers: workerNames };
       saveDataToFirebase();
+      showToast('সকল ডাটা সফলভাবে রিসেট করা হয়েছে!', 'error');
     }
   }
 </script>
