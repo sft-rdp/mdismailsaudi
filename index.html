@@ -291,7 +291,6 @@
     .worker-item-card h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     .worker-stats { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; flex-wrap: wrap; gap: 6px; }
 
-    /* সুন্দর ডিজাইনযুক্ত অ্যালার্ট বক্স */
     .monthly-alert-box {
       background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
       border: 1px solid #fbcfe8;
@@ -325,7 +324,6 @@
       border-bottom: none;
     }
 
-    /* নোটিফিকেশন ব্যানার ডিজাইন */
     .notification-banner {
       background: linear-gradient(135deg, #d1fae5, #ecfdf5);
       border: 1px solid #6ee7b7;
@@ -338,6 +336,19 @@
       display: none;
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
       animation: fadeIn 0.3s ease-in-out;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .notification-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #065f46;
+      cursor: pointer;
+      padding: 0 4px;
     }
 
     @keyframes fadeIn {
@@ -345,7 +356,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* আধুনিক কাস্টম টোস্ট এলার্ট স্টাইল */
     #customToastContainer {
       position: fixed;
       top: 20px;
@@ -476,7 +486,6 @@
 </head>
 <body>
 
-<!-- কাস্টম টোস্ট এলার্ট কন্টেইনার -->
 <div id="customToastContainer"></div>
 
 <div class="container">
@@ -522,7 +531,6 @@
     <div class="section-block section-worker" style="max-width: 680px;">
       <h2 class="section-title">👥 কর্মীদের মোট পাওনা ও প্রাপ্তির হিসাব (পাবলিক ভিউ)</h2>
       
-      <!-- কর্মীর নোটিফিকেশন ব্যানার -->
       <div id="workerNotificationBanner" class="notification-banner"></div>
 
       <div class="card">
@@ -927,7 +935,7 @@
       </div>
 
       <div class="card" style="margin-top: 15px; border: 1px solid #fde047;">
-        <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক কাজের বিবরণী (ডে-বাই-ডে)</h3>
+        <h3>⚖️ কর্মীদের আইটেম ও কেজিভিত্তিক বিবরণী (ডে-বাই-ডে)</h3>
         <div class="worker-tabs" id="dashWorkerItemTabs"></div>
         <details class="history-dropdown" open>
           <summary>🔍 ডে-বাই-ডে কাজের বিবরণী দেখুন / লুকান</summary>
@@ -980,15 +988,12 @@
 
   <footer class="app-footer">
     <p>পাওয়ারড বাই <strong>এমডি ইসমাইল</strong></p>
-    <p>ভার্সন: <span class="version-text">v1.5.0-Firebase</span></p>
+    <p>ভার্সন: <span class="version-text">v1.5.1-Firebase</span></p>
   </footer>
 
 </div>
 
 <script>
-  // ==========================================
-  // কাস্টম টোস্ট এলার্ট ফাংশন (Alert Replace)
-  // ==========================================
   function showToast(message, type = 'success') {
     let container = document.getElementById('customToastContainer');
     if (!container) {
@@ -1008,9 +1013,6 @@
     }, 3000);
   }
 
-  // ==========================================
-  // ফায়ারবেস কনফিগারেশন
-  // ==========================================
   const firebaseConfig = {
     apiKey: "AIzaSyAU8xgvaCecbjtbVWeSWwGt8-nHZHhuEiU",
     authDomain: "mdismailsft.firebaseapp.com",
@@ -1109,9 +1111,21 @@
     if (!banner) return;
     
     if (store.notifications && store.notifications[currentWorkerTab]) {
-      banner.style.display = 'block';
-      banner.innerHTML = `🔔 ${store.notifications[currentWorkerTab]}`;
+      banner.style.display = 'flex';
+      banner.innerHTML = `<span>🔔 ${store.notifications[currentWorkerTab]}</span><button class="notification-close-btn" onclick="clearWorkerNotification()">✕</button>`;
     } else {
+      banner.style.display = 'none';
+      banner.innerHTML = '';
+    }
+  }
+
+  function clearWorkerNotification() {
+    if (store.notifications) {
+      delete store.notifications[currentWorkerTab];
+      saveDataToFirebase();
+    }
+    const banner = document.getElementById('workerNotificationBanner');
+    if (banner) {
       banner.style.display = 'none';
       banner.innerHTML = '';
     }
