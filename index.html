@@ -708,6 +708,22 @@
       🧮 দৈনিক কাজের রেট ক্যালকুলেটর ওপেন করুন
     </button>
 
+    <div id="adminPasswordManagementSection" class="section-block" style="background: linear-gradient(135deg, #f3e8ff 100%, #faf5ff 0%); border: 1px solid #d8b4fe; display: none;">
+      <h2 class="section-title" style="color: #7e22ce;">🔑 পাসওয়ার্ড পরিবর্তন সেকশন (শুধু এডমিন)</h2>
+      <div class="card">
+        <h3>লগইন পাসওয়ার্ড আপডেট করুন</h3>
+        <div class="input-group">
+          <label for="newAdminPassInput">নতুন এডমিন পাসওয়ার্ড:</label>
+          <input type="text" id="newAdminPassInput" placeholder="নতুন এডমিন পাসওয়ার্ড লিখুন">
+        </div>
+        <div class="input-group">
+          <label for="newEditorPassInput">নতুন এডিটর পাসওয়ার্ড:</label>
+          <input type="text" id="newEditorPassInput" placeholder="নতুন এডিটর পাসওয়ার্ড লিখুন">
+        </div>
+        <button class="btn" style="background: #9333ea;" onclick="updatePasswords()">পাসওয়ার্ড আপডেট করুন</button>
+      </div>
+    </div>
+
     <div id="adminWorkerManagementSection" class="section-block" style="background: linear-gradient(135deg, #ecfdf5 100%, #f0fdf4 0%); border: 1px solid #a7f3d0; display: none;">
       <h2 class="section-title" style="color: #059669;">➕ কর্মী যুক্ত ও ব্যবস্থাপনা সেকশন (শুধু এডমিন)</h2>
       <div class="card">
@@ -988,7 +1004,7 @@
 
   <footer class="app-footer">
     <p>পাওয়ারড বাই <strong>এমডি ইসমাইল</strong></p>
-    <p>ভার্সন: <span class="version-text">v1.5.1-Firebase</span></p>
+    <p>ভার্সন: <span class="version-text">v1.5.2-Firebase</span></p>
   </footer>
 
 </div>
@@ -1027,8 +1043,8 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  const PASS_ADMIN = "sft10";
-  const PASS_EDITOR = "mehidy103050";
+  let PASS_ADMIN = "sft10";
+  let PASS_EDITOR = "mehidy103050";
 
   const ITEM_RATES = {
     heater: 2.16, china_heater: 2.16, auto_switch: 1.50, black_switch: 0.90,
@@ -1066,7 +1082,8 @@
     workerHistory: [],
     pendingRequests: [],
     notifications: {},
-    workers: null
+    workers: null,
+    passwords: null
   };
 
   window.onload = function() {
@@ -1082,11 +1099,17 @@
           workerHistory: data.workerHistory || [],
           pendingRequests: data.pendingRequests || [],
           notifications: data.notifications || {},
-          workers: data.workers || null
+          workers: data.workers || null,
+          passwords: data.passwords || null
         };
 
         if (store.workers) {
           workerNames = store.workers;
+        }
+
+        if (store.passwords) {
+          if (store.passwords.admin) PASS_ADMIN = store.passwords.admin;
+          if (store.passwords.editor) PASS_EDITOR = store.passwords.editor;
         }
       }
       
@@ -1103,7 +1126,28 @@
 
   function saveDataToFirebase() {
     store.workers = workerNames;
+    store.passwords = { admin: PASS_ADMIN, editor: PASS_EDITOR };
     db.ref('ledgerData').set(store);
+  }
+
+  function updatePasswords() {
+    if (userRole !== 'admin') return;
+    const newAdmin = document.getElementById('newAdminPassInput').value.trim();
+    const newEditor = document.getElementById('newEditorPassInput').value.trim();
+
+    if (!newAdmin && !newEditor) {
+      showToast('কমপক্ষে যেকোনো একটি পাসওয়ার্ড লিখুন!', 'warning');
+      return;
+    }
+
+    if (newAdmin) PASS_ADMIN = newAdmin;
+    if (newEditor) PASS_EDITOR = newEditor;
+
+    document.getElementById('newAdminPassInput').value = '';
+    document.getElementById('newEditorPassInput').value = '';
+
+    saveDataToFirebase();
+    showToast('পাসওয়ার্ড সফলভাবে আপডেট করা হয়েছে!', 'success');
   }
 
   function checkWorkerNotifications() {
@@ -1550,6 +1594,7 @@
     const badge = document.getElementById('userRoleBadge');
     const adminFundCard = document.getElementById('adminFundInputCard');
     const adminWorkerMgmt = document.getElementById('adminWorkerManagementSection');
+    const adminPassMgmt = document.getElementById('adminPasswordManagementSection');
     const btnResetBazar = document.getElementById('btnResetBazar');
     const btnResetMal = document.getElementById('btnResetMal');
     const btnDeleteAllPermanent = document.getElementById('btnDeleteAllPermanent');
@@ -1560,6 +1605,7 @@
       document.getElementById('resetAllBtn').style.display = 'block';
       if(adminFundCard) adminFundCard.style.display = 'block';
       if(adminWorkerMgmt) adminWorkerMgmt.style.display = 'block';
+      if(adminPassMgmt) adminPassMgmt.style.display = 'block';
       if(btnResetBazar) btnResetBazar.style.display = 'block';
       if(btnResetMal) btnResetMal.style.display = 'block';
       if(btnDeleteAllPermanent) btnDeleteAllPermanent.style.display = 'inline-block';
@@ -1568,6 +1614,7 @@
       badge.className = 'role-badge role-editor';
       if(adminFundCard) adminFundCard.style.display = 'none';
       if(adminWorkerMgmt) adminWorkerMgmt.style.display = 'none';
+      if(adminPassMgmt) adminPassMgmt.style.display = 'none';
       if(btnResetBazar) btnResetBazar.style.display = 'none';
       if(btnResetMal) btnResetMal.style.display = 'none';
       if(btnDeleteAllPermanent) btnDeleteAllPermanent.style.display = 'none';
@@ -1991,7 +2038,7 @@
 
   function resetAllData() {
     if(userRole === 'admin' && confirm('সব ডাটা মুছে ফেলতে চান?')) {
-      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [], notifications: {}, workers: workerNames };
+      store = { initialFund: 0, bazarHistory: [], malHistory: [], workerHistory: [], pendingRequests: [], notifications: {}, workers: workerNames, passwords: { admin: PASS_ADMIN, editor: PASS_EDITOR } };
       saveDataToFirebase();
       showToast('সকল ডাটা সফলভাবে রিসেট করা হয়েছে!', 'error');
     }
